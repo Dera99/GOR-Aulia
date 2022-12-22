@@ -1,0 +1,69 @@
+package com.app.service;
+
+import com.app.cell.CellActionTrx;
+import com.app.configurations.DatabaseConnection;
+import com.app.form.Transaksi;
+import com.app.main.Main;
+import com.app.model.ModelPaket;
+import com.app.model.ModelTransaksi;
+import com.app.swing.table.TableCustom;
+import com.app.swing.table.TableRowData;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.sql.Time;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import org.joda.time.DateTime;
+
+public class ServiceTransaksi {
+    ResultSet rs = null;
+    Connection CC = new DatabaseConnection().connect();;
+    PreparedStatement pst = null;
+    Statement stt;
+    String sql; 
+    Main M = new Main();
+    public List<ModelTransaksi> getTransaksi() throws SQLException {
+        List<ModelTransaksi> list = new ArrayList<>();
+        SimpleDateFormat ex = new SimpleDateFormat("yyyy-MM-dd H:mm:ss");
+        sql = "SELECT * FROM Transaksi JOIN jenistransaksi ON Transaksi.IdTipeTrx=jenistransaksi.IdTipeTrx JOIN Pesanan ON Pesanan.IdPesanan=Transaksi.IdPesanan ORDER BY Tanggal";
+        pst = CC.prepareStatement(sql);
+        rs = pst.executeQuery();
+        int count=1;
+        while (rs.next()) {
+            int trxID = rs.getInt(1);
+            int tipeTrx = rs.getInt("transaksi.IdTipeTrx");
+            int pesananID = rs.getInt("pesanan.IdPesanan");
+            long subTotal = rs.getLong("Subtotal");
+            int DP = rs.getInt("DP");
+            long grandTotal = rs.getLong("GrandTotal");
+            Timestamp tanggal = rs.getTimestamp("Tanggal");
+            String status = rs.getString("StatusTransaksi");
+            ModelTransaksi data = new ModelTransaksi(trxID,tipeTrx,pesananID,subTotal,DP,grandTotal,tanggal,status);
+            data.setNameTransaksi(rs.getString("jenistransaksi.JenisTransaksi"));
+            data.setCount(count++);
+            //int tipeTrx = rs.getInt()
+            list.add(data);
+        }
+        rs.close();
+        pst.close();
+        return list;
+    }
+    public void updateTrx(ModelTransaksi data) throws SQLException{
+        sql="update Transaksi set StatusTransaksi = ? where IdTrx="+data.getTrxID()+" limit 1";
+        pst = CC.prepareStatement(sql);
+            pst.setString(1, "Selesai");
+        pst.execute();
+        pst.close();
+    }
+}
