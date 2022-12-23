@@ -1,9 +1,10 @@
-package com.app.service;
+package com.app.services;
 
 import com.app.cell.CellActionTrx;
 import com.app.configurations.DatabaseConnection;
 import com.app.form.Transaksi;
 import com.app.main.Main;
+import com.app.model.ModelCustomer;
 import com.app.model.ModelPaket;
 import com.app.model.ModelTransaksi;
 import com.app.swing.table.TableCustom;
@@ -36,7 +37,7 @@ public class ServiceTransaksi {
     public List<ModelTransaksi> getTransaksi() throws SQLException {
         List<ModelTransaksi> list = new ArrayList<>();
         SimpleDateFormat ex = new SimpleDateFormat("yyyy-MM-dd H:mm:ss");
-        sql = "SELECT * FROM Transaksi JOIN jenistransaksi ON Transaksi.IdTipeTrx=jenistransaksi.IdTipeTrx JOIN Pesanan ON Pesanan.IdPesanan=Transaksi.IdPesanan ORDER BY Tanggal";
+        sql = "SELECT * FROM Transaksi JOIN jenistransaksi ON Transaksi.IdTipeTrx=jenistransaksi.IdTipeTrx JOIN Pesanan ON Pesanan.IdPesanan=Transaksi.IdPesanan JOIN customer ON Pesanan.IdCustomer = Customer.IdCustomer ORDER BY Tanggal";
         pst = CC.prepareStatement(sql);
         rs = pst.executeQuery();
         int count=1;
@@ -44,14 +45,23 @@ public class ServiceTransaksi {
             int trxID = rs.getInt(1);
             int tipeTrx = rs.getInt("transaksi.IdTipeTrx");
             int pesananID = rs.getInt("pesanan.IdPesanan");
+            int customerID = rs.getInt("pesanan.IdCustomer");
             long subTotal = rs.getLong("Subtotal");
             int DP = rs.getInt("DP");
             long grandTotal = rs.getLong("GrandTotal");
             Timestamp tanggal = rs.getTimestamp("Tanggal");
             String status = rs.getString("StatusTransaksi");
+            String nama = rs.getString("customer.Nama");
+            String noTelp = rs.getString("customer.NoTelp");
+            String email = rs.getString("customer.Email");
+            String type = rs.getString("customer.Keterangan");
+            Timestamp tanggl = rs.getTimestamp("Customer.LastOrder");
+            ModelCustomer dataCustomer = new ModelCustomer(customerID,nama,noTelp,email,type);
+            dataCustomer.setTanggal(tanggal);
             ModelTransaksi data = new ModelTransaksi(trxID,tipeTrx,pesananID,subTotal,DP,grandTotal,tanggal,status);
             data.setNameTransaksi(rs.getString("jenistransaksi.JenisTransaksi"));
             data.setCount(count++);
+            data.setCustomerID(dataCustomer);
             //int tipeTrx = rs.getInt()
             list.add(data);
         }

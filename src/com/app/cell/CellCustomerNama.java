@@ -1,7 +1,9 @@
 package com.app.cell;
 
 import com.app.main.Main;
+import com.app.model.ModelCustomer;
 import com.app.model.ModelPaket;
+import com.app.services.ServiceCustomer;
 import com.app.services.ServicePaket;
 import com.app.swing.table.TableCustom;
 import com.app.swing.table.TableCustomCell;
@@ -11,74 +13,57 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.sql.Time;
+import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javaswingdev.GoogleMaterialDesignIcon;
 import javaswingdev.GoogleMaterialIcon;
 import notification.Notification;
 
-public class CellPaketNama extends TableCustomCell {
-    public CellPaketNama() {
+public class CellCustomerNama extends TableCustomCell {
+    public CellCustomerNama() {
         initComponents();
     }
-    boolean member = false;
-    int id,harga,paketID;
-    String nama;
-    Time durasi;
     public void addEventSave(TableCustom table) {
         btnUpdate.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 table.stopCellEditing();
                 Main m = new Main();
-                Notification err= new Notification(m, Notification.Type.ERROR, Notification.Location.TOP_CENTER, "Paket Sewa Gagal Di Tambahkan !!");
-                Notification succ= new Notification(m, Notification.Type.SUCCESS, Notification.Location.TOP_CENTER, "Paket Sewa Berhasil Di Tambahkan !!");
-                Notification err1= new Notification(m, Notification.Type.ERROR, Notification.Location.TOP_CENTER, "Paket Sewa Gagal Di Update !!");
-                Notification succ1= new Notification(m, Notification.Type.SUCCESS, Notification.Location.TOP_CENTER, "Paket Sewa Berhasil Di Update !!");
-                Notification errNumber= new Notification(m, Notification.Type.ERROR, Notification.Location.TOP_CENTER, "Input Harga Tidak Sesuai !!");
+                Notification err1= new Notification(m, Notification.Type.ERROR, Notification.Location.TOP_CENTER, "Data Customer Gagal Di Update !!");
+                Notification succ1= new Notification(m, Notification.Type.SUCCESS, Notification.Location.TOP_CENTER, "Data Customer Berhasil Di Update !!");
             try{  
                 int row = getRow();
                 int col = getColumn();
-                String base = (String) table.getValueAt(row,0);
+                String base = (String) table.getValueAt(row,1);
                 String replace = base.replace("R", "");
                 if(!base.contains("R")){
                  replace = base.replace("M", "");
                 }
-                paketID = Integer.parseInt(replace);
-                nama = table.getValueAt(row,1).toString();
-                String price = table.getValueAt(row,2).toString();
-                String result = price.replace("Rp ", "");
-                harga = Integer.parseInt(result);
-                String str = table.getValueAt(row,3).toString();
-                String[] arrOfStr = str.split(":", 2);
-                for (String a : arrOfStr)
-                durasi = new Time(Integer.parseInt(arrOfStr[0]),Integer.parseInt(arrOfStr[1]),0);
-                member = Boolean.parseBoolean(table.getValueAt(row,4).toString());
-                System.out.println("Member = "+member);
-                ModelPaket data = new ModelPaket(paketID,nama,harga,durasi,member);
-                if (data.getPaketID() == 0) {
+                int customerID = Integer.parseInt(replace);
+                String nama = table.getValueAt(row,2).toString();
+                String noTelp = table.getValueAt(row,3).toString();
+                String email = table.getValueAt(row,4).toString();
+                String member = (String) table.getValueAt(row, 5);
+                System.out.println("is Member ? "+member);
+                ModelCustomer data = new ModelCustomer(customerID,nama,noTelp,email,member);
+                DateFormat sdf = new SimpleDateFormat("dd/MM/yy H:mm");
+                String tanggal = (String) table.getValueAt(row, 6);
+                data.setTanggal(sdf.parse(tanggal));
+                if (data.getCustomerID()!= 0) {
                     try {
-                        //  Insert
-                     new ServicePaket().insertPaket(data);
+                      //  Update
+                     new ServiceCustomer().updateCustomer(data);
                      table.updateModelData(row, data);
-                     succ.showNotification();
+                     succ1.showNotification();
                     } catch (SQLException ex) {
-                        System.err.println(ex);
-                        err.showNotification();
-                    }
-                } else {
-                    try {
-                        //                        //  Update
-                        new ServicePaket().updatePaket(data);
-                        table.updateModelData(row, data);
-                        succ1.showNotification();
-                    } catch (SQLException ex) {
-                        System.err.println(ex);
+                        ex.printStackTrace();
                         err1.showNotification();
                     }
-                      
-                }
-            }catch (NumberFormatException ex) {
-                        System.err.println(ex);
-                        errNumber.showNotification();
+                } 
+            }catch (Exception ex) {
+                ex.printStackTrace();
             }
        }});
     }
@@ -91,7 +76,7 @@ public class CellPaketNama extends TableCustomCell {
         btnUpdate = new com.app.swing.Button();
 
         jLabel1.setForeground(new java.awt.Color(230, 230, 230));
-        jLabel1.setText("Nama Paket");
+        jLabel1.setText("Nama");
 
         btnUpdate.setBackground(new java.awt.Color(50, 200, 126));
         btnUpdate.setForeground(new java.awt.Color(255, 255, 255));
@@ -147,7 +132,7 @@ public class CellPaketNama extends TableCustomCell {
   
     @Override
     public TableCustomCell createComponentCellEditor(TableCustom tc, TableRowData trd, Object o, int i, int i1) {
-        CellPaketNama cell = new CellPaketNama();
+        CellCustomerNama cell = new CellCustomerNama();
         cell.setData(o);
         cell.addEventSave(tc);
         return cell;

@@ -1,12 +1,12 @@
 package com.app.cell;
 
-import com.app.model.ModelPaket;
+import com.app.model.ModelCustomer;
 import com.app.swing.table.TableCustom;
 import com.app.swing.table.TableCustomCell;
 import com.app.swing.table.TableRowData;
 
-public class CellPaketType extends TableCustomCell {
-    public CellPaketType() {
+public class CellCustomerType extends TableCustomCell {
+    public CellCustomerType() {
         initComponents();
     }
 
@@ -45,20 +45,30 @@ public class CellPaketType extends TableCustomCell {
 
     @Override
     public void setData(Object data) {
-        System.out.println("data "+data);
+        
        if (data != null) {
-            ModelPaket d = (ModelPaket) data;
-            txt.setSelected(d.isMember());
+            ModelCustomer d = (ModelCustomer) data;
+            boolean result=false;
+            if(d.getKet().equals("Member")){
+                result=true;
+            }
+            txt.setSelected(result);
         }
     }    
     @Override
     public Object getData() {
-        return txt.isSelected();
+        String result;
+        if(txt.isSelected()==true){
+            result="Member";
+        }else{
+            result = "Reguler";
+        }
+        return result;
     }
 
     @Override
     public TableCustomCell createComponentCellEditor(TableCustom table, TableRowData data, Object cellData, int row, int column) {
-        CellPaketType cell = new CellPaketType();
+        CellCustomerType cell = new CellCustomerType();
         cell.setData(data);
         return cell;
     }

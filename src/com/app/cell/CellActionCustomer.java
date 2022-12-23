@@ -1,10 +1,8 @@
 package com.app.cell;
 
-import com.app.form.Pemesanan;
-import com.app.model.ModelBooking;
-import com.app.model.ModelCell;
-import com.app.services.ServiceBooking;
-import com.app.services.ServiceCellBooking;
+import com.app.model.ModelCustomer;
+import com.app.model.ModelPaket;
+import com.app.services.ServicePaket;
 import com.app.swing.table.TableCustom;
 import com.app.swing.table.TableCustomCell;
 import com.app.swing.table.TableRowData;
@@ -15,19 +13,30 @@ import java.sql.SQLException;
 import javax.swing.ImageIcon;
 import java.awt.Color;
 
-public class CellActionBooking extends TableCustomCell {
-    public CellActionBooking()  {
+public class CellActionCustomer extends TableCustomCell {
+    public CellActionCustomer() {
         initComponents();
     }
     private void addEvent(TableCustom table, TableRowData data, int row) {
+        cmdEdit.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                if (data.isEditing()) {
+                 table.cancelEditRowAt(row);
+                    cmdEdit.setIcon(new ImageIcon(getClass().getResource("/com/app/icon/edit.png")));
+                } else {
+                    table.editRowAt(row);
+                    cmdEdit.setIcon(new ImageIcon(getClass().getResource("/com/app/icon/cancel.png")));
+                }
+            }
+        });
         cmdDelete.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                int bookedID = ((ModelBooking) data).getId();
-                System.out.println("booked ID" +bookedID);
-                if (bookedID != 0) {
+                int CustomerID = ((ModelCustomer) data).getCustomerID();
+                if (CustomerID != 0) {
                     try {
-                        new ServiceBooking().deleteBooked(bookedID);
+                        new ServicePaket().deletePaket(CustomerID);
                         table.deleteRowAt(getRow(), true);
                     } catch (SQLException e) {
                         System.err.println(e);
@@ -38,13 +47,24 @@ public class CellActionBooking extends TableCustomCell {
             }
         });
     }
-  
+
+    private void checkIcon(TableRowData data) {
+        if (data.isEditing()) {
+            cmdEdit.setIcon(new ImageIcon(getClass().getResource("/com/app/icon/cancel.png")));
+        } else {
+            cmdEdit.setIcon(new ImageIcon(getClass().getResource("/com/app/icon/edit.png")));
+        }
+    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        cmdEdit = new com.app.swing.Button();
         cmdDelete = new com.app.swing.Button();
+
+        cmdEdit.setBackground(new Color(0,0,0,0));
+        cmdEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/app/icon/edit.png"))); // NOI18N
 
         cmdDelete.setBackground(new Color(0,0,0,0));
         cmdDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/app/icon/delete.png"))); // NOI18N
@@ -53,22 +73,25 @@ public class CellActionBooking extends TableCustomCell {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addComponent(cmdDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(25, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(cmdEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(5, 5, 5)
+                .addComponent(cmdDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(cmdDelete, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cmdDelete, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmdEdit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     @Override
     public void setData(Object o) {
+
     }
 
     @Override
@@ -78,7 +101,8 @@ public class CellActionBooking extends TableCustomCell {
 
     @Override
     public Component createComponentCellRender(TableCustom table, TableRowData data, int row, int column) {
-        CellActionBooking cell = new CellActionBooking();
+        CellActionCustomer cell = new CellActionCustomer();
+        cell.checkIcon(data);
         cell.addEvent(table, data, row);
         return cell;
     }
@@ -90,7 +114,8 @@ public class CellActionBooking extends TableCustomCell {
 
     @Override
     public TableCustomCell createComponentCellEditor(TableCustom table, TableRowData data, Object o, int row, int column) {
-        CellActionBooking cell = new CellActionBooking();
+        CellActionCustomer cell = new CellActionCustomer();
+        cell.checkIcon(data);
         cell.addEvent(table, data, row);
         return cell;
     }
@@ -98,5 +123,6 @@ public class CellActionBooking extends TableCustomCell {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.app.swing.Button cmdDelete;
+    private com.app.swing.Button cmdEdit;
     // End of variables declaration//GEN-END:variables
 }

@@ -3,8 +3,8 @@ package com.app.component;
 
 import com.app.main.Main;
 import com.app.model.ModelAccounts;
-import com.app.service.ServiceSettings;
-import com.app.service.UserSession;
+import com.app.services.ServiceSettings;
+import com.app.services.UserSession;
 import com.app.swing.SwitchButton;
 import java.awt.Color;
 import java.sql.SQLException;

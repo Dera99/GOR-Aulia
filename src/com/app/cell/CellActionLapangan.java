@@ -1,7 +1,7 @@
 package com.app.cell;
 
 import com.app.model.ModelLapangan;
-import com.app.service.ServicePaket;
+import com.app.services.ServicePaket;
 import com.app.swing.table.TableCustom;
 import com.app.swing.table.TableCustomCell;
 import com.app.swing.table.TableRowData;

@@ -6,12 +6,9 @@ import com.app.main.Main;
 import com.app.model.ModelBooking;
 import com.app.model.ModelCustomer;
 import com.app.model.ModelTransaksi;
-import com.app.service.ServiceBooking;
-import com.app.swing.table.TableCustom;
+import com.app.services.ServiceBooking;
 import com.app.swing.table.TableRowData;
 import java.awt.Color;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -21,10 +18,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javaswingdev.GoogleMaterialDesignIcon;
 import javaswingdev.GoogleMaterialIcon;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.ImageIcon;
 import javax.swing.RowFilter;
-import javax.swing.UIManager;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 import notification.Notification;
@@ -183,7 +177,7 @@ public class Pemesanan extends Form{
                if(sb.isMember()==true){
                    type="Member";
                }else{
-                   type="Non-Member";
+                   type="Reguler";
                } 
        ModelCustomer customer = new ModelCustomer(customerID,nama,noTelp,email,type);
         String field = data.getField();
@@ -787,8 +781,8 @@ public class Pemesanan extends Form{
         roundPanel2Layout.setVerticalGroup(
             roundPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(roundPanel2Layout.createSequentialGroup()
-                .addComponent(jLabel1)
-                .addGap(18, 18, 18)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(roundPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(roundPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(roundPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)

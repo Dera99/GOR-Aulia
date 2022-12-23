@@ -7,6 +7,12 @@ import java.util.Date;
 
 public class ModelTransaksi extends TableRowData{
 
+    public ModelCustomer getCustomerID() {
+        return customerID;
+    }
+    public void setCustomerID(ModelCustomer customerID) {
+        this.customerID = customerID;
+    }
     public int getCount() {
         return count;
     }
@@ -77,6 +83,7 @@ public class ModelTransaksi extends TableRowData{
     private Date tanggal;
     private int count;
     private String nameTransaksi;
+    private ModelCustomer customerID;
     public ModelTransaksi(int trxID,int tipeTrx, int pesananID, long subTotal, int DP, long grandTotal,Date tanggal, String status){
         this.trxID = trxID;
         this.tipeTrx = tipeTrx;
@@ -95,6 +102,6 @@ public class ModelTransaksi extends TableRowData{
         DateFormat sdf = new SimpleDateFormat("dd/MM/yy H:mm");
         String kode = "R";
         if(tipeTrx==2){kode="M";}
-        return new Object[]{getCount(),kode+pesananID,getNameTransaksi(),"Rp "+subTotal,"Rp "+DP,"Rp "+grandTotal,sdf.format(tanggal)+" WIB",status};
+        return new Object[]{getCount(),kode+pesananID,kode+customerID.getCustomerID(),getNameTransaksi(),"Rp "+subTotal,"Rp "+DP,"Rp "+grandTotal,sdf.format(tanggal)+" WIB",status};
     }
 }

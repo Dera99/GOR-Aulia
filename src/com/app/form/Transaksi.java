@@ -3,7 +3,7 @@ package com.app.form;
 import com.app.cell.CellActionTrx;
 import com.app.component.Form;
 import com.app.model.ModelTransaksi;
-import com.app.service.ServiceTransaksi;
+import com.app.services.ServiceTransaksi;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -19,7 +19,7 @@ public class Transaksi extends Form {
         initTable();
     }
     public void initTable(){
-        table1.addTableCell(new CellActionTrx(),8);
+        table1.addTableCell(new CellActionTrx(),9);
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -54,7 +54,7 @@ public class Transaksi extends Form {
 
             },
             new String [] {
-                "No", "Kode Pesanan", "Tipe Transaksi", "Sub Total", "DP", "Total Bayar", "Tanggal", "Status Transaksi", "Action"
+                "No", "Kode Pesanan", "Customer ID", "Tipe Transaksi", "Sub Total", "DP", "Total Bayar", "Tanggal", "Status Transaksi", "Action"
             }
         ));
         jScrollPane1.setViewportView(table1);
@@ -63,11 +63,11 @@ public class Transaksi extends Form {
             table1.getColumnModel().getColumn(0).setPreferredWidth(30);
             table1.getColumnModel().getColumn(0).setMaxWidth(30);
             table1.getColumnModel().getColumn(1).setPreferredWidth(50);
-            table1.getColumnModel().getColumn(3).setPreferredWidth(30);
             table1.getColumnModel().getColumn(4).setPreferredWidth(30);
             table1.getColumnModel().getColumn(5).setPreferredWidth(30);
             table1.getColumnModel().getColumn(6).setPreferredWidth(30);
-            table1.getColumnModel().getColumn(8).setPreferredWidth(10);
+            table1.getColumnModel().getColumn(7).setPreferredWidth(30);
+            table1.getColumnModel().getColumn(9).setPreferredWidth(10);
         }
 
         jLabel1.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N

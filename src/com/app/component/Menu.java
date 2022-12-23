@@ -1,8 +1,8 @@
 package com.app.component;
 
 import com.app.event.MenuEvent;
-import com.app.service.ServiceSettings;
-import com.app.service.UserSession;
+import com.app.services.ServiceSettings;
+import com.app.services.UserSession;
 import com.app.swing.MenuButton;
 import com.app.swing.Split;
 import com.app.swing.scroll.ScrollBarCustom;

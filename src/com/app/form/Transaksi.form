@@ -81,9 +81,10 @@
             <Component class="com.app.swing.table.Table" name="table1">
               <Properties>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                  <Table columnCount="9" rowCount="0">
+                  <Table columnCount="10" rowCount="0">
                     <Column editable="true" title="No" type="java.lang.Object"/>
                     <Column editable="true" title="Kode Pesanan" type="java.lang.Object"/>
+                    <Column editable="true" title="Customer ID" type="java.lang.Object"/>
                     <Column editable="true" title="Tipe Transaksi" type="java.lang.Object"/>
                     <Column editable="true" title="Sub Total" type="java.lang.Object"/>
                     <Column editable="true" title="DP" type="java.lang.Object"/>
@@ -101,6 +102,11 @@
                       <Renderer/>
                     </Column>
                     <Column maxWidth="-1" minWidth="-1" prefWidth="50" resizable="true">
+                      <Title/>
+                      <Editor/>
+                      <Renderer/>
+                    </Column>
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                       <Title/>
                       <Editor/>
                       <Renderer/>

@@ -2,8 +2,8 @@ package com.app.form;
 
 import com.app.chart.ModelChart;
 import com.app.model.ModelJadwal;
-import com.app.service.ServiceReport;
-import com.app.service.ServiceJadwal;
+import com.app.services.ServiceReport;
+import com.app.services.ServiceJadwal;
 import java.awt.Color;
 import java.sql.SQLException;
 import java.util.List;

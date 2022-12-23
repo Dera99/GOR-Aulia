@@ -1,4 +1,4 @@
-package com.app.service;
+package com.app.services;
 
 import com.app.configurations.Conn;
 import com.app.configurations.DatabaseConnection;

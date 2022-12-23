@@ -3,7 +3,7 @@ package com.app.cell;
 import com.app.form.Transaksi;
 import com.app.main.Main;
 import com.app.model.ModelTransaksi;
-import com.app.service.ServiceTransaksi;
+import com.app.services.ServiceTransaksi;
 import com.app.swing.table.TableCustom;
 import com.app.swing.table.TableCustomCell;
 import com.app.swing.table.TableRowData;

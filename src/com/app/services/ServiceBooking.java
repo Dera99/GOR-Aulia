@@ -1,4 +1,4 @@
-package com.app.service;
+package com.app.services;
 
 import com.app.configurations.DatabaseConnection;
 import com.app.main.Main;
@@ -103,7 +103,7 @@ public class ServiceBooking {
                 String NoTelp = rs.getString("NoTelp");
                 String email = rs.getString("Email");
                 dataCustomer = new ModelCustomer(kode,nama,NoTelp,email,status);
-               }else if (status.equals("Non-Member")){
+               }else if (status.equals("Reguler")){
                 setMember(false);
                 String nama = rs.getString("Nama");
                 String NoTelp = rs.getString("NoTelp");
@@ -195,7 +195,7 @@ public class ServiceBooking {
             insertCustomer(data);
             updateOrder(data);
             try{
-                sql = "insert into pesanan (IdSewa, IdLapangan,IdTipeTrx,IdCustomer,Request_Date,Expired,Status) values ((select IdSewa from sewa where NamaSewa='"+data.getPaket()+"'),(SELECT IdLapangan from lapangan WHERE NamaLapangan='"+data.getField()+"'),"+jenis+",(SELECT IdCustomer from customer WHERE Nama ='"+data.getCustomer().getNama()+"' AND Email='"+data.getCustomer().getEmail()+"' AND NoTelp = '"+data.getCustomer().getNoTelp()+"' AND Keterangan = 'Non-Member'),'"+ex.format(data.getReqDate())+"','"+ex.format(data.getExpire())+"','Menunggu Antrian');";
+                sql = "insert into pesanan (IdSewa, IdLapangan,IdTipeTrx,IdCustomer,Request_Date,Expired,Status) values ((select IdSewa from sewa where NamaSewa='"+data.getPaket()+"'),(SELECT IdLapangan from lapangan WHERE NamaLapangan='"+data.getField()+"'),"+jenis+",(SELECT IdCustomer from customer WHERE Nama ='"+data.getCustomer().getNama()+"' AND Email='"+data.getCustomer().getEmail()+"' AND NoTelp = '"+data.getCustomer().getNoTelp()+"' AND Keterangan = 'Reguler'),'"+ex.format(data.getReqDate())+"','"+ex.format(data.getExpire())+"','Menunggu Antrian');";
                 pst = CC.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
                 pst.execute();
                 rs = pst.getGeneratedKeys();
@@ -234,9 +234,9 @@ public class ServiceBooking {
     }
     public void insertCustomer(ModelBooking data){
         try {
-            String sql = "INSERT INTO customer (Nama, NoTelp, Email, Keterangan) SELECT * FROM (SELECT '"+data.getCustomer().getNama()+"', '"+data.getCustomer().getNoTelp()+"', '"+data.getCustomer().getEmail()+"', 'Non-Member') AS tmp "
+            String sql = "INSERT INTO customer (Nama, NoTelp, Email, Keterangan) SELECT * FROM (SELECT '"+data.getCustomer().getNama()+"', '"+data.getCustomer().getNoTelp()+"', '"+data.getCustomer().getEmail()+"', 'Reguler') AS tmp "
                     + "WHERE NOT EXISTS ( SELECT Nama,NoTelp,Email,Keterangan FROM customer WHERE "
-                    + "Nama = '"+data.getCustomer().getNama()+"' AND NoTelp = '"+data.getCustomer().getNoTelp()+"' AND Email='"+data.getCustomer().getEmail()+"' AND Keterangan='Non-Member'  LIMIT 1 )";
+                    + "Nama = '"+data.getCustomer().getNama()+"' AND NoTelp = '"+data.getCustomer().getNoTelp()+"' AND Email='"+data.getCustomer().getEmail()+"' AND Keterangan='Reguler'  LIMIT 1 )";
             pst = CC.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             pst.execute();
             rs = pst.getGeneratedKeys();

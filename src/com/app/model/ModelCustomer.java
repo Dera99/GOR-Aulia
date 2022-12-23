@@ -1,33 +1,34 @@
 package com.app.model;
 
 import com.app.swing.table.TableRowData;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
-public class ModelCustomer{
+public class ModelCustomer extends TableRowData{
+    public Date getTanggal() {
+        return tanggal;
+    }
+    public void setTanggal(Date tanggal) {
+        this.tanggal = tanggal;
+    }
 
-    /**
-     * @return the Ket
-     */
+    public int getCount() {
+        return count;
+    }
+    public void setCount(int count) {
+        this.count = count;
+    }
+
     public String getKet() {
         return Ket;
     }
-
-    /**
-     * @param Ket the Ket to set
-     */
     public void setKet(String Ket) {
         this.Ket = Ket;
     }
-
-    /**
-     * @return the CustomerID
-     */
     public int getCustomerID() {
         return CustomerID;
     }
-
-    /**
-     * @param CustomerID the CustomerID to set
-     */
     public void setCustomerID(int CustomerID) {
         this.CustomerID = CustomerID;
     }
@@ -51,19 +52,7 @@ public class ModelCustomer{
         this.Email = Email;
     }
 
-//    public ModelCustomer(String nama) {
-//      this.nama = nama;
-//    }
-//    public ModelCustomer(String nama, String Ket) {
-//      this.nama = nama;
-//      this.Ket=Ket;
-//    }
-//    public ModelCustomer(String nama, String noTelp, String Email) {
-//      this.nama = nama;
-//      this.noTelp = noTelp;
-//      this.Email = Email;
-//    }
-     public ModelCustomer(int CustomerID, String nama, String noTelp, String Email,String Ket) {
+    public ModelCustomer(int CustomerID, String nama, String noTelp, String Email,String Ket) {
       this.CustomerID = CustomerID;
       this.nama = nama;
       this.noTelp = noTelp;
@@ -78,10 +67,22 @@ public class ModelCustomer{
     private String Email;
     private String Ket;
     private int CustomerID;
+    private int count;
+    private Date tanggal;
     
     @Override
     public String toString() {
         return getNama();
+    }
+
+    @Override
+    public Object[] toTableRow() {
+        DateFormat sdf = new SimpleDateFormat("dd/MM/yy H:mm");
+        String type = "R";
+        if(Ket.equals("Member")){
+            type="M";
+        }
+        return new Object[]{count,type+CustomerID,nama,noTelp,Email,Ket,sdf.format(tanggal)};
     }
   
 }
