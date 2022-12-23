@@ -9,10 +9,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Properties;
 
-/**
- *
- * @author AMIRULLAH
- */
 public class config {
     public static Properties prop = new Properties();
     public void SaveProp(String title, String value){

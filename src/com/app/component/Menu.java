@@ -32,6 +32,9 @@ public class Menu extends javax.swing.JPanel {
     private MenuEvent event;
     private GoogleMaterialDesignIcon icon;
     private FontAwesome icn;
+    int roleID = UserSession.getRoleId();
+    String userLogin = UserSession.getUserLogin();
+    String security = "Staff";
     public Menu() {
         initComponents();
         setOpaque(false);
@@ -54,24 +57,44 @@ public class Menu extends javax.swing.JPanel {
         animator.setAcceleration(.5f);
         animator.setDeceleration(.5f);
         animator.setResolution(0);
+        if(roleID==1){
+            security="Admin";
+        }
+        lblSecurity.setText(security);
+        lblUser.setText(userLogin);
+        
     }
 
     public void initMenu(MenuEvent event) {
         this.event = event;
+        if(roleID==1){
         addMenu(DASHBOARD, "Dashboard", 0);
         split("Penyewaan");
         addMenu(GoogleMaterialDesignIcon.EVENT, "Pemesanan", 1);
         addMenu(GoogleMaterialDesignIcon.PAYMENT, "Transaksi", 2); 
         addMenu(GoogleMaterialDesignIcon.FORMAT_LIST_BULLETED, "Paket Sewa", 3); 
-        addMenu(GoogleMaterialDesignIcon.GROUP, "Penyewa", 4); 
-        addMenu(GoogleMaterialDesignIcon.SETTINGS, "Settings", 5);     
-//        split("Report");
-//        addMenu("4", "Report Income", 3);
-//        addMenu("5", "Report Expense", 4);
-//        addMenu("6", "Report Staff", 5);
-//        addMenu("7", "Accounting", 6);
-        space();
-        addMenu(GoogleMaterialDesignIcon.LOGOUT, "Logout", 6);
+        addMenu(GoogleMaterialDesignIcon.GROUP, "Customer", 4); 
+        split("Staff");
+        addMenu(GoogleMaterialDesignIcon.ACCOUNT_BOX, "Data Staff", 5);
+        split("Report");
+        addMenu(GoogleMaterialDesignIcon.PERSON, "Customer Reguler", 6);
+        addMenu(GoogleMaterialDesignIcon.GROUPS, "Customer Member", 7);
+        addMenu("4", "Transaksi", 8);
+        addMenu("7", "Pemesanan", 9);
+        split("Settings");
+        addMenu(GoogleMaterialDesignIcon.SETTINGS, "Pengaturan", 10);    
+        addMenu(GoogleMaterialDesignIcon.LOGOUT, "Logout", 11);
+        }else{
+          addMenu(DASHBOARD, "Dashboard", 0);
+          split("Penyewaan");
+          addMenu(GoogleMaterialDesignIcon.EVENT, "Pemesanan", 1);
+          addMenu(GoogleMaterialDesignIcon.PAYMENT, "Transaksi", 2); 
+          addMenu(GoogleMaterialDesignIcon.FORMAT_LIST_BULLETED, "Paket Sewa", 3); 
+          addMenu(GoogleMaterialDesignIcon.GROUP, "Customer", 4);  
+          split("Settings");
+          addMenu(GoogleMaterialDesignIcon.SETTINGS, "Pengaturan", 10);    
+          addMenu(GoogleMaterialDesignIcon.LOGOUT, "Logout", 11);
+        }
     }
   
 
@@ -152,10 +175,12 @@ public class Menu extends javax.swing.JPanel {
         scroll = new javax.swing.JScrollPane();
         panelMenu = new javax.swing.JPanel();
         Image = new com.app.swing.ImageAvatar();
+        lblUser = new javax.swing.JLabel();
+        lblSecurity = new javax.swing.JLabel();
 
         jLabel1.setFont(new java.awt.Font("sansserif", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(243, 243, 243));
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/app/icon/logo.png"))); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Dashboard");
         jLabel1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 5, 1, 1));
 
@@ -169,12 +194,22 @@ public class Menu extends javax.swing.JPanel {
         );
         panelMenuLayout.setVerticalGroup(
             panelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 352, Short.MAX_VALUE)
+            .addGap(0, 394, Short.MAX_VALUE)
         );
 
         scroll.setViewportView(panelMenu);
 
         Image.setGradientColor1(new java.awt.Color(51, 149, 225));
+
+        lblUser.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
+        lblUser.setForeground(new java.awt.Color(154, 154, 154));
+        lblUser.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblUser.setText("Admin");
+
+        lblSecurity.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
+        lblSecurity.setForeground(new java.awt.Color(154, 154, 154));
+        lblSecurity.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblSecurity.setText("Admin");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -183,15 +218,21 @@ public class Menu extends javax.swing.JPanel {
             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(scroll)
             .addComponent(Image, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(lblUser, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(lblSecurity, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jLabel1)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(Image, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(39, 39, 39)
-                .addComponent(scroll))
+                .addComponent(Image, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lblSecurity, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblUser, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(4, 4, 4)
+                .addComponent(scroll, javax.swing.GroupLayout.DEFAULT_SIZE, 348, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -199,6 +240,8 @@ public class Menu extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public com.app.swing.ImageAvatar Image;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel lblSecurity;
+    private javax.swing.JLabel lblUser;
     private javax.swing.JPanel panelMenu;
     private javax.swing.JScrollPane scroll;
     // End of variables declaration//GEN-END:variables

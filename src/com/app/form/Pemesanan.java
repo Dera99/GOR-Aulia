@@ -495,7 +495,7 @@ public class Pemesanan extends Form{
 
         jLabel3.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(240, 240, 240));
-        jLabel3.setText("Data Penyewa");
+        jLabel3.setText("Data Customer");
 
         javax.swing.GroupLayout roundPanel3Layout = new javax.swing.GroupLayout(roundPanel3);
         roundPanel3.setLayout(roundPanel3Layout);

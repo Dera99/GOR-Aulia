@@ -31,6 +31,8 @@ public class CellCustomerNama extends TableCustomCell {
             public void actionPerformed(ActionEvent ae) {
                 table.stopCellEditing();
                 Main m = new Main();
+                Notification err= new Notification(m, Notification.Type.ERROR, Notification.Location.TOP_CENTER, "Data Customer Gagal Di Tambahkan !!");
+                Notification succ= new Notification(m, Notification.Type.SUCCESS, Notification.Location.TOP_CENTER, "Data Customer Berhasil Di Tambahkan !!");
                 Notification err1= new Notification(m, Notification.Type.ERROR, Notification.Location.TOP_CENTER, "Data Customer Gagal Di Update !!");
                 Notification succ1= new Notification(m, Notification.Type.SUCCESS, Notification.Location.TOP_CENTER, "Data Customer Berhasil Di Update !!");
             try{  
@@ -51,7 +53,16 @@ public class CellCustomerNama extends TableCustomCell {
                 DateFormat sdf = new SimpleDateFormat("dd/MM/yy H:mm");
                 String tanggal = (String) table.getValueAt(row, 6);
                 data.setTanggal(sdf.parse(tanggal));
-                if (data.getCustomerID()!= 0) {
+                if (data.getCustomerID()== 0) {
+                   try{
+                     new ServiceCustomer().insertCustomer(data);
+                     table.updateModelData(row, data);
+                     succ.showNotification();
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                        err.showNotification();
+                    }
+                }else{
                     try {
                       //  Update
                      new ServiceCustomer().updateCustomer(data);

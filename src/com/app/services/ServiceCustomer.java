@@ -54,4 +54,22 @@ public class ServiceCustomer  {
         rs.close();
         pst.close();
     }
+    public void deleteCustomer(int id) throws SQLException{
+         sql = "delete from Customer where IdCustomer=? limit 1";
+        pst = CC.prepareStatement(sql);
+        pst.setInt(1, id);
+        pst.execute();
+        pst.close();
+    }
+    public void insertCustomer(ModelCustomer data) throws SQLException{
+            sql = "INSERT INTO customer (Nama, NoTelp, Email, Keterangan) SELECT * FROM (SELECT '"+data.getNama()+"', '"+data.getNoTelp()+"', '"+data.getEmail()+"', 'Member') AS tmp "
+                    + "WHERE NOT EXISTS ( SELECT Nama,NoTelp,Email,Keterangan FROM customer WHERE "
+                    + "Nama = '"+data.getNama()+"' AND NoTelp = '"+data.getNoTelp()+"' AND Email='"+data.getEmail()+"' AND Keterangan='Member'  LIMIT 1 )";
+            pst = CC.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            pst.execute();
+            rs = pst.getGeneratedKeys();
+            rs.first();
+            rs.close();
+            pst.close();
+    }
 }

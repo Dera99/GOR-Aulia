@@ -37,6 +37,7 @@
             <file>file:/F:/Project/GOR-Aulia/src/com/app/model/ModelCard.java</file>
             <file>file:/F:/Project/GOR-Aulia/src/com/app/cell/CellPaketDurasi.java</file>
             <file>file:/F:/Project/GOR-Aulia/src/com/app/services/ServicePaket.java</file>
+            <file>file:/F:/Project/GOR-Aulia/src/com/app/configurations/config.java</file>
             <file>file:/F:/Project/GOR-Aulia/src/com/app/model/ModelBooking.java</file>
             <file>file:/F:/Project/GOR-Aulia/src/com/app/cell/CellCustomerType.java</file>
             <file>file:/F:/Project/GOR-Aulia/src/com/app/main/Login.java</file>
@@ -61,6 +62,7 @@
             <file>file:/F:/Project/GOR-Aulia/src/com/app/cell/CellPaketHarga.java</file>
             <file>file:/F:/Project/GOR-Aulia/src/com/app/form/PaketSewa.java</file>
             <file>file:/F:/Project/GOR-Aulia/src/com/app/component/ChangePassword.java</file>
+            <file>file:/F:/Project/GOR-Aulia/src/com/app/configurations/DatabaseConnection.java</file>
             <file>file:/F:/Project/GOR-Aulia/src/com/app/swing/PanelBackground.java</file>
             <file>file:/F:/Project/GOR-Aulia/src/com/app/services/ServiceLogin.java</file>
             <file>file:/F:/Project/GOR-Aulia/src/com/app/swing/table/TableHeaderCustom.java</file>

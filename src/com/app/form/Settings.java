@@ -1,14 +1,15 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
 package com.app.form;
 
 import com.app.component.Form;
+import com.app.services.UserSession;
 
 public class Settings extends Form{
     public Settings() {
         initComponents();
+        int roleID = UserSession.getRoleId();
+        if(roleID==0){
+        roundPanel2.setVisible(false);
+        }
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents

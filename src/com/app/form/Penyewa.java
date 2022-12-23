@@ -10,6 +10,7 @@ import com.app.model.ModelCustomer;
 import com.app.services.ServiceCustomer;
 import java.awt.Color;
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javaswingdev.GoogleMaterialDesignIcon;
@@ -80,6 +81,7 @@ public class Penyewa extends Form {
         jLabel2 = new javax.swing.JLabel();
         btnPrint = new com.app.swing.Button();
         serch = new com.app.swing.TextField();
+        btnAdd = new com.app.swing.Button();
 
         roundPanel1.setBackground(new java.awt.Color(60, 60, 60));
 
@@ -99,7 +101,7 @@ public class Penyewa extends Form {
 
         jLabel1.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(240, 240, 240));
-        jLabel1.setText("Penyewa Reguler");
+        jLabel1.setText("Customer Reguler");
 
         javax.swing.GroupLayout roundPanel1Layout = new javax.swing.GroupLayout(roundPanel1);
         roundPanel1.setLayout(roundPanel1Layout);
@@ -120,8 +122,8 @@ public class Penyewa extends Form {
                 .addContainerGap()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 262, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(9, Short.MAX_VALUE))
         );
 
         roundPanel2.setBackground(new java.awt.Color(60, 60, 60));
@@ -147,7 +149,7 @@ public class Penyewa extends Form {
 
         jLabel2.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(240, 240, 240));
-        jLabel2.setText("Penyewa Member");
+        jLabel2.setText("Customer Member");
 
         btnPrint.setBackground(new java.awt.Color(51, 149, 225));
         btnPrint.setForeground(new java.awt.Color(240, 240, 240));
@@ -165,6 +167,21 @@ public class Penyewa extends Form {
         serch.setForeground(new java.awt.Color(242, 242, 242));
         serch.setLabelText("Search");
 
+        btnAdd.setBackground(new java.awt.Color(51, 149, 225));
+        btnAdd.setForeground(new java.awt.Color(240, 240, 240));
+        btnAdd.setText("Add");
+        btnAdd.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        btnAdd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddActionPerformed(evt);
+            }
+        });
+        GoogleMaterialIcon icon1 = new GoogleMaterialIcon();
+        icon1.setIcon(GoogleMaterialDesignIcon.ADD_CIRCLE_OUTLINE);
+        icon1.setColor1(Color.white);
+        icon1.setColor2(Color.white);
+        btnAdd.setIcon(icon1.toIcon());
+
         javax.swing.GroupLayout roundPanel2Layout = new javax.swing.GroupLayout(roundPanel2);
         roundPanel2.setLayout(roundPanel2Layout);
         roundPanel2Layout.setHorizontalGroup(
@@ -174,7 +191,9 @@ public class Penyewa extends Form {
                 .addGroup(roundPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 922, Short.MAX_VALUE)
                     .addGroup(roundPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel2)
+                        .addGroup(roundPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(serch, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -184,15 +203,17 @@ public class Penyewa extends Form {
         roundPanel2Layout.setVerticalGroup(
             roundPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(roundPanel2Layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(roundPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(roundPanel2Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(roundPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnPrint, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(serch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 241, Short.MAX_VALUE)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, roundPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(serch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnPrint, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 204, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -219,8 +240,16 @@ public class Penyewa extends Form {
         btnPrint.setVisible(true);
     }//GEN-LAST:event_table2MouseReleased
 
+    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
+        Date date = new Date();
+        ModelCustomer data = new ModelCustomer(0,"","","","Member");
+        data.setTanggal(date);
+        table2.insertRowWithEdit(data, 0, true);
+    }//GEN-LAST:event_btnAddActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private com.app.swing.Button btnAdd;
     private com.app.swing.Button btnPrint;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

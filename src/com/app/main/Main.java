@@ -8,6 +8,7 @@ import com.app.form.PaketSewa;
 import com.app.form.Pemesanan;
 import com.app.form.Penyewa;
 import com.app.form.Settings;
+import com.app.form.Staff;
 import com.app.form.Transaksi;
 import com.app.services.UserSession;
 import java.sql.Connection;
@@ -42,9 +43,19 @@ Connection CC = new DatabaseConnection().connect();
                 }else if (index==4){
                     mainBody.displayForm(new Penyewa(),"Penyewa");
                 }else if (index==5){
+                    mainBody.displayForm(new Staff(),"Data Staff");
+                }else if (index==6){
+                    mainBody.displayForm(new Penyewa(),"P");
+                }else if (index==7){
+                    mainBody.displayForm(new Penyewa(),"Penyewa");
+                }else if (index==8){
+                    mainBody.displayForm(new Penyewa(),"Penyewa");
+                }else if (index==9){
+                    mainBody.displayForm(new Penyewa(),"Penyewa");
+                }else if (index==10){
                     mainBody.displayForm(new Settings(),"Settings");
                 }
-                else if(index == 6){
+                else if(index == 11){
                     try {
                         UserSession.setUserId(0);
                         UserSession.setUserLogin("");

@@ -2,6 +2,7 @@ package com.app.cell;
 
 import com.app.model.ModelCustomer;
 import com.app.model.ModelPaket;
+import com.app.services.ServiceCustomer;
 import com.app.services.ServicePaket;
 import com.app.swing.table.TableCustom;
 import com.app.swing.table.TableCustomCell;
@@ -34,9 +35,10 @@ public class CellActionCustomer extends TableCustomCell {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 int CustomerID = ((ModelCustomer) data).getCustomerID();
+                System.out.println("ID "+CustomerID);
                 if (CustomerID != 0) {
                     try {
-                        new ServicePaket().deletePaket(CustomerID);
+                        new ServiceCustomer().deleteCustomer(CustomerID);
                         table.deleteRowAt(getRow(), true);
                     } catch (SQLException e) {
                         System.err.println(e);
