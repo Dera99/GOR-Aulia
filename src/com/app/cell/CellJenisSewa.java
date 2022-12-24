@@ -2,7 +2,6 @@ package com.app.cell;
 
 import com.app.main.Main;
 import com.app.model.ModelLapangan;
-import com.app.model.ModelPaket;
 import com.app.services.ServicePaket;
 import com.app.swing.table.TableCustom;
 import com.app.swing.table.TableCustomCell;
@@ -11,9 +10,6 @@ import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
-import java.sql.Time;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javaswingdev.GoogleMaterialDesignIcon;
 import javaswingdev.GoogleMaterialIcon;
 import notification.Notification;

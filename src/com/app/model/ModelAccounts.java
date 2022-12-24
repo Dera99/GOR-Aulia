@@ -1,8 +1,15 @@
 package com.app.model;
 
+import com.app.swing.table.TableRowData;
 import javax.swing.Icon;
 
 public class ModelAccounts{
+    public ModelStaff getStaff() {
+        return staff;
+    }
+    public void setStaff(ModelStaff staff) {
+        this.staff = staff;
+    }
     public int getUserID() {
         return userID;
     }
@@ -27,23 +34,27 @@ public class ModelAccounts{
     public void setRoleID(int roleID) {
         this.roleID = roleID;
     }
-    public Icon getProfile() {
-        return profile;
-    }
-    public void setProfile(Icon profile) {
-        this.profile = profile;
-    }
     private int userID;
     private String username;
     private String password;
     private int roleID;
-    private Icon profile;
+    private ModelStaff staff;
     public ModelAccounts(){}
-    public ModelAccounts(int userID,String username, String password, int roleID, Icon profile){
+//    public ModelAccounts(int userID,String username, String password, int roleID, ModelStaff staff){
+//        this.userID = userID;
+//        this.username=username;
+//        this.password=password;
+//        this.roleID=roleID;
+//        this.staff=staff;
+//    }
+    public ModelAccounts(int userID,String username, String password, int roleID){
         this.userID = userID;
         this.username=username;
         this.password=password;
         this.roleID=roleID;
-        this.profile=profile;
+    }
+    @Override
+    public String toString() {
+        return username;
     }
 }

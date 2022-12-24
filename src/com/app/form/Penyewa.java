@@ -1,10 +1,10 @@
 package com.app.form;
 
 import com.app.cell.CellActionCustomer;
-import com.app.cell.CellCustomerEmail;
 import com.app.cell.CellCustomerNama;
-import com.app.cell.CellCustomerTelp;
 import com.app.cell.CellCustomerType;
+import com.app.cell.CellTextEmail;
+import com.app.cell.CellTextTelp;
 import com.app.component.Form;
 import com.app.model.ModelCustomer;
 import com.app.services.ServiceCustomer;
@@ -20,13 +20,15 @@ public class Penyewa extends Form {
     public Penyewa() {
         initComponents();
         table1.addTableStyle(jScrollPane1);
+        table1.setAnimateRowHeight(130);
         table2.addTableStyle(jScrollPane2);
+        table2.setAnimateRowHeight(130);
         init();
     }
     private void init(){
       table1.addTableCell(new CellCustomerNama(),2);
-      table1.addTableCell(new CellCustomerTelp(),3);
-      table1.addTableCell(new CellCustomerEmail(),4);
+      table1.addTableCell(new CellTextTelp(),3);
+      table1.addTableCell(new CellTextEmail(),4);
       table1.addTableCell(new CellCustomerType(),5);
       table1.addTableCell(new CellActionCustomer(),7);
         new Thread(new Runnable() {
@@ -46,8 +48,8 @@ public class Penyewa extends Form {
             }   
         }).start();
       table2.addTableCell(new CellCustomerNama(),2);
-      table2.addTableCell(new CellCustomerTelp(),3);
-      table2.addTableCell(new CellCustomerEmail(),4);
+      table2.addTableCell(new CellTextTelp(),3);
+      table2.addTableCell(new CellTextEmail(),4);
       table2.addTableCell(new CellCustomerType(),5);
       table2.addTableCell(new CellActionCustomer(),7);
         new Thread(new Runnable() {
@@ -95,7 +97,13 @@ public class Penyewa extends Form {
         ));
         jScrollPane1.setViewportView(table1);
         if (table1.getColumnModel().getColumnCount() > 0) {
-            table1.getColumnModel().getColumn(0).setPreferredWidth(10);
+            table1.getColumnModel().getColumn(0).setMinWidth(50);
+            table1.getColumnModel().getColumn(0).setMaxWidth(50);
+            table1.getColumnModel().getColumn(1).setPreferredWidth(10);
+            table1.getColumnModel().getColumn(2).setPreferredWidth(100);
+            table1.getColumnModel().getColumn(3).setPreferredWidth(100);
+            table1.getColumnModel().getColumn(4).setPreferredWidth(100);
+            table1.getColumnModel().getColumn(6).setPreferredWidth(20);
             table1.getColumnModel().getColumn(7).setPreferredWidth(10);
         }
 
@@ -143,7 +151,13 @@ public class Penyewa extends Form {
         });
         jScrollPane2.setViewportView(table2);
         if (table2.getColumnModel().getColumnCount() > 0) {
-            table2.getColumnModel().getColumn(0).setPreferredWidth(10);
+            table2.getColumnModel().getColumn(0).setMinWidth(50);
+            table2.getColumnModel().getColumn(0).setMaxWidth(50);
+            table2.getColumnModel().getColumn(1).setPreferredWidth(10);
+            table2.getColumnModel().getColumn(2).setPreferredWidth(100);
+            table2.getColumnModel().getColumn(3).setPreferredWidth(100);
+            table2.getColumnModel().getColumn(4).setPreferredWidth(100);
+            table2.getColumnModel().getColumn(6).setPreferredWidth(20);
             table2.getColumnModel().getColumn(7).setPreferredWidth(10);
         }
 

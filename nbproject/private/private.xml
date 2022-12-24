@@ -10,8 +10,10 @@
             <file>file:/F:/Project/GOR-Aulia/src/com/app/swing/table/Table.java</file>
             <file>file:/F:/Project/GOR-Aulia/src/com/app/form/Pemesanan.java</file>
             <file>file:/F:/Project/GOR-Aulia/src/com/app/swing/PasswordField.java</file>
+            <file>file:/F:/Project/GOR-Aulia/src/com/app/form/Staff.java</file>
             <file>file:/F:/Project/GOR-Aulia/src/com/app/swing/Line.java</file>
             <file>file:/F:/Project/GOR-Aulia/src/com/app/model/ModelTransaksi.java</file>
+            <file>file:/F:/Project/GOR-Aulia/src/com/app/icon/2.png</file>
             <file>file:/F:/Project/GOR-Aulia/src/com/app/model/ModelPaket.java</file>
             <file>file:/F:/Project/GOR-Aulia/src/com/app/cell/CellCustomerTelp.java</file>
             <file>file:/F:/Project/GOR-Aulia/src/com/app/swing/table/TableRowData.java</file>
@@ -29,6 +31,7 @@
             <file>file:/F:/Project/GOR-Aulia/src/com/app/swing/Combobox.java</file>
             <file>file:/F:/Project/GOR-Aulia/src/com/app/services/ServiceTransaksi.java</file>
             <file>file:/F:/Project/GOR-Aulia/src/com/app/component/Menu.java</file>
+            <file>file:/F:/Project/GOR-Aulia/src/com/app/icon/1.png</file>
             <file>file:/F:/Project/GOR-Aulia/src/com/app/services/ServiceCustomer.java</file>
             <file>file:/F:/Project/GOR-Aulia/src/com/app/component/ChangeDP.java</file>
             <file>file:/F:/Project/GOR-Aulia/src/com/app/form/Transaksi.java</file>
@@ -39,12 +42,15 @@
             <file>file:/F:/Project/GOR-Aulia/src/com/app/services/ServicePaket.java</file>
             <file>file:/F:/Project/GOR-Aulia/src/com/app/configurations/config.java</file>
             <file>file:/F:/Project/GOR-Aulia/src/com/app/model/ModelBooking.java</file>
+            <file>file:/F:/Project/GOR-Aulia/src/com/app/icon/6.png</file>
             <file>file:/F:/Project/GOR-Aulia/src/com/app/cell/CellCustomerType.java</file>
+            <file>file:/F:/Project/GOR-Aulia/src/com/app/component/MainBody.java</file>
             <file>file:/F:/Project/GOR-Aulia/src/com/app/main/Login.java</file>
             <file>file:/F:/Project/GOR-Aulia/src/com/app/cell/CellActionPaket.java</file>
             <file>file:/F:/Project/GOR-Aulia/src/com/app/swing/RoundPanel.java</file>
             <file>file:/F:/Project/GOR-Aulia/src/com/app/component/ChangeProfile.java</file>
             <file>file:/F:/Project/GOR-Aulia/src/com/app/model/ModelJadwal.java</file>
+            <file>file:/F:/Project/GOR-Aulia/src/com/app/services/ServiceCellBooking.java</file>
             <file>file:/F:/Project/GOR-Aulia/src/com/app/swing/ImageAvatar.java</file>
             <file>file:/F:/Project/GOR-Aulia/src/com/app/services/UserSession.java</file>
             <file>file:/F:/Project/GOR-Aulia/src/com/app/model/ModelLapangan.java</file>
@@ -54,9 +60,11 @@
             <file>file:/F:/Project/GOR-Aulia/src/com/app/form/Forms.java</file>
             <file>file:/F:/Project/GOR-Aulia/src/com/app/services/ServiceSettings.java</file>
             <file>file:/F:/Project/GOR-Aulia/src/com/app/form/Penyewa.java</file>
+            <file>file:/F:/Project/GOR-Aulia/src/com/app/icon/3.png</file>
             <file>file:/F:/Project/GOR-Aulia/src/com/app/swing/MenuButton.java</file>
             <file>file:/F:/Project/GOR-Aulia/src/com/app/services/ServiceReport.java</file>
             <file>file:/F:/Project/GOR-Aulia/src/com/app/cell/CellActionBooking.java</file>
+            <file>file:/F:/Project/GOR-Aulia/src/com/app/services/ServiceStaff.java</file>
             <file>file:/F:/Project/GOR-Aulia/src/com/app/swing/table/TableCustom.java</file>
             <file>file:/F:/Project/GOR-Aulia/src/com/app/event/EventSwitchSelected.java</file>
             <file>file:/F:/Project/GOR-Aulia/src/com/app/cell/CellPaketHarga.java</file>
@@ -64,9 +72,12 @@
             <file>file:/F:/Project/GOR-Aulia/src/com/app/component/ChangePassword.java</file>
             <file>file:/F:/Project/GOR-Aulia/src/com/app/configurations/DatabaseConnection.java</file>
             <file>file:/F:/Project/GOR-Aulia/src/com/app/swing/PanelBackground.java</file>
+            <file>file:/F:/Project/GOR-Aulia/src/com/app/icon/4.png</file>
             <file>file:/F:/Project/GOR-Aulia/src/com/app/services/ServiceLogin.java</file>
             <file>file:/F:/Project/GOR-Aulia/src/com/app/swing/table/TableHeaderCustom.java</file>
+            <file>file:/F:/Project/GOR-Aulia/src/com/app/model/ModelStaff.java</file>
             <file>file:/F:/Project/GOR-Aulia/src/com/app/cell/CellCustomerNama.java</file>
+            <file>file:/F:/Project/GOR-Aulia/src/com/app/icon/5.png</file>
             <file>file:/F:/Project/GOR-Aulia/src/com/app/main/Main.java</file>
         </group>
     </open-files>

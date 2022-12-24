@@ -196,9 +196,9 @@ public class ChangePassword extends javax.swing.JPanel {
             int userID = UserSession.GetUserId();
             int roleID = UserSession.getRoleId();
             String userLogin = UserSession.getUserLogin();
-            ModelAccounts data = new ModelAccounts(userID,userLogin,txtLama.getText(),roleID,null);
+            ModelAccounts data = new ModelAccounts(userID,userLogin,txtLama.getText(),roleID);
             if(ss.checkPassword(data)==true){
-                ModelAccounts data2 = new ModelAccounts(userID,userLogin,txtBaru.getText(),roleID,null);
+                ModelAccounts data2 = new ModelAccounts(userID,userLogin,txtBaru.getText(),roleID);
                 ss.updatePassword(data2);
                 succ.showNotification();
             }else{
