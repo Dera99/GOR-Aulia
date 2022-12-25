@@ -61,14 +61,13 @@ public class ModelStaff extends TableRowData{
     private int count;
     private ModelAccounts account;
     public ModelStaff(){}
-    public ModelStaff(int staffID,ModelAccounts account,String nama, String alamat,String noTelp,String email,String jabatan){
+    public ModelStaff(int staffID,String nama, String alamat,String noTelp,String email,String jabatan){
         this.staffID=staffID;
         this.nama=nama;
         this.alamat=alamat;
         this.noTelp=noTelp;
         this.email=email;
         this.jabatan=jabatan;
-        this.account=account;
     }
 
     @Override
@@ -77,8 +76,11 @@ public class ModelStaff extends TableRowData{
         if(account.getRoleID()==1){
             level="ADMIN";
         }
-        return new Object[]{account,noTelp,email,jabatan,level};
+        return new Object[]{nama,email,jabatan,account,level};
+    }
+    @Override
+    public String toString(){
+        return nama;
     }
     
-  
 }

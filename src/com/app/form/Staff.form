@@ -16,7 +16,7 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="roundPanel1" max="32767" attributes="0"/>
+          <Component id="roundPanel1" alignment="0" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
@@ -36,18 +36,24 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="1" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jScrollPane1" pref="836" max="32767" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="jScrollPane1" max="32767" attributes="0"/>
+                      <Group type="102" attributes="0">
+                          <Component id="btnAdd" min="-2" pref="101" max="-2" attributes="0"/>
+                          <EmptySpace pref="931" max="32767" attributes="0"/>
+                      </Group>
+                  </Group>
               </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
-                  <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
-                  <Component id="jScrollPane1" pref="519" max="32767" attributes="0"/>
+                  <Component id="btnAdd" min="-2" pref="32" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="jScrollPane1" pref="507" max="32767" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -65,10 +71,10 @@
               <Properties>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                   <Table columnCount="6" rowCount="0">
-                    <Column editable="true" title="Username" type="java.lang.Object"/>
-                    <Column editable="true" title="No Telp" type="java.lang.Object"/>
+                    <Column editable="true" title="Nama" type="java.lang.Object"/>
                     <Column editable="true" title="Email" type="java.lang.Object"/>
                     <Column editable="true" title="Jabatan" type="java.lang.Object"/>
+                    <Column editable="true" title="Username" type="java.lang.Object"/>
                     <Column editable="true" title="Level Account" type="java.lang.Object"/>
                     <Column editable="true" title="Action" type="java.lang.Object"/>
                   </Table>
@@ -80,22 +86,22 @@
                       <Editor/>
                       <Renderer/>
                     </Column>
-                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="100" resizable="true">
                       <Title/>
                       <Editor/>
                       <Renderer/>
                     </Column>
-                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="90" resizable="true">
                       <Title/>
                       <Editor/>
                       <Renderer/>
                     </Column>
-                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="100" resizable="true">
                       <Title/>
                       <Editor/>
                       <Renderer/>
                     </Column>
-                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="100" resizable="true">
                       <Title/>
                       <Editor/>
                       <Renderer/>
@@ -114,6 +120,26 @@
             </Component>
           </SubComponents>
         </Container>
+        <Component class="com.app.swing.Button" name="btnAdd">
+          <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="e1" green="95" red="33" type="rgb"/>
+            </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="f0" green="f0" red="f0" type="rgb"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Add"/>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="SansSerif" size="12" style="1"/>
+            </Property>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAddActionPerformed"/>
+          </Events>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_ListenersCodePost" type="java.lang.String" value="GoogleMaterialIcon icon1 = new GoogleMaterialIcon();&#xa;        icon1.setIcon(GoogleMaterialDesignIcon.ADD_CIRCLE_OUTLINE);&#xa;        icon1.setColor1(Color.white);&#xa;        icon1.setColor2(Color.white);&#xa;        btnAdd.setIcon(icon1.toIcon());"/>
+          </AuxValues>
+        </Component>
       </SubComponents>
     </Container>
   </SubComponents>

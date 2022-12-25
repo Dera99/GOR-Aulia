@@ -3,7 +3,7 @@ package com.app.model;
 import com.app.swing.table.TableRowData;
 import javax.swing.Icon;
 
-public class ModelAccounts{
+public class ModelAccounts extends TableRowData{
     public ModelStaff getStaff() {
         return staff;
     }
@@ -56,5 +56,14 @@ public class ModelAccounts{
     @Override
     public String toString() {
         return username;
+    }
+
+    @Override
+    public Object[] toTableRow() {
+        String level = "STAFF";
+        if(getRoleID()==1){
+            level="ADMIN";
+        }
+        return new Object[]{staff,staff.getEmail(),staff.getJabatan(),username,level};
     }
 }

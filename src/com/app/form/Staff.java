@@ -5,15 +5,19 @@ import com.app.cell.CellActionStaff;
 import com.app.cell.CellStaffJabatan;
 import com.app.cell.CellStaffLevel;
 import com.app.cell.CellStaffNama;
+import com.app.cell.CellStaffUsername;
 import com.app.cell.CellTextEmail;
 import com.app.cell.CellTextTelp;
 import com.app.component.Form;
 import com.app.model.ModelAccounts;
 import com.app.model.ModelStaff;
 import com.app.services.ServiceStaff;
+import java.awt.Color;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javaswingdev.GoogleMaterialDesignIcon;
+import javaswingdev.GoogleMaterialIcon;
 
 public class Staff extends Form{
 
@@ -25,9 +29,9 @@ public class Staff extends Form{
     }
     private void initTable(){
         table1.addTableCell(new CellStaffNama(), 0);
-        table1.addTableCell(new CellTextTelp(), 1);
-        table1.addTableCell(new CellTextEmail(), 2);
-        table1.addTableCell(new CellStaffJabatan(), 3);
+        table1.addTableCell(new CellTextEmail(), 1);
+        table1.addTableCell(new CellStaffJabatan(), 2);
+        table1.addTableCell(new CellStaffUsername(), 3);
         table1.addTableCell(new CellStaffLevel(), 4);
         table1.addTableCell(new CellActionStaff(), 5);
          new Thread(new Runnable() {
@@ -36,7 +40,7 @@ public class Staff extends Form{
                 table1.removeAllRows();
                 try {
                     table1.removeAllRows();
-                    for (ModelStaff data : new ServiceStaff().getStaff()) {
+                    for (ModelAccounts data : new ServiceStaff().getStaff()) {
                         table1.addRow(data, false); 
                     }
                 } catch (SQLException ex) {
@@ -54,6 +58,7 @@ public class Staff extends Form{
         roundPanel1 = new com.app.swing.RoundPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         table1 = new com.app.swing.table.Table();
+        btnAdd = new com.app.swing.Button();
 
         roundPanel1.setBackground(new java.awt.Color(60, 60, 60));
 
@@ -62,29 +67,52 @@ public class Staff extends Form{
 
             },
             new String [] {
-                "Username", "No Telp", "Email", "Jabatan", "Level Account", "Action"
+                "Nama", "Email", "Jabatan", "Username", "Level Account", "Action"
             }
         ));
         jScrollPane1.setViewportView(table1);
         if (table1.getColumnModel().getColumnCount() > 0) {
             table1.getColumnModel().getColumn(0).setPreferredWidth(200);
+            table1.getColumnModel().getColumn(1).setPreferredWidth(100);
+            table1.getColumnModel().getColumn(2).setPreferredWidth(90);
+            table1.getColumnModel().getColumn(3).setPreferredWidth(100);
+            table1.getColumnModel().getColumn(4).setPreferredWidth(100);
             table1.getColumnModel().getColumn(5).setPreferredWidth(10);
         }
+
+        btnAdd.setBackground(new java.awt.Color(51, 149, 225));
+        btnAdd.setForeground(new java.awt.Color(240, 240, 240));
+        btnAdd.setText("Add");
+        btnAdd.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        btnAdd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddActionPerformed(evt);
+            }
+        });
+        GoogleMaterialIcon icon1 = new GoogleMaterialIcon();
+        icon1.setIcon(GoogleMaterialDesignIcon.ADD_CIRCLE_OUTLINE);
+        icon1.setColor1(Color.white);
+        icon1.setColor2(Color.white);
+        btnAdd.setIcon(icon1.toIcon());
 
         javax.swing.GroupLayout roundPanel1Layout = new javax.swing.GroupLayout(roundPanel1);
         roundPanel1.setLayout(roundPanel1Layout);
         roundPanel1Layout.setHorizontalGroup(
             roundPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, roundPanel1Layout.createSequentialGroup()
+            .addGroup(roundPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 836, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGroup(roundPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1)
+                    .addGroup(roundPanel1Layout.createSequentialGroup()
+                        .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(931, Short.MAX_VALUE))))
         );
         roundPanel1Layout.setVerticalGroup(
             roundPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(roundPanel1Layout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 519, Short.MAX_VALUE)
+                .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 507, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -100,8 +128,17 @@ public class Staff extends Form{
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
+        ModelAccounts acc = new ModelAccounts(0,"","",0);
+        ModelStaff data = new ModelStaff(0,"","","","","");
+        acc.setStaff(data);
+        data.setAccount(acc);
+        table1.insertRowWithEdit(acc, 0, true);
+    }//GEN-LAST:event_btnAddActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private com.app.swing.Button btnAdd;
     private javax.swing.JScrollPane jScrollPane1;
     private com.app.swing.RoundPanel roundPanel1;
     private com.app.swing.table.Table table1;

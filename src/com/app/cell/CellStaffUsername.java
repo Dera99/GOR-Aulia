@@ -6,9 +6,9 @@ import com.app.swing.table.TableCustom;
 import com.app.swing.table.TableCustomCell;
 import com.app.swing.table.TableRowData;
 
-public class CellStaffLevel extends TableCustomCell {
+public class CellStaffUsername extends TableCustomCell {
 
-    public CellStaffLevel() {
+    public CellStaffUsername() {
         initComponents();
     }
 
@@ -16,55 +16,52 @@ public class CellStaffLevel extends TableCustomCell {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel2 = new javax.swing.JLabel();
-        cbLevel = new javax.swing.JComboBox<>();
+        jLabel1 = new javax.swing.JLabel();
+        txt = new javax.swing.JTextField();
 
-        jLabel2.setForeground(new java.awt.Color(230, 230, 230));
-        jLabel2.setText("Level");
-
-        cbLevel.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "STAFF", "ADMIN" }));
+        jLabel1.setForeground(new java.awt.Color(230, 230, 230));
+        jLabel1.setText("User");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel2)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cbLevel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addComponent(txt, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                 .addGap(0, 0, 0)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(cbLevel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(txt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     @Override
     public void setData(Object o) {
-        cbLevel.setSelectedItem(o);
+         txt.setText(o.toString());
     }
 
     @Override
     public Object getData() {      
-        return cbLevel.getSelectedItem();
+        return txt.getText().trim();
     }
 
     @Override
     public TableCustomCell createComponentCellEditor(TableCustom tc, TableRowData trd, Object o, int i, int i1) {
-        CellStaffLevel cell = new CellStaffLevel();
+        CellStaffUsername cell = new CellStaffUsername();
         cell.setData(o);
         return cell;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> cbLevel;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JTextField txt;
     // End of variables declaration//GEN-END:variables
 }

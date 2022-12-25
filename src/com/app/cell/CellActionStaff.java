@@ -4,6 +4,7 @@ import com.app.model.ModelAccounts;
 import com.app.model.ModelLapangan;
 import com.app.model.ModelStaff;
 import com.app.services.ServicePaket;
+import com.app.services.ServiceStaff;
 import com.app.swing.table.TableCustom;
 import com.app.swing.table.TableCustomCell;
 import com.app.swing.table.TableRowData;
@@ -22,7 +23,7 @@ public class CellActionStaff extends TableCustomCell {
         cmdEdit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                int staffID = ((ModelStaff) data).getStaffID();
+                int staffID = ((ModelAccounts) data).getUserID();
                 if (data.isEditing()) {
                  table.cancelEditRowAt(row);
                     cmdEdit.setIcon(new ImageIcon(getClass().getResource("/com/app/icon/edit.png")));
@@ -35,10 +36,10 @@ public class CellActionStaff extends TableCustomCell {
         cmdDelete.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                int lapanganID = ((ModelLapangan) data).getLapanganID();
-                if (lapanganID != 0) {
+                int staffID = ((ModelAccounts) data).getStaff().getStaffID();
+                if (staffID != 0) {
                     try {
-                        new ServicePaket().deleteLapangan(lapanganID);
+                        new ServiceStaff().deleteStaff(staffID);
                         table.deleteRowAt(getRow(), true);
                     } catch (SQLException e) {
                         System.err.println(e);
