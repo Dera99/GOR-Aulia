@@ -23,7 +23,6 @@ public class CellActionStaff extends TableCustomCell {
         cmdEdit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                int staffID = ((ModelAccounts) data).getUserID();
                 if (data.isEditing()) {
                  table.cancelEditRowAt(row);
                     cmdEdit.setIcon(new ImageIcon(getClass().getResource("/com/app/icon/edit.png")));

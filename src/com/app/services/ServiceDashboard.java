@@ -1,8 +1,9 @@
 package com.app.services;
 
+import com.app.chart.ModelChart;
 import com.app.configurations.DatabaseConnection;
 import com.app.model.ModelCustomer;
-import com.app.model.ModelJadwal;
+import com.app.model.ModelDashboard;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -18,7 +19,7 @@ import java.util.List;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 
-public class ServiceJadwal {
+public class ServiceDashboard {
     ResultSet rs = null;
     Connection CC = new DatabaseConnection().connect();;
     PreparedStatement pst = null;
@@ -82,8 +83,8 @@ public class ServiceJadwal {
 //        }
 //    }
 
-    public List<ModelJadwal> getBooking() throws SQLException {
-        List<ModelJadwal> list = new ArrayList<>();
+    public List<ModelDashboard> getBooking() throws SQLException {
+        List<ModelDashboard> list = new ArrayList<>();
         sql = "select * from pesanan JOIN customer ON customer.IdCustomer = pesanan.IdCustomer JOIN Lapangan ON Lapangan.IdLapangan = pesanan.IdLapangan JOIN sewa ON sewa.IdSewa = pesanan.IdSewa"
                 + "";
         pst = CC.prepareStatement(sql);
@@ -97,7 +98,7 @@ public class ServiceJadwal {
             Time expired = rs.getTime("Expired");
             Time durasi = rs.getTime("Durasi");
             String status = rs.getString("pesanan.Status");
-            list.add(new ModelJadwal(nama,noTelp,Lapangan,request,expired,durasi,status));
+            list.add(new ModelDashboard(nama,noTelp,Lapangan,request,expired,durasi,status));
         }
         rs.close();
         pst.close();
@@ -110,5 +111,20 @@ public class ServiceJadwal {
         pst.setInt(1, staffID);
         pst.execute();
         pst.close();
+    }
+    public List<ModelChart> getDataChart() throws SQLException {
+        List<ModelChart> list = new ArrayList<>();
+        String sql = "SELECT DATE_FORMAT(Tanggal,'%M') as M, SUM(IF(IdTipeTrx=1, Subtotal, 0)) as Subtotal1, SUM(IF(IdTipeTrx=2, Subtotal, 0)) as Subtotal2 FROM Transaksi WHERE StatusTransaksi='Selesai' GROUP BY DATE_FORMAT(Tanggal,'%Y-%M') ORDER BY Tanggal DESC LIMIT 6";
+        pst = CC.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+        rs = pst.executeQuery();
+        while (rs.next()) {
+            String month = rs.getString(1);
+            double total = rs.getDouble(2);
+            double total2 = rs.getDouble(3);
+            list.add(new ModelChart(month, new double[]{total,total2}));
+        }
+        rs.close();
+        pst.close();
+        return list;
     }
 }

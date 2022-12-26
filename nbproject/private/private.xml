@@ -21,7 +21,6 @@
             <file>file:/F:/Project/GOR-Aulia/src/com/app/cell/CellActionTrx.java</file>
             <file>file:/F:/Project/GOR-Aulia/src/com/app/swing/TextField.java</file>
             <file>file:/F:/Project/GOR-Aulia/src/com/app/swing/table/TableCustomCell.java</file>
-            <file>file:/F:/Project/GOR-Aulia/src/com/app/services/ServiceJadwal.java</file>
             <file>file:/F:/Project/GOR-Aulia/src/com/app/form/Settings.java</file>
             <file>file:/F:/Project/GOR-Aulia/src/com/app/cell/CellPaketNama.java</file>
             <file>file:/F:/Project/GOR-Aulia/src/com/app/swing/LabelIcon.java</file>
@@ -53,12 +52,12 @@
             <file>file:/F:/Project/GOR-Aulia/src/com/app/cell/CellActionPaket.java</file>
             <file>file:/F:/Project/GOR-Aulia/src/com/app/swing/RoundPanel.java</file>
             <file>file:/F:/Project/GOR-Aulia/src/com/app/component/ChangeProfile.java</file>
-            <file>file:/F:/Project/GOR-Aulia/src/com/app/model/ModelJadwal.java</file>
             <file>file:/F:/Project/GOR-Aulia/src/com/app/services/ServiceCellBooking.java</file>
             <file>file:/F:/Project/GOR-Aulia/src/com/app/swing/ImageAvatar.java</file>
             <file>file:/F:/Project/GOR-Aulia/src/com/app/cell/CellTextTelp.java</file>
             <file>file:/F:/Project/GOR-Aulia/src/com/app/services/UserSession.java</file>
             <file>file:/F:/Project/GOR-Aulia/src/com/app/model/ModelLapangan.java</file>
+            <file>file:/F:/Project/GOR-Aulia/src/com/app/model/ModelDashboard.java</file>
             <file>file:/F:/Project/GOR-Aulia/src/com/app/cell/CellJenisSewa.java</file>
             <file>file:/F:/Project/GOR-Aulia/src/com/app/cell/CellActionLapangan.java</file>
             <file>file:/F:/Project/GOR-Aulia/src/com/app/swing/SwitchButton.java</file>
@@ -77,6 +76,7 @@
             <file>file:/F:/Project/GOR-Aulia/src/com/app/component/ChangePassword.java</file>
             <file>file:/F:/Project/GOR-Aulia/src/com/app/configurations/DatabaseConnection.java</file>
             <file>file:/F:/Project/GOR-Aulia/src/com/app/swing/PanelBackground.java</file>
+            <file>file:/F:/Project/GOR-Aulia/src/com/app/services/ServiceDashboard.java</file>
             <file>file:/F:/Project/GOR-Aulia/src/com/app/icon/4.png</file>
             <file>file:/F:/Project/GOR-Aulia/src/com/app/swing/Button.java</file>
             <file>file:/F:/Project/GOR-Aulia/src/com/app/services/ServiceLogin.java</file>
