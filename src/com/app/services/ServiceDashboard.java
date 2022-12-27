@@ -14,6 +14,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Time;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.Icon;
@@ -140,15 +142,21 @@ public class ServiceDashboard {
         return String.valueOf(total);
     }
     public String getIncome() throws SQLException{
-        sql="SELECT COUNT(*) as JumlahPesanan FROM pesanan WHERE DATE(Request_Date) = CURDATE()";
+        sql="SELECT SUM(Subtotal) as Total FROM transaksi WHERE DATE(Tanggal) = CURDATE() AND StatusTransaksi='Selesai';";
         pst = CC.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
         rs = pst.executeQuery();
-        int total=0;
+        DecimalFormat kursIndonesia = new DecimalFormat("#,##0");
+        DecimalFormatSymbols formatRp = new DecimalFormatSymbols();
+        formatRp.setCurrencySymbol("Rp. ");
+        formatRp.setMonetaryDecimalSeparator(',');
+        formatRp.setGroupingSeparator('.');
+        kursIndonesia.setDecimalFormatSymbols(formatRp);
+        double total=0;
         while (rs.next()) {
             total = rs.getInt(1);
         }
         rs.close();
         pst.close();
-        return String.valueOf(total);
+        return kursIndonesia.format(total);
     }
 }

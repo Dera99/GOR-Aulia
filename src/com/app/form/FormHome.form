@@ -135,7 +135,7 @@
             <Property name="color2" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="aa" green="a6" red="1a" type="rgb"/>
             </Property>
-            <Property name="description" type="java.lang.String" value="Pemasukan Hari Ini"/>
+            <Property name="description" type="java.lang.String" value="Income Hari Ini"/>
             <Property name="doubleBuffered" type="boolean" value="false"/>
             <Property name="icon" type="javaswingdev.GoogleMaterialDesignIcon" editor="org.netbeans.modules.form.editors.EnumEditor">
               <Value id="ATTACH_MONEY"/>

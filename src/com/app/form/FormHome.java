@@ -22,11 +22,11 @@ public class FormHome extends Form {
 
     private void init() throws SQLException {
         ServiceDashboard sd = new ServiceDashboard();
-        chart.addLegend("Customer Reguler", new Color(12, 84, 175), new Color(0, 108, 247));
-        chart.addLegend("Customer Member", new Color(5, 125, 0), new Color(95, 209, 69));
+        chart.addLegend("Reguler", new Color(12, 84, 175), new Color(0, 108, 247));
+        chart.addLegend("Member", new Color(5, 125, 0), new Color(95, 209, 69));
         // card
         card1.setData(new ModelCard(null, null, null, sd.getPasanan(), "Pesanan Hari Ini"));
-        card2.setData(new ModelCard(GoogleMaterialDesignIcon.ATTACH_MONEY, null, null, "Rp 50.000", "Pemasukan Hari Ini"));
+        card2.setData(new ModelCard(GoogleMaterialDesignIcon.PAYMENTS, null, null, "Rp "+sd.getIncome(), "Income Hari Ini"));
         card3.setData(new ModelCard(GoogleMaterialDesignIcon.GROUP, null, null, "50", "Member Aktif Bulan Ini"));
         try {
             List<ModelChart> datas = new ServiceDashboard().getDataChart();
@@ -102,7 +102,7 @@ public class FormHome extends Form {
         card2.setForeground(new java.awt.Color(255, 255, 255));
         card2.setColor1(new java.awt.Color(95, 211, 226));
         card2.setColor2(new java.awt.Color(26, 166, 170));
-        card2.setDescription("Pemasukan Hari Ini");
+        card2.setDescription("Income Hari Ini");
         card2.setDoubleBuffered(false);
         card2.setIcon(javaswingdev.GoogleMaterialDesignIcon.ATTACH_MONEY);
 
