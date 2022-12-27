@@ -11,7 +11,7 @@ import javaswingdev.GoogleMaterialDesignIcon;
 
 public class FormHome extends Form {
 
-    public FormHome() {
+    public FormHome() throws SQLException {
         initComponents();
         setOpaque(false);
         //table1.addTableStyle(jScrollPane1);
@@ -20,13 +20,14 @@ public class FormHome extends Form {
         //initDataTable();
     }
 
-    private void init() {
+    private void init() throws SQLException {
+        ServiceDashboard sd = new ServiceDashboard();
         chart.addLegend("Customer Reguler", new Color(12, 84, 175), new Color(0, 108, 247));
         chart.addLegend("Customer Member", new Color(5, 125, 0), new Color(95, 209, 69));
         // card
-        card1.setData(new ModelCard(null, null, null, "50", "Pesanan Hari Ini"));
+        card1.setData(new ModelCard(null, null, null, sd.getPasanan(), "Pesanan Hari Ini"));
         card2.setData(new ModelCard(GoogleMaterialDesignIcon.ATTACH_MONEY, null, null, "Rp 50.000", "Pemasukan Hari Ini"));
-        card3.setData(new ModelCard(GoogleMaterialDesignIcon.GROUP, null, null, "50", "Member Aktif Hari Ini"));
+        card3.setData(new ModelCard(GoogleMaterialDesignIcon.GROUP, null, null, "50", "Member Aktif Bulan Ini"));
         try {
             List<ModelChart> datas = new ServiceDashboard().getDataChart();
             for (int i = datas.size() - 1; i >= 0; i--) {

@@ -127,4 +127,28 @@ public class ServiceDashboard {
         pst.close();
         return list;
     }
+    public String getPasanan() throws SQLException{
+        sql="SELECT COUNT(*) as JumlahPesanan FROM pesanan WHERE DATE(Request_Date) = CURDATE()";
+        pst = CC.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+        rs = pst.executeQuery();
+        int total=0;
+        while (rs.next()) {
+            total = rs.getInt(1);
+        }
+        rs.close();
+        pst.close();
+        return String.valueOf(total);
+    }
+    public String getIncome() throws SQLException{
+        sql="SELECT COUNT(*) as JumlahPesanan FROM pesanan WHERE DATE(Request_Date) = CURDATE()";
+        pst = CC.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+        rs = pst.executeQuery();
+        int total=0;
+        while (rs.next()) {
+            total = rs.getInt(1);
+        }
+        rs.close();
+        pst.close();
+        return String.valueOf(total);
+    }
 }
