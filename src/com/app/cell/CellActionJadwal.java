@@ -1,11 +1,8 @@
 package com.app.cell;
 
-import com.app.form.Transaksi;
 import com.app.main.Main;
 import com.app.model.ModelDashboard;
-import com.app.model.ModelTransaksi;
 import com.app.services.ServiceDashboard;
-import com.app.services.ServiceTransaksi;
 import com.app.swing.table.TableCustom;
 import com.app.swing.table.TableCustomCell;
 import com.app.swing.table.TableRowData;
@@ -16,9 +13,6 @@ import java.awt.Color;
 import java.sql.SQLException;
 import java.sql.Time;
 import java.util.Calendar;
-import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javaswingdev.GoogleMaterialDesignIcon;
 import javaswingdev.GoogleMaterialIcon;
 import javax.swing.JOptionPane;
