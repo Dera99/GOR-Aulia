@@ -47,7 +47,8 @@
                       <Component id="jScrollPane1" alignment="0" pref="922" max="32767" attributes="0"/>
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
+                          <Component id="serch1" min="-2" pref="187" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
@@ -58,10 +59,13 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jLabel1" min="-2" pref="36" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="jLabel1" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
+                      <Component id="serch1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jScrollPane1" min="-2" pref="221" max="-2" attributes="0"/>
-                  <EmptySpace pref="9" max="32767" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -150,6 +154,20 @@
             <Property name="text" type="java.lang.String" value="Customer Reguler"/>
           </Properties>
         </Component>
+        <Component class="com.app.swing.TextField" name="serch1">
+          <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="3c" green="3c" red="3c" type="rgb"/>
+            </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="f2" green="f2" red="f2" type="rgb"/>
+            </Property>
+            <Property name="labelText" type="java.lang.String" value="Search"/>
+          </Properties>
+          <Events>
+            <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="serch1KeyReleased"/>
+          </Events>
+        </Component>
       </SubComponents>
     </Container>
     <Container class="com.app.swing.RoundPanel" name="roundPanel2">
@@ -172,7 +190,7 @@
                               <Component id="btnAdd" alignment="0" min="-2" pref="101" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="32767" attributes="0"/>
-                          <Component id="serch" min="-2" pref="187" max="-2" attributes="0"/>
+                          <Component id="serch2" min="-2" pref="187" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="btnPrint" min="-2" pref="76" max="-2" attributes="0"/>
                       </Group>
@@ -192,12 +210,12 @@
                           <Component id="btnAdd" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Group type="103" alignment="1" groupAlignment="3" attributes="0">
-                          <Component id="serch" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="serch2" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="btnPrint" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="jScrollPane2" pref="204" max="32767" attributes="0"/>
+                  <Component id="jScrollPane2" pref="197" max="32767" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -311,7 +329,7 @@
             <AuxValue name="JavaCodeGenerator_ListenersCodePost" type="java.lang.String" value=";       &#xa;        GoogleMaterialIcon icn = new GoogleMaterialIcon();&#xa;        icn.setIcon(GoogleMaterialDesignIcon.PRINT);&#xa;        icn.setColor1(Color.white);&#xa;        icn.setColor2(Color.white);&#xa;        btnPrint.setIcon(icn.toIcon());"/>
           </AuxValues>
         </Component>
-        <Component class="com.app.swing.TextField" name="serch">
+        <Component class="com.app.swing.TextField" name="serch2">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="3c" green="3c" red="3c" type="rgb"/>
@@ -321,6 +339,9 @@
             </Property>
             <Property name="labelText" type="java.lang.String" value="Search"/>
           </Properties>
+          <Events>
+            <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="serch2KeyReleased"/>
+          </Events>
         </Component>
         <Component class="com.app.swing.Button" name="btnAdd">
           <Properties>

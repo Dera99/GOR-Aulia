@@ -101,7 +101,13 @@ public class ModelTransaksi extends TableRowData{
     public Object[] toTableRow() {
         DateFormat sdf = new SimpleDateFormat("dd/MM/yy H:mm");
         String kode = "R";
-        if(tipeTrx==2){kode="M";}
-        return new Object[]{getCount(),kode+pesananID,kode+customerID.getCustomerID(),getNameTransaksi(),"Rp "+subTotal,"Rp "+DP,"Rp "+grandTotal,sdf.format(tanggal)+" WIB",status};
+        String type = "R";
+        if(tipeTrx==2){
+            kode="M";
+        }
+        if(customerID.getKet().equals("Member")){
+            type="M";
+        }
+        return new Object[]{getCount(),kode+pesananID,type+customerID.getCustomerID(),getNameTransaksi(),"Rp "+subTotal,"Rp "+DP,"Rp "+grandTotal,sdf.format(tanggal)+" WIB",status};
     }
 }

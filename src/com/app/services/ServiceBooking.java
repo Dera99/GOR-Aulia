@@ -135,7 +135,7 @@ public class ServiceBooking {
             if(data.getField().equals("Lapangan 1 & 2")){
             SimpleDateFormat ex = new SimpleDateFormat("yyyy-MM-dd H:mm:ss");
             SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-                sql = "SELECT * FROM pesanan JOIN lapangan on lapangan.IdLapangan = pesanan.IdLapangan JOIN customer on customer.IdCustomer = pesanan.IdCustomer";
+                sql = "SELECT * FROM pesanan JOIN lapangan on lapangan.IdLapangan = pesanan.IdLapangan JOIN customer on customer.IdCustomer = pesanan.IdCustomer WHERE pesanan.Status ='Menunggu Antrian' OR Status='Ongoing'";
                 pst = CC.prepareStatement(sql);
                 rs = pst.executeQuery();
                 while(rs.next()){
@@ -158,7 +158,7 @@ public class ServiceBooking {
             }else {
             SimpleDateFormat ex = new SimpleDateFormat("yyyy-MM-dd H:mm:ss");
             SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-                sql = "SELECT * FROM pesanan JOIN lapangan on lapangan.IdLapangan = pesanan.IdLapangan JOIN customer on customer.IdCustomer = pesanan.IdCustomer WHERE pesanan.IdLapangan = (select IdLapangan from lapangan WHERE NamaLapangan='"+data.getField()+"')";
+                sql = "SELECT * FROM pesanan JOIN lapangan on lapangan.IdLapangan = pesanan.IdLapangan JOIN customer on customer.IdCustomer = pesanan.IdCustomer WHERE pesanan.IdLapangan = (select IdLapangan from lapangan WHERE NamaLapangan='"+data.getField()+"') AND pesanan.Status ='Menunggu Antrian' OR Status='Ongoing'";
                 pst = CC.prepareStatement(sql);
                 rs = pst.executeQuery();
                 while(rs.next()){
@@ -420,7 +420,10 @@ public class ServiceBooking {
        pst = CC.prepareStatement(sql);
        rs = pst.executeQuery();
        while(rs.next()){
-            isMember = rs.getInt("isMember");
+            int member = rs.getInt("isMember");
+            if(member==1){
+                isMember=1;
+            }
        }
        pst.close();
        rs.close();  

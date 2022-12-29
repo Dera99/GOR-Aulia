@@ -15,6 +15,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javaswingdev.GoogleMaterialDesignIcon;
 import javaswingdev.GoogleMaterialIcon;
+import javax.swing.RowFilter;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 
 public class Penyewa extends Form {
     public Penyewa() {
@@ -77,12 +80,13 @@ public class Penyewa extends Form {
         jScrollPane1 = new javax.swing.JScrollPane();
         table1 = new com.app.swing.table.Table();
         jLabel1 = new javax.swing.JLabel();
+        serch1 = new com.app.swing.TextField();
         roundPanel2 = new com.app.swing.RoundPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         table2 = new com.app.swing.table.Table();
         jLabel2 = new javax.swing.JLabel();
         btnPrint = new com.app.swing.Button();
-        serch = new com.app.swing.TextField();
+        serch2 = new com.app.swing.TextField();
         btnAdd = new com.app.swing.Button();
 
         roundPanel1.setBackground(new java.awt.Color(60, 60, 60));
@@ -111,6 +115,15 @@ public class Penyewa extends Form {
         jLabel1.setForeground(new java.awt.Color(240, 240, 240));
         jLabel1.setText("Customer Reguler");
 
+        serch1.setBackground(new java.awt.Color(60, 60, 60));
+        serch1.setForeground(new java.awt.Color(242, 242, 242));
+        serch1.setLabelText("Search");
+        serch1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                serch1KeyReleased(evt);
+            }
+        });
+
         javax.swing.GroupLayout roundPanel1Layout = new javax.swing.GroupLayout(roundPanel1);
         roundPanel1.setLayout(roundPanel1Layout);
         roundPanel1Layout.setHorizontalGroup(
@@ -121,17 +134,20 @@ public class Penyewa extends Form {
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 922, Short.MAX_VALUE)
                     .addGroup(roundPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(serch1, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         roundPanel1Layout.setVerticalGroup(
             roundPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, roundPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(roundPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(serch1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(9, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         roundPanel2.setBackground(new java.awt.Color(60, 60, 60));
@@ -177,9 +193,14 @@ public class Penyewa extends Form {
         icn.setColor2(Color.white);
         btnPrint.setIcon(icn.toIcon());
 
-        serch.setBackground(new java.awt.Color(60, 60, 60));
-        serch.setForeground(new java.awt.Color(242, 242, 242));
-        serch.setLabelText("Search");
+        serch2.setBackground(new java.awt.Color(60, 60, 60));
+        serch2.setForeground(new java.awt.Color(242, 242, 242));
+        serch2.setLabelText("Search");
+        serch2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                serch2KeyReleased(evt);
+            }
+        });
 
         btnAdd.setBackground(new java.awt.Color(51, 149, 225));
         btnAdd.setForeground(new java.awt.Color(240, 240, 240));
@@ -209,7 +230,7 @@ public class Penyewa extends Form {
                             .addComponent(jLabel2)
                             .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(serch, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(serch2, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnPrint, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
@@ -224,10 +245,10 @@ public class Penyewa extends Form {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, roundPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(serch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(serch2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(btnPrint, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 204, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 197, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -261,6 +282,25 @@ public class Penyewa extends Form {
         table2.insertRowWithEdit(data, 0, true);
     }//GEN-LAST:event_btnAddActionPerformed
 
+    private void serch2KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_serch2KeyReleased
+        table2.stopCellEditing();
+        TableRowSorter<TableModel> sorter = new TableRowSorter<>(table2.getModel());
+        String value = serch2.getText();
+        sorter.setRowFilter(RowFilter.regexFilter(value));
+        table2.setRowSorter(sorter);
+        table2.autoRowHeight();
+    }//GEN-LAST:event_serch2KeyReleased
+
+    private void serch1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_serch1KeyReleased
+        // TODO add your handling code here:
+        table1.stopCellEditing();
+        TableRowSorter<TableModel> sorter = new TableRowSorter<>(table1.getModel());
+        String value = serch1.getText();
+        sorter.setRowFilter(RowFilter.regexFilter(value));
+        table1.setRowSorter(sorter);
+        table1.autoRowHeight();
+    }//GEN-LAST:event_serch1KeyReleased
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.app.swing.Button btnAdd;
@@ -271,7 +311,8 @@ public class Penyewa extends Form {
     private javax.swing.JScrollPane jScrollPane2;
     private com.app.swing.RoundPanel roundPanel1;
     private com.app.swing.RoundPanel roundPanel2;
-    private com.app.swing.TextField serch;
+    private com.app.swing.TextField serch1;
+    private com.app.swing.TextField serch2;
     private com.app.swing.table.Table table1;
     private com.app.swing.table.Table table2;
     // End of variables declaration//GEN-END:variables

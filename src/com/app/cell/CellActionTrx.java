@@ -45,7 +45,7 @@ public class CellActionTrx extends TableCustomCell {
                     try {
                         new ServiceTransaksi().updateTrx(data);
                         table.updateModelData(row, data);
-                        table.setValueAt(status, row, 7);
+                        table.setValueAt(status, row, 8);
                         succ.showNotification();
                     } catch (SQLException ex) {
                         System.err.println(ex);

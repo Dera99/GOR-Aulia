@@ -190,7 +190,7 @@ public class Pemesanan extends Form{
         if(pesananID==0){
         if(checkTime(check)==true){
             setResult(true);  
-            if(sb.checkPaket(paket)==1 || sb.isMember()==true){
+            if(sb.checkPaket(paket)==1 && sb.isMember()==true){
                 int i;
                 for (i=0;i<=3;i++){
                    duration = reqTime.getHours()+sb.getDurasi(paket).getHours();
