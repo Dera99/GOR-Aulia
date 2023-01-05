@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="590" pageHeight="280" orientation="Landscape" columnWidth="550" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="f6f86c5d-c585-4197-b9d2-c1dd421c0bfb">
+	<property name="ireport.zoom" value="1.7715610000000017"/>
+	<property name="ireport.x" value="359"/>
+	<property name="ireport.y" value="163"/>
+	<style name="Title" forecolor="#FFFFFF" fontName="Times New Roman" fontSize="50" isBold="false" pdfFontName="Times-Bold"/>
+	<style name="SubTitle" forecolor="#CCCCCC" fontName="Times New Roman" fontSize="18" isBold="false" pdfFontName="Times-Roman"/>
+	<style name="Column header" forecolor="#666666" fontName="Times New Roman" fontSize="14" isBold="true" pdfFontName="Times-Roman"/>
+	<style name="Detail" mode="Transparent" fontName="Times New Roman" pdfFontName="Times-Roman"/>
+	<style name="Row" mode="Transparent" fontName="Times New Roman" pdfFontName="Times-Roman">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
+			<style mode="Opaque" backcolor="#F0EFEF"/>
+		</conditionalStyle>
+	</style>
+	<queryString>
+		<![CDATA[SELECT * FROM Customer WHERE Keterangan = 'Member' AND IdCustomer = 1671]]>
+	</queryString>
+	<field name="IdCustomer" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Nama" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="NoTelp" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Email" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Keterangan" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="CreatedAt" class="java.time.LocalDateTime">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="LastOrder" class="java.time.LocalDateTime">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="102" splitType="Stretch">
+			<frame>
+				<reportElement mode="Opaque" x="0" y="0" width="550" height="66" backcolor="#141414" uuid="af9f2d45-6cb6-4188-bc46-883f33611716"/>
+				<staticText>
+					<reportElement style="Title" x="0" y="0" width="310" height="66" forecolor="#F3F3F3" backcolor="#3C3C3C" uuid="59e482bf-213b-4013-91dc-0af3d21bf5cd"/>
+					<box topPadding="4" leftPadding="4" bottomPadding="4" rightPadding="4"/>
+					<textElement verticalAlignment="Bottom">
+						<font isBold="false"/>
+					</textElement>
+					<text><![CDATA[Member Card]]></text>
+				</staticText>
+			</frame>
+			<frame>
+				<reportElement mode="Opaque" x="0" y="70" width="550" height="32" forecolor="#000000" backcolor="#141414" uuid="9a8b7e68-3fe9-4aae-a0a4-35bee4bdd855"/>
+				<staticText>
+					<reportElement x="13" y="12" width="537" height="20" forecolor="#FFFFFF" uuid="f93665ec-bd69-495c-94e8-88d79a929a51"/>
+					<text><![CDATA[Jl. Perumahan Jakasampurna No.20, RT.005/RW.002, Jakasampurna, Kec. Bekasi Barat, Jawa Barat 17145]]></text>
+				</staticText>
+			</frame>
+			<image>
+				<reportElement x="473" y="0" width="77" height="102" uuid="20348d1e-7f1f-4d0e-808e-ff895e2b2f35"/>
+				<imageExpression><![CDATA["gor.png"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="18" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="89" splitType="Stretch">
+			<frame>
+				<reportElement style="Row" mode="Opaque" x="0" y="0" width="103" height="18" uuid="fa9475af-c38e-4a7c-aba0-197391fed2b1"/>
+				<staticText>
+					<reportElement style="Column header" x="13" y="0" width="90" height="18" forecolor="#000000" uuid="8b9763e4-5e98-4f75-8362-6ff092b827ba"/>
+					<textElement>
+						<font isBold="false"/>
+					</textElement>
+					<text><![CDATA[Customer ID]]></text>
+				</staticText>
+			</frame>
+			<staticText>
+				<reportElement style="Column header" x="13" y="18" width="100" height="18" forecolor="#000000" uuid="6d934a2b-68be-4c1d-a960-c2f23c09f65f"/>
+				<textElement>
+					<font isBold="false"/>
+				</textElement>
+				<text><![CDATA[Nama]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="Detail" positionType="Float" x="113" y="18" width="113" height="18" uuid="d0af4b16-6754-4494-b398-7da961bb8216"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Nama}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="Column header" x="13" y="36" width="100" height="18" forecolor="#000000" uuid="7a319c9f-de69-4880-839b-24dfbb458bad"/>
+				<textElement>
+					<font isBold="false"/>
+				</textElement>
+				<text><![CDATA[NoTelp]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="Detail" positionType="Float" x="113" y="36" width="113" height="18" uuid="1a7b4af6-5355-4bfc-8a5d-2880526362dc"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NoTelp}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="Column header" x="13" y="53" width="102" height="18" forecolor="#000000" uuid="8f2cfbd3-a9dc-4fe1-a121-c9f4fd7afcea"/>
+				<textElement>
+					<font isBold="false"/>
+				</textElement>
+				<text><![CDATA[Email]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="Detail" positionType="Float" x="113" y="53" width="113" height="18" uuid="c8c11f13-ba40-4298-a5f9-c160399d14f0"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Email}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="Column header" x="13" y="71" width="100" height="18" forecolor="#000000" uuid="c1b51a70-0f45-4645-b98c-1373ce8a1162"/>
+				<textElement>
+					<font isBold="false"/>
+				</textElement>
+				<text><![CDATA[CreatedAt]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="true">
+				<reportElement style="Detail" positionType="Float" x="113" y="71" width="163" height="18" uuid="eae23a32-6a48-4dc1-afe3-0d83938c0f66"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[java.time.format.DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss").format($F{CreatedAt})]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="Detail" positionType="Float" x="113" y="0" width="113" height="18" uuid="160fef17-c3a6-47f1-aab2-15b61396fcda"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA["M"+$F{IdCustomer}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="6" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="3" width="555" height="1" uuid="d4a163c9-9034-40bf-a8e9-ac6a1f3ed8ca"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="25" splitType="Stretch">
+			<frame>
+				<reportElement mode="Opaque" x="0" y="0" width="550" height="25" forecolor="#D0B48E" backcolor="#141414" uuid="883df78c-ffd9-4f70-a5fd-a34738f6e02b"/>
+				<textField pattern="EEEEE dd MMMMM yyyy">
+					<reportElement x="428" y="5" width="105" height="20" forecolor="#FFFFFF" uuid="81503ae0-5f2e-47c6-883e-a740071ff1f9"/>
+					<textElement textAlignment="Right">
+						<font size="10"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="386" y="5" width="42" height="20" forecolor="#FFFFFF" uuid="6df69b16-d2ca-413f-a800-f46381892f06"/>
+					<textElement>
+						<font size="10"/>
+					</textElement>
+					<text><![CDATA[Printed : ]]></text>
+				</staticText>
+			</frame>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>
