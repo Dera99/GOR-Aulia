@@ -129,7 +129,7 @@ public class Pemesanan extends Form{
                         expired = DateUtils.setMinutes(expired,minute);
                     }
                     ModelCustomer cust = new ModelCustomer(0,"","","","");
-                    ModelTransaksi trx = new ModelTransaksi(0,0,0,0,con.getDP(),0,null,"");
+                    ModelTransaksi trx = new ModelTransaksi(0,0,0,con.getDP(),0,null,"");
                     ModelBooking check = new ModelBooking(0,cust,paket,field,data.getReqDate(),expired,"",trx);
                      sb.checkRequest(check); 
                     }                      
@@ -149,7 +149,7 @@ public class Pemesanan extends Form{
                     expired = DateUtils.setMinutes(expired,minute);
                 }       
                 ModelCustomer cust = new ModelCustomer(0,"","","","");
-                ModelTransaksi trx = new ModelTransaksi(0,0,0,0,con.getDP(),0,null,"");
+                ModelTransaksi trx = new ModelTransaksi(0,0,0,con.getDP(),0,null,"");
                 ModelBooking check = new ModelBooking(0,cust,paket,field,data.getReqDate(),expired,"",trx);
                 //System.out.println("Midnight pemesanna");
                 sb.checkRequest(check);
@@ -185,7 +185,7 @@ public class Pemesanan extends Form{
         Date reqTime = data.getReqDate();
         long subTotal = data.getTransaksi().getSubTotal();
         long grandTotal = data.getTransaksi().getGrandTotal();
-        ModelTransaksi cek = new ModelTransaksi(0,0,0,0,con.getDP(),0,null,"");
+        ModelTransaksi cek = new ModelTransaksi(0,0,0,con.getDP(),0,null,"");
         ModelBooking check = new ModelBooking(0,customer,paket,field,reqTime,null,"",cek);
         if(pesananID==0){
         if(checkTime(check)==true){
@@ -208,10 +208,10 @@ public class Pemesanan extends Form{
                         expired = DateUtils.setHours(expired,duration);
                         expired = DateUtils.setMinutes(expired, minute);
                     }
-                    ModelBooking insert = new ModelBooking(0,customer,paket,field,request,expired,"",new ModelTransaksi(0,2,pesananID,subTotal,0,grandTotal,null,"Selesai"));
+                    ModelBooking insert = new ModelBooking(0,customer,paket,field,request,expired,"",new ModelTransaksi(0,pesananID,subTotal,0,grandTotal,null,"Selesai"));
                     sb.insertData(insert); 
                     pesananID = insert.getId();
-                    ModelTransaksi trx = new ModelTransaksi(0,2,pesananID,subTotal,0,grandTotal,null,"Selesai");
+                    ModelTransaksi trx = new ModelTransaksi(0,pesananID,subTotal,0,grandTotal,null,"Selesai");
                     sb.addTransaksi(trx);
                 }  
                     succ.showNotification();
@@ -227,10 +227,10 @@ public class Pemesanan extends Form{
                     expired = DateUtils.setHours(data.getReqDate(),duration);
                     expired = DateUtils.setMinutes(expired,minute);
                 } 
-               ModelBooking insert = new ModelBooking(0,customer,paket,field,data.getReqDate(),expired,"", new ModelTransaksi(0,1,pesananID,subTotal,data.getTransaksi().getDP(),grandTotal,null,"Pending"));
+               ModelBooking insert = new ModelBooking(0,customer,paket,field,data.getReqDate(),expired,"", new ModelTransaksi(0,pesananID,subTotal,data.getTransaksi().getDP(),grandTotal,null,"Pending"));
                sb.insertData(insert);
                pesananID = insert.getId();
-               ModelTransaksi trx = new ModelTransaksi(0,1,pesananID,subTotal,con.getDP(),grandTotal,null,"Pending");
+               ModelTransaksi trx = new ModelTransaksi(0,pesananID,subTotal,con.getDP(),grandTotal,null,"Pending");
                sb.addTransaksi(trx);
                
                succ.showNotification();
@@ -259,7 +259,7 @@ public class Pemesanan extends Form{
         Date reqTime = data.getReqDate(); 
         long subTotal = data.getTransaksi().getSubTotal();
         long grandTotal = data.getTransaksi().getGrandTotal();
-        ModelTransaksi cek = new ModelTransaksi(0,0,0,0,con.getDP(),0,null,"");
+        ModelTransaksi cek = new ModelTransaksi(0,0,0,con.getDP(),0,null,"");
         ModelBooking check = new ModelBooking(getPesananID(),customer,paket,field,reqTime,null,"",cek);
         if(getPesananID()!=0){
         if(checkTime(check)==true){
@@ -282,7 +282,7 @@ public class Pemesanan extends Form{
                         expired = DateUtils.setHours(expired,duration);
                         expired = DateUtils.setMinutes(expired,minute);
                     }
-                    ModelTransaksi trx = new ModelTransaksi(trxID,2, pesananID,subTotal,0,grandTotal,null,"Selesai");
+                    ModelTransaksi trx = new ModelTransaksi(trxID, pesananID,subTotal,0,grandTotal,null,"Selesai");
                     ModelBooking add = new ModelBooking(pesananID,customer,paket,field,request,expired,"Member",trx);
                     sb.updateBooked(add);  
                     sb.updateOrder(add);
@@ -299,7 +299,7 @@ public class Pemesanan extends Form{
                     expired = DateUtils.setHours(data.getReqDate(),duration);
                     expired = DateUtils.setMinutes(expired,minute);
                 }
-                ModelTransaksi trx = new ModelTransaksi(trxID,1, getPesananID(),subTotal,con.getDP(),grandTotal,null,"Pending");
+                ModelTransaksi trx = new ModelTransaksi(trxID, getPesananID(),subTotal,con.getDP(),grandTotal,null,"Pending");
                 ModelBooking insert = new ModelBooking(getPesananID(),customer,paket,field,data.getReqDate(),expired,"",trx);
                 System.out.println("ID Pesanan "+pesananID);
                 sb.updateBooked(insert);
@@ -856,7 +856,7 @@ public class Pemesanan extends Form{
             Date reqTime = tf.parse(request);
             Date dateRequest = DateUtils.setHours(date,reqTime.getHours());
             ModelCustomer cust = new ModelCustomer(0,"","","","");
-            ModelTransaksi cek = new ModelTransaksi(0,0,0,0,con.getDP(),0,null,"Pending");
+            ModelTransaksi cek = new ModelTransaksi(0,0,0,con.getDP(),0,null,"Pending");
             ModelBooking data = new ModelBooking(0,cust,paket,field,dateRequest,null,"",cek);
             if(checkTime(data)==true){
                 succ.showNotification();
@@ -903,15 +903,13 @@ public class Pemesanan extends Form{
                 String request = cbTimeReq.getSelectedItem().toString();      
                 Date reqTime = tf.parse(request);
                 Date dateRequest = DateUtils.setHours(date,reqTime.getHours());
-                int tipe = 1;
                 int dp = con.getDP();
                 if(sb.checkPaket(paket)==1){
-                    tipe=2;
                     dp = 0;
                 }
                 long subTotal = Long.parseLong(lblHarga.getText().replaceAll("[^0-9]", ""));
                 long grandTotal = Long.parseLong(lblSisa.getText().replaceAll("[^0-9]", ""));
-                ModelTransaksi trx = new ModelTransaksi(0,tipe, getPesananID(),subTotal,dp,grandTotal,null,"Pending");
+                ModelTransaksi trx = new ModelTransaksi(0, getPesananID(),subTotal,dp,grandTotal,null,"Pending");
                 ModelBooking data = new ModelBooking(0,customer,paket,field,dateRequest,null,"",trx);
             addPesanan(data);
             initTable(); 
@@ -1068,16 +1066,14 @@ public class Pemesanan extends Form{
                 String request = cbTimeReq.getSelectedItem().toString();      
                 Date reqTime = tf.parse(request);
                 Date dateRequest = DateUtils.setHours(date,reqTime.getHours());
-                int tipe = 1;
                 int dp = con.getDP();
                 if(sb.checkPaket(paket)==1){
-                    tipe=2;
                     dp = 0;
                 }
                 
                 long subTotal = Long.parseLong(lblHarga.getText().replaceAll("[^0-9]", ""));
                 long grandTotal = Long.parseLong(lblSisa.getText().replaceAll("[^0-9]", ""));
-                ModelTransaksi trx = new ModelTransaksi(0,tipe,getKode(),subTotal,dp,grandTotal,null,"Pending");
+                ModelTransaksi trx = new ModelTransaksi(0,getKode(),subTotal,dp,grandTotal,null,"Pending");
                 ModelBooking data = new ModelBooking(getPesananID(),customer,paket,field,dateRequest,null,"",trx);
             updatePesanan(data);
             initTable(); 

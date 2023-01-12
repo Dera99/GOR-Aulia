@@ -37,13 +37,12 @@ public class ServiceTransaksi {
     public List<ModelTransaksi> getTransaksi() throws SQLException {
         List<ModelTransaksi> list = new ArrayList<>();
         SimpleDateFormat ex = new SimpleDateFormat("yyyy-MM-dd H:mm:ss");
-        sql = "SELECT * FROM Transaksi JOIN jenistransaksi ON Transaksi.IdTipeTrx=jenistransaksi.IdTipeTrx JOIN Pesanan ON Pesanan.IdPesanan=Transaksi.IdPesanan JOIN customer ON Pesanan.IdCustomer = Customer.IdCustomer ORDER BY Tanggal";
+        sql = "SELECT * FROM Transaksi JOIN Pesanan ON Pesanan.IdPesanan=Transaksi.IdPesanan JOIN customer ON Pesanan.IdCustomer = Customer.IdCustomer JOIN sewa ON Pesanan.IdSewa = sewa.IdSewa ORDER BY Tanggal";
         pst = CC.prepareStatement(sql);
         rs = pst.executeQuery();
         int count=1;
         while (rs.next()) {
             int trxID = rs.getInt(1);
-            int tipeTrx = rs.getInt("transaksi.IdTipeTrx");
             int pesananID = rs.getInt("pesanan.IdPesanan");
             int customerID = rs.getInt("pesanan.IdCustomer");
             long subTotal = rs.getLong("Subtotal");
@@ -56,10 +55,15 @@ public class ServiceTransaksi {
             String email = rs.getString("customer.Email");
             String type = rs.getString("customer.Keterangan");
             Timestamp tanggl = rs.getTimestamp("Customer.LastOrder");
+            int isMember = rs.getInt("sewa.isMember");
             ModelCustomer dataCustomer = new ModelCustomer(customerID,nama,noTelp,email,type);
             dataCustomer.setTanggal(tanggal);
-            ModelTransaksi data = new ModelTransaksi(trxID,tipeTrx,pesananID,subTotal,DP,grandTotal,tanggal,status);
-            data.setNameTransaksi(rs.getString("jenistransaksi.JenisTransaksi"));
+            ModelTransaksi data = new ModelTransaksi(trxID,pesananID,subTotal,DP,grandTotal,tanggal,status);
+            String typeSewa = "Sewa Reguler";
+            if(isMember==1){
+                typeSewa = "Sewa Member";
+            }
+            data.setNameTransaksi(typeSewa);
             data.setCount(count++);
             data.setCustomerID(dataCustomer);
             //int tipeTrx = rs.getInt()

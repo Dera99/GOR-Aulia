@@ -37,12 +37,6 @@ public class ModelTransaksi extends TableRowData{
     public void setTrxID(int trxID) {
         this.trxID = trxID;
     }
-    public int getTipeTrx() {
-        return tipeTrx;
-    }
-    public void setTipeTrx(int tipeTrx) {
-        this.tipeTrx = tipeTrx;
-    }
     public int getPesananID() {
         return pesananID;
     }
@@ -74,7 +68,6 @@ public class ModelTransaksi extends TableRowData{
         this.status = status;
     }
     private int trxID;
-    private int tipeTrx;
     private int pesananID;
     private long subTotal;
     private int DP;
@@ -84,9 +77,8 @@ public class ModelTransaksi extends TableRowData{
     private int count;
     private String nameTransaksi;
     private ModelCustomer customerID;
-    public ModelTransaksi(int trxID,int tipeTrx, int pesananID, long subTotal, int DP, long grandTotal,Date tanggal, String status){
+    public ModelTransaksi(int trxID, int pesananID, long subTotal, int DP, long grandTotal,Date tanggal, String status){
         this.trxID = trxID;
-        this.tipeTrx = tipeTrx;
         this.pesananID = pesananID;
         this.subTotal = subTotal;
         this.DP = DP;
@@ -102,11 +94,11 @@ public class ModelTransaksi extends TableRowData{
         DateFormat sdf = new SimpleDateFormat("dd/MM/yy H:mm");
         String kode = "R";
         String type = "R";
-        if(tipeTrx==2){
-            kode="M";
-        }
         if(customerID.getKet().equals("Member")){
             type="M";
+        }
+        if(nameTransaksi.equals("Sewa Member")){
+            kode="M";
         }
         return new Object[]{getCount(),kode+pesananID,type+customerID.getCustomerID(),getNameTransaksi(),"Rp "+subTotal,"Rp "+DP,"Rp "+grandTotal,sdf.format(tanggal)+" WIB",status};
     }

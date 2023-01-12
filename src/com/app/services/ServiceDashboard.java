@@ -48,7 +48,7 @@ public class ServiceDashboard {
     }
     public List<ModelChart> getDataChart() throws SQLException {
         List<ModelChart> list = new ArrayList<>();
-        String sql = "SELECT DATE_FORMAT(Tanggal,'%M') as M, SUM(IF(IdTipeTrx=1, Subtotal, 0)) as Subtotal1, SUM(IF(IdTipeTrx=2, Subtotal, 0)) as Subtotal2 FROM Transaksi WHERE StatusTransaksi='Selesai' GROUP BY DATE_FORMAT(Tanggal,'%Y-%M') ORDER BY Tanggal DESC LIMIT 6";
+        String sql = "SELECT DATE_FORMAT(Tanggal,'%M') as M, SUM(IF(sewa.IsMember=1, Subtotal, 0)) as Subtotal1, SUM(IF(sewa.IsMember=0, Subtotal, 0)) as Subtotal2 FROM Transaksi JOIN Pesanan ON Pesanan.IdPesanan = Transaksi.IdPesanan JOIN sewa ON sewa.IdSewa = pesanan.IdSewa WHERE StatusTransaksi='Selesai' GROUP BY DATE_FORMAT(Tanggal,'%Y-%M') ORDER BY Tanggal DESC LIMIT 6";
         pst = CC.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
         rs = pst.executeQuery();
         while (rs.next()) {

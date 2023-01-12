@@ -76,14 +76,13 @@ public class ServiceBooking {
                   Date expired = ex.parse(rs.getString("Expired"));  
             String status = rs.getString("pesanan.Status");
             int trxID = rs.getInt("transaksi.IdTrx");
-            int IdTipeTrx = rs.getInt("transaksi.IdTipeTrx");
             long subTotal = rs.getLong("transaksi.Subtotal");
             int DP = rs.getInt("transaksi.DP");
             long grandTotal = rs.getLong("transaksi.GrandTotal");
             Date tanggal = rs.getDate("transaksi.Tanggal");
             String StatusTrx = rs.getString("transaksi.StatusTransaksi");
             ModelCustomer data = new ModelCustomer(CustomerID,nama,noTelp,Email,memberType);
-            ModelTransaksi trx = new ModelTransaksi(trxID,IdTipeTrx,bookingID,subTotal,DP,grandTotal,tanggal,StatusTrx);
+            ModelTransaksi trx = new ModelTransaksi(trxID,bookingID,subTotal,DP,grandTotal,tanggal,StatusTrx);
             list.add(new ModelBooking(bookingID,data,paket,field,request,expired,status,trx));
         }
         rs.close();
@@ -186,16 +185,12 @@ public class ServiceBooking {
     }
     public void insertData(ModelBooking data){
         SimpleDateFormat ex = new SimpleDateFormat("yyyy-MM-dd H:mm:ss");
-        int jenis = 1;
-        if(data.getPaket().equals("Member")){
-            jenis=2;
-        }
         if(isMember()==false){
         try{
             insertCustomer(data);
             updateOrder(data);
             try{
-                sql = "insert into pesanan (IdSewa, IdLapangan,IdTipeTrx,IdCustomer,Request_Date,Expired,Status) values ((select IdSewa from sewa where NamaSewa='"+data.getPaket()+"'),(SELECT IdLapangan from lapangan WHERE NamaLapangan='"+data.getField()+"'),"+jenis+",(SELECT IdCustomer from customer WHERE Nama ='"+data.getCustomer().getNama()+"' AND Email='"+data.getCustomer().getEmail()+"' AND NoTelp = '"+data.getCustomer().getNoTelp()+"' AND Keterangan = 'Reguler'),'"+ex.format(data.getReqDate())+"','"+ex.format(data.getExpire())+"','Menunggu Antrian');";
+                sql = "insert into pesanan (IdSewa, IdLapangan,IdCustomer,Request_Date,Expired,Status) values ((select IdSewa from sewa where NamaSewa='"+data.getPaket()+"'),(SELECT IdLapangan from lapangan WHERE NamaLapangan='"+data.getField()+"'),(SELECT IdCustomer from customer WHERE Nama ='"+data.getCustomer().getNama()+"' AND Email='"+data.getCustomer().getEmail()+"' AND NoTelp = '"+data.getCustomer().getNoTelp()+"' AND Keterangan = 'Reguler'),'"+ex.format(data.getReqDate())+"','"+ex.format(data.getExpire())+"','Menunggu Antrian');";
                 pst = CC.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
                 pst.execute();
                 rs = pst.getGeneratedKeys();
@@ -214,7 +209,7 @@ public class ServiceBooking {
         }
         }else{
         try{    
-            sql = "insert into pesanan (IdSewa, IdLapangan,IdTipeTrx,IdCustomer,Request_Date,Expired,Status) values ((select IdSewa from sewa where NamaSewa='"+data.getPaket()+"'),(SELECT IdLapangan from lapangan WHERE NamaLapangan='"+data.getField()+"'),"+jenis+",(SELECT IdCustomer from customer WHERE Nama ='"+data.getCustomer().getNama()+"' AND Email='"+data.getCustomer().getEmail()+"' AND NoTelp = '"+data.getCustomer().getNoTelp()+"' AND Keterangan = 'Member'),'"+ex.format(data.getReqDate())+"','"+ex.format(data.getExpire())+"','Menunggu Antrian');";
+            sql = "insert into pesanan (IdSewa, IdLapangan,IdCustomer,Request_Date,Expired,Status) values ((select IdSewa from sewa where NamaSewa='"+data.getPaket()+"'),(SELECT IdLapangan from lapangan WHERE NamaLapangan='"+data.getField()+"'),(SELECT IdCustomer from customer WHERE Nama ='"+data.getCustomer().getNama()+"' AND Email='"+data.getCustomer().getEmail()+"' AND NoTelp = '"+data.getCustomer().getNoTelp()+"' AND Keterangan = 'Member'),'"+ex.format(data.getReqDate())+"','"+ex.format(data.getExpire())+"','Menunggu Antrian');";
             pst = CC.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS); 
             pst.execute();
             rs = pst.getGeneratedKeys();
@@ -227,7 +222,7 @@ public class ServiceBooking {
         rs.close();
         pst.close();
         }catch (SQLException a){
-            System.err.println(a);
+            Logger.getLogger(ServiceBooking.class.getName()).log(Level.SEVERE, null, a);
         }
         
     }
@@ -257,13 +252,9 @@ public class ServiceBooking {
     public void updateBooked(ModelBooking data) {
         try{
         SimpleDateFormat ex = new SimpleDateFormat("yyyy-MM-dd H:mm:ss");
-        int jenis = 1;
-        if(data.getPaket().equals("Member")){
-            jenis=2;
-        }
         String sql = "update pesanan set IdSewa=(select IdSewa from sewa where NamaSewa='"+data.getPaket()+"'),\n" +
 "		 IdLapangan=(SELECT IdLapangan from lapangan WHERE NamaLapangan='"+data.getField()+"'),\n" +
-"                IdTipeTrx="+jenis+",Request_Date='"+ex.format(data.getReqDate())+"',Expired='"+ex.format(data.getExpire())+"' where IdPesanan="+data.getId()+" limit 1";
+"                Request_Date='"+ex.format(data.getReqDate())+"',Expired='"+ex.format(data.getExpire())+"' where IdPesanan="+data.getId()+" limit 1";
         pst = CC.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS); 
         pst.execute();
             rs = pst.getGeneratedKeys();
@@ -295,7 +286,7 @@ public class ServiceBooking {
     public void updateTrx(ModelBooking data) {
         try{
         SimpleDateFormat ex = new SimpleDateFormat("yyyy-MM-dd H:mm:ss");
-        sql = "update transaksi SET IdTipeTrx = "+data.getTransaksi().getTipeTrx()+", "
+        sql = "update transaksi SET "
                 + "IdPesanan="+data.getId()+", Subtotal="+data.getTransaksi().getSubTotal()+","
                 + "DP="+data.getTransaksi().getDP()+",GrandTotal="+data.getTransaksi().getGrandTotal()+","
                 + "StatusTransaksi='"+data.getTransaksi().getStatus()+"' WHERE IdTrx="+data.getTransaksi().getTrxID()+" LIMIT 1";
@@ -389,14 +380,13 @@ public class ServiceBooking {
     }
     public void addTransaksi(ModelTransaksi data){
         try{ 
-            sql= "INSERT INTO transaksi (IdTipeTrx, IdPesanan, Subtotal, DP, GrandTotal,StatusTransaksi) values (?,?,?,?,?,?)";
+            sql= "INSERT INTO transaksi (IdPesanan, Subtotal, DP, GrandTotal,StatusTransaksi) values (?,?,?,?,?)";
             pst = CC.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            pst.setInt(1, data.getTipeTrx());
-            pst.setInt(2, data.getPesananID());
-            pst.setLong(3, data.getSubTotal());
-            pst.setLong(4, data.getDP());
-            pst.setLong(5, data.getGrandTotal());
-            pst.setString(6, data.getStatus());
+            pst.setInt(1, data.getPesananID());
+            pst.setLong(2, data.getSubTotal());
+            pst.setLong(3, data.getDP());
+            pst.setLong(4, data.getGrandTotal());
+            pst.setString(5, data.getStatus());
             pst.execute();       
             rs = pst.getGeneratedKeys();
             rs.first();
