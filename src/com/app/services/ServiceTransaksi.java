@@ -56,9 +56,10 @@ public class ServiceTransaksi {
             String type = rs.getString("customer.Keterangan");
             Timestamp tanggl = rs.getTimestamp("Customer.LastOrder");
             int isMember = rs.getInt("sewa.isMember");
+            String paket = rs.getString("sewa.NamaSewa");
             ModelCustomer dataCustomer = new ModelCustomer(customerID,nama,noTelp,email,type);
             dataCustomer.setTanggal(tanggal);
-            ModelTransaksi data = new ModelTransaksi(trxID,pesananID,subTotal,DP,grandTotal,tanggal,status);
+            ModelTransaksi data = new ModelTransaksi(trxID,pesananID,paket,subTotal,DP,grandTotal,tanggal,status);
             String typeSewa = "Sewa Reguler";
             if(isMember==1){
                 typeSewa = "Sewa Member";

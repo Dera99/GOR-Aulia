@@ -7,6 +7,13 @@ import java.util.Date;
 
 public class ModelTransaksi extends TableRowData{
 
+    public String getPaket() {
+        return paket;
+    }
+    public void setPaket(String paket) {
+        this.paket = paket;
+    }
+
     public ModelCustomer getCustomerID() {
         return customerID;
     }
@@ -69,6 +76,7 @@ public class ModelTransaksi extends TableRowData{
     }
     private int trxID;
     private int pesananID;
+    String paket;
     private long subTotal;
     private int DP;
     private long grandTotal;
@@ -77,9 +85,10 @@ public class ModelTransaksi extends TableRowData{
     private int count;
     private String nameTransaksi;
     private ModelCustomer customerID;
-    public ModelTransaksi(int trxID, int pesananID, long subTotal, int DP, long grandTotal,Date tanggal, String status){
+    public ModelTransaksi(int trxID, int pesananID,String paket, long subTotal, int DP, long grandTotal,Date tanggal, String status){
         this.trxID = trxID;
         this.pesananID = pesananID;
+        this.paket=paket;
         this.subTotal = subTotal;
         this.DP = DP;
         this.grandTotal = grandTotal;

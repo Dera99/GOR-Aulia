@@ -82,7 +82,7 @@ public class ServiceBooking {
             Date tanggal = rs.getDate("transaksi.Tanggal");
             String StatusTrx = rs.getString("transaksi.StatusTransaksi");
             ModelCustomer data = new ModelCustomer(CustomerID,nama,noTelp,Email,memberType);
-            ModelTransaksi trx = new ModelTransaksi(trxID,bookingID,subTotal,DP,grandTotal,tanggal,StatusTrx);
+            ModelTransaksi trx = new ModelTransaksi(trxID,bookingID,paket,subTotal,DP,grandTotal,tanggal,StatusTrx);
             list.add(new ModelBooking(bookingID,data,paket,field,request,expired,status,trx));
         }
         rs.close();
@@ -287,7 +287,7 @@ public class ServiceBooking {
         try{
         SimpleDateFormat ex = new SimpleDateFormat("yyyy-MM-dd H:mm:ss");
         sql = "update transaksi SET "
-                + "IdPesanan="+data.getId()+", Subtotal="+data.getTransaksi().getSubTotal()+","
+                + "IdPesanan="+data.getId()+",IdSewa=(select IdSewa from sewa where NamaSewa='"+data.getPaket()+"'),Subtotal="+data.getTransaksi().getSubTotal()+","
                 + "DP="+data.getTransaksi().getDP()+",GrandTotal="+data.getTransaksi().getGrandTotal()+","
                 + "StatusTransaksi='"+data.getTransaksi().getStatus()+"' WHERE IdTrx="+data.getTransaksi().getTrxID()+" LIMIT 1";
         pst = CC.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS); 
@@ -380,7 +380,7 @@ public class ServiceBooking {
     }
     public void addTransaksi(ModelTransaksi data){
         try{ 
-            sql= "INSERT INTO transaksi (IdPesanan, Subtotal, DP, GrandTotal,StatusTransaksi) values (?,?,?,?,?)";
+            sql= "INSERT INTO transaksi (IdPesanan,IdSewa,Subtotal, DP, GrandTotal,StatusTransaksi) values (?,(select IdSewa from sewa where NamaSewa='"+data.getPaket()+"'),?,?,?,?)";
             pst = CC.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             pst.setInt(1, data.getPesananID());
             pst.setLong(2, data.getSubTotal());

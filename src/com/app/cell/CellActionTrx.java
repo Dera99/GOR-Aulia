@@ -35,7 +35,8 @@ public class CellActionTrx extends TableCustomCell {
                 int trxID = rows.getTrxID();
                 int pesananID = rows.getPesananID();
                 String status = "Selesai";
-                ModelTransaksi data = new ModelTransaksi(rows.getTrxID(),rows.getPesananID(),rows.getSubTotal(),rows.getDP(),rows.getGrandTotal(),null,status);
+                String paket = rows.getPaket();
+                ModelTransaksi data = new ModelTransaksi(rows.getTrxID(),rows.getPesananID(),paket,rows.getSubTotal(),rows.getDP(),rows.getGrandTotal(),null,status);
                 Notification succ= new Notification(m, Notification.Type.SUCCESS, Notification.Location.TOP_CENTER, "Transaksi Berhasil di Update!!");
                 Notification err= new Notification(m, Notification.Type.ERROR, Notification.Location.TOP_CENTER, "Transaksi Gagal di Update!!");
                 int response = JOptionPane.showConfirmDialog(m, "Apakah Anda Yakin?", "Konfirmasi Pembayaran", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
