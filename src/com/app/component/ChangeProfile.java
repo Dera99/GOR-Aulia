@@ -26,8 +26,6 @@ import org.jdesktop.animation.timing.TimingTargetAdapter;
 public class ChangeProfile extends javax.swing.JPanel {
     private MigLayout layout;
     private String pathImage;
-    ServiceSettings ss = new ServiceSettings();
-    ModelAccounts data = new ModelAccounts();
     public ChangeProfile() {
         initComponents();
         image.setImage(UserSession.getIcon());
@@ -266,6 +264,8 @@ public class ChangeProfile extends javax.swing.JPanel {
     }//GEN-LAST:event_deleteImageActionPerformed
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
+       ServiceSettings ss = new ServiceSettings();
+        ModelAccounts data = new ModelAccounts();
         Main m = new Main();
         Notification succ= new Notification(m, Notification.Type.SUCCESS, Notification.Location.TOP_CENTER, "Berhasil Disimpan, Silahkan Login Kembali !!");
         try {

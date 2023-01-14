@@ -12,6 +12,7 @@ import com.app.main.Main;
 import com.app.model.ModelLapangan;
 import com.app.model.ModelPaket;
 import com.app.services.ServicePaket;
+import com.app.services.UserSession;
 import java.awt.Color;
 import java.sql.SQLException;
 import java.sql.Time;
@@ -24,6 +25,14 @@ public class PaketSewa extends Form {
         initComponents();
         table1.addTableStyle(jScrollPane1);
         table2.addTableStyle(jScrollPane2);
+        int roleID = UserSession.getRoleId();
+        if(roleID==0){
+            btnAdd.setVisible(false);
+            btnAdd1.setVisible(false);
+        }else{
+            btnAdd.setVisible(true);
+            btnAdd1.setVisible(true);
+        }
         initTable();
     }
     Main m = new Main();

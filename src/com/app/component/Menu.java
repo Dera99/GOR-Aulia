@@ -67,23 +67,19 @@ public class Menu extends javax.swing.JPanel {
 
     public void initMenu(MenuEvent event) {
         this.event = event;
-        if(roleID==0){
+        if(roleID==1){
         addMenu(DASHBOARD, "Dashboard", 0);
         split("Penyewaan");
         addMenu(GoogleMaterialDesignIcon.EVENT, "Pemesanan", 1);
         addMenu(GoogleMaterialDesignIcon.PAYMENT, "Transaksi", 2); 
         addMenu(GoogleMaterialDesignIcon.FORMAT_LIST_BULLETED, "Paket Sewa", 3); 
         addMenu(GoogleMaterialDesignIcon.GROUP, "Customer", 4); 
-        split("Staff");
-        addMenu(GoogleMaterialDesignIcon.ACCOUNT_BOX, "Data Staff", 5);
-        split("Laporan");
-        addMenu(GoogleMaterialDesignIcon.PERSON, "Customer Reguler", 6);
-        addMenu(GoogleMaterialDesignIcon.GROUPS, "Customer Member", 7);
-        addMenu("4", "Transaksi", 8);
-        addMenu("7", "Pemesanan", 9);
         split("Account");
-        addMenu(GoogleMaterialDesignIcon.ADMIN_PANEL, "Panel Admin", 10);    
-        addMenu(GoogleMaterialDesignIcon.LOGOUT, "Logout", 11);
+        addMenu(GoogleMaterialDesignIcon.ADMIN_PANEL, "Panel Admin", 5);
+        addMenu(GoogleMaterialDesignIcon.ACCOUNT_BOX, "Data Staff", 6);
+        addMenu(GoogleMaterialDesignIcon.MANAGE_ACCOUNTS, "Pengaturan", 7);
+        space();
+        addMenu(GoogleMaterialDesignIcon.LOGOUT, "Logout", 8);
         }else{
           addMenu(DASHBOARD, "Dashboard", 0);
           split("Penyewaan");
@@ -92,8 +88,9 @@ public class Menu extends javax.swing.JPanel {
           addMenu(GoogleMaterialDesignIcon.FORMAT_LIST_BULLETED, "Paket Sewa", 3); 
           addMenu(GoogleMaterialDesignIcon.GROUP, "Customer", 4);  
           split("Account");
-          addMenu(GoogleMaterialDesignIcon.MANAGE_ACCOUNTS, "Pengaturan", 10);    
-          addMenu(GoogleMaterialDesignIcon.LOGOUT, "Logout", 11);
+          addMenu(GoogleMaterialDesignIcon.MANAGE_ACCOUNTS, "Pengaturan", 7);  
+          space();
+          addMenu(GoogleMaterialDesignIcon.LOGOUT, "Logout", 8);
         }
     }
   

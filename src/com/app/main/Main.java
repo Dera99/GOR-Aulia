@@ -2,6 +2,7 @@ package com.app.main;
 
 import com.app.configurations.DatabaseConnection;
 import com.app.event.MenuEvent;
+import com.app.form.AdminPanel;
 import com.app.form.FormHome;
 import com.app.form.Forms;
 import com.app.form.PaketSewa;
@@ -43,19 +44,13 @@ Connection CC = new DatabaseConnection().connect();
                 }else if (index==4){
                     mainBody.displayForm(new Penyewa(),"Penyewa");
                 }else if (index==5){
-                    mainBody.displayForm(new Staff(),"Data Staff");
+                    mainBody.displayForm(new AdminPanel(),"Panel Admin");
                 }else if (index==6){
-                    mainBody.displayForm(new Penyewa(),"P");
+                    mainBody.displayForm(new Staff(),"Data Staff");
                 }else if (index==7){
-                    mainBody.displayForm(new Penyewa(),"Penyewa");
-                }else if (index==8){
-                    mainBody.displayForm(new Penyewa(),"Penyewa");
-                }else if (index==9){
-                    mainBody.displayForm(new Penyewa(),"Penyewa");
-                }else if (index==10){
-                    mainBody.displayForm(new Settings(),"Settings");
+                    mainBody.displayForm(new Settings(),"Pengaturan");
                 }
-                else if(index == 11){
+                else if(index == 8){
                     try {
                         UserSession.setUserId(0);
                         UserSession.setUserLogin("");
