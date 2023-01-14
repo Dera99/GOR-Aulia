@@ -71,7 +71,6 @@ public class ServiceBooking {
             String memberType = rs.getString("Customer.Keterangan");
             String paket = rs.getString("sewa.NamaSewa");
             String field = rs.getString("lapangan.NamaLapangan");
-          
                   Date request = ex.parse(rs.getString("Request_Date"));
                   Date expired = ex.parse(rs.getString("Expired"));  
             String status = rs.getString("pesanan.Status");
@@ -89,32 +88,25 @@ public class ServiceBooking {
         pst.close();
         return list;
     }
-    public void isMember(int kode) throws SQLException{
+    public boolean checkMember(int kode) throws SQLException{
         Notification err= new Notification(m, Notification.Type.ERROR, Notification.Location.TOP_CENTER, "Kode Member Tidak Ditemukan !");
         try{
             stt=CC.createStatement();
-            rs = stt.executeQuery("SELECT * FROM Customer WHERE IdCustomer ="+kode+"");
+            rs = stt.executeQuery("SELECT * FROM Customer WHERE IdCustomer ="+kode+" AND Keterangan = 'Member'");
             if(rs.next()){
                 String status = rs.getString("Keterangan");
-                if(status.equals("Member")){
-                setMember(true);
+                member=true;
                 String nama = rs.getString("Nama");
                 String NoTelp = rs.getString("NoTelp");
                 String email = rs.getString("Email");
-                dataCustomer = new ModelCustomer(kode,nama,NoTelp,email,status);
-               }else if (status.equals("Reguler")){
-                setMember(false);
-                String nama = rs.getString("Nama");
-                String NoTelp = rs.getString("NoTelp");
-                String email = rs.getString("Email");
-                dataCustomer = new ModelCustomer(kode,nama,NoTelp,email,status);
-               }           
+                dataCustomer = new ModelCustomer(kode,nama,NoTelp,email,status);         
             }else{
-                setMember(false);
+                member=false;
             }
         }catch(NumberFormatException e){
             System.err.println(e);
         }
+        return member;
     }
  
     public boolean checkRequest(ModelBooking data) throws ParseException{
@@ -130,6 +122,7 @@ public class ServiceBooking {
             //Set current time biar bisa di setting dynamic
                 if(durasi.isBeforeNow()){
                     setResultCheck(false);
+                    result=false;
                 }  
             if(data.getField().equals("Lapangan 1 & 2")){
             SimpleDateFormat ex = new SimpleDateFormat("yyyy-MM-dd H:mm:ss");
@@ -183,9 +176,10 @@ public class ServiceBooking {
         }
         return result;
     }
-    public void insertData(ModelBooking data){
+    public boolean insertData(ModelBooking data) throws SQLException{
+        boolean result=true;
         SimpleDateFormat ex = new SimpleDateFormat("yyyy-MM-dd H:mm:ss");
-        if(isMember()==false){
+        if(checkMember(data.getCustomer().getCustomerID())==false){
         try{
             insertCustomer(data);
             updateOrder(data);
@@ -203,9 +197,11 @@ public class ServiceBooking {
                 pst.close();
             }catch (SQLException e){
                 System.err.println(e);
+                result=false;
             }
         }catch (SQLException ex1){
                 Logger.getLogger(ServiceBooking.class.getName()).log(Level.SEVERE, null,ex1);
+                result=false;
         }
         }else{
         try{    
@@ -223,15 +219,16 @@ public class ServiceBooking {
         pst.close();
         }catch (SQLException a){
             Logger.getLogger(ServiceBooking.class.getName()).log(Level.SEVERE, null, a);
-        }
-        
+            result=false;
+        }   
     }
+        return result;
     }
     public void insertCustomer(ModelBooking data){
         try {
             String sql = "INSERT INTO customer (Nama, NoTelp, Email, Keterangan) SELECT * FROM (SELECT '"+data.getCustomer().getNama()+"', '"+data.getCustomer().getNoTelp()+"', '"+data.getCustomer().getEmail()+"', 'Reguler') AS tmp "
                     + "WHERE NOT EXISTS ( SELECT Nama,NoTelp,Email,Keterangan FROM customer WHERE "
-                    + "Nama = '"+data.getCustomer().getNama()+"' AND NoTelp = '"+data.getCustomer().getNoTelp()+"' AND Email='"+data.getCustomer().getEmail()+"' AND Keterangan='Reguler'  LIMIT 1 )";
+                    + "Nama = '"+data.getCustomer().getNama()+"' AND NoTelp = '"+data.getCustomer().getNoTelp()+"' AND Email='"+data.getCustomer().getEmail()+"' AND Keterangan='Reguler' LIMIT 1 )";
             pst = CC.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             pst.execute();
             rs = pst.getGeneratedKeys();
@@ -249,7 +246,8 @@ public class ServiceBooking {
         pst.execute();
         pst.close();
     }
-    public void updateBooked(ModelBooking data) {
+    public boolean updateBooked(ModelBooking data) {
+        boolean result=true;
         try{
         SimpleDateFormat ex = new SimpleDateFormat("yyyy-MM-dd H:mm:ss");
         String sql = "update pesanan set IdSewa=(select IdSewa from sewa where NamaSewa='"+data.getPaket()+"'),\n" +
@@ -264,7 +262,9 @@ public class ServiceBooking {
             updateTrx(data);
         }catch (SQLException ex) {
             Logger.getLogger(ServiceBooking.class.getName()).log(Level.SEVERE, null, ex);
+            result=false;
         }
+        return result;
     }
     public void updateOrder(ModelBooking data) throws SQLException{
         String status = data.getCustomer().getKet();

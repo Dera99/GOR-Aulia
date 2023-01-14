@@ -375,9 +375,6 @@
                 </Property>
                 <Property name="labelText" type="java.lang.String" value="Kode Member"/>
               </Properties>
-              <AuxValues>
-                <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="txtMember.addKeyListener(new KeyAdapter() {&#xa;         public void keyPressed(KeyEvent ke) {&#xa;            String value = txtMember.getText();&#xa;            int l = value.length();&#xa;            if (ke.getKeyChar() &gt;= &apos;0&apos; &amp;&amp; ke.getKeyChar() &lt;= &apos;9&apos; || ke.getKeyChar()==VK_BACK_SPACE) {&#xa;               txtMember.setEditable(true);&#xa;            } else {&#xa;               txtMember.setEditable(false);&#xa;            }&#xa;         }&#xa;      });"/>
-              </AuxValues>
             </Component>
             <Component class="com.app.swing.Button" name="btnSearch">
               <Properties>
