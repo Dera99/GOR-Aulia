@@ -47,7 +47,7 @@ public class Pemesanan extends Form{
     }
     
     private boolean member;
-    private boolean available;
+    private boolean available=false;
     private int pesananID;
     private int customerID;
     private int trxID;
@@ -82,6 +82,100 @@ public class Pemesanan extends Form{
                 
             }   
         }).start();
+    }
+    private boolean checkTime(){
+        Main m = new Main();
+        Notification err1= new Notification(m, Notification.Type.ERROR, Notification.Location.TOP_CENTER, "Pesanan Tidak Sesuai Jam Oprasional !!");
+        try {                                         
+            ServiceBooking sb = new ServiceBooking();
+            //Start Detail Pesanan
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            DateFormat tf=new SimpleDateFormat("H:mm");
+            Date date = sdf.parse(txtDate.getText());
+            String field = cbLapangan.getSelectedItem().toString();
+            String paket = (String) cbPaket.getSelectedItem();
+            Time durasi = sb.getDurasi(paket);
+            String requestTime = cbTimeReq.getSelectedItem().toString();
+            Date reqTime = tf.parse(requestTime);
+            Date dateRequest = DateUtils.setHours(date,reqTime.getHours());
+            int hour,minute;
+            //End Detail Pesanan
+            if(sb.checkPaket(paket)==1){
+                    int i;
+                    for (i=0;i<=3;i++){
+                        hour= reqTime.getHours()+durasi.getHours();
+                        minute = reqTime.getMinutes()+durasi.getMinutes();
+                        Date expired,request;
+                        if(hour==24){
+                            hour = 23;
+                            request = DateUtils.addWeeks(dateRequest,i);
+                            expired = DateUtils.addWeeks(dateRequest,i);
+                            expired = DateUtils.setHours(expired,23);
+                            expired = DateUtils.setMinutes(expired,minute);
+                        }else{
+                            request = DateUtils.addWeeks(dateRequest, i);
+                            expired = DateUtils.addWeeks(dateRequest,i);
+                            expired = DateUtils.setHours(expired,hour);
+                            expired = DateUtils.setMinutes(expired,minute);
+                        }
+                            ModelCustomer cust = new ModelCustomer(0,"","","","");
+                            ModelTransaksi trx = new ModelTransaksi(0,0,paket,0,0,0,null,"");
+                            ModelBooking check = new ModelBooking(0,cust,paket,field,request,expired,"",trx);
+                            // Give Notifications Here
+                            if(sb.checkRequest(check)==true){
+                                setAvailable(true);
+                                System.out.println("Result Checking : "+sb.checkRequest(check));
+                                lblPaket.setText(paket);
+                                int harga = sb.getPrice(field, paket);
+                                int DP = 0;
+                                int sisa = harga-DP;
+                                lblHarga.setText("Rp "+String.valueOf(harga)+" ,-");
+                                lblDP.setText("Rp "+String.valueOf(DP)+" ,-");
+                                lblSisa.setText("Rp "+String.valueOf(sisa)+" ,-");
+                            }else{
+                                System.out.println("Result Checking : "+sb.checkRequest(check));
+                                setAvailable(false);
+                            }
+                        }
+                }else{
+                    hour = reqTime.getHours()+durasi.getHours();
+                    minute = reqTime.getMinutes()+durasi.getMinutes();
+                    Date expired;
+                    if(hour == 24){
+                        expired = DateUtils.setHours(dateRequest,23);
+                        expired = DateUtils.setMinutes(dateRequest,minute);
+                    }else{
+                        expired = DateUtils.setHours(dateRequest,hour);
+                        expired = DateUtils.setMinutes(expired,minute);
+                    }       
+                    ModelCustomer cust = new ModelCustomer(0,"","","","");
+                    ModelTransaksi trx = new ModelTransaksi(0,0,paket,0,con.getDP(),0,null,"");
+                    ModelBooking check = new ModelBooking(0,cust,paket,field,dateRequest,expired,"",trx);
+                     // Give Notifications Here
+                     if(sb.checkRequest(check)==true){
+                        System.out.println("Result Checking : "+sb.checkRequest(check));
+                        lblPaket.setText(paket);
+                        int harga = sb.getPrice(field, paket);
+                        int DP = con.getDP();
+                        int sisa = harga-DP;
+                        lblHarga.setText("Rp "+String.valueOf(harga)+" ,-");
+                        lblDP.setText("Rp "+String.valueOf(DP)+" ,-");
+                        lblSisa.setText("Rp "+String.valueOf(sisa)+" ,-");
+                        setAvailable(true);
+                     }else{
+                        System.out.println("Result Checking : "+sb.checkRequest(check));
+                        setAvailable(false);
+                     }
+                }  
+            } catch (SQLException ex) {
+                Logger.getLogger(Pemesanan.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ParseException ex) {            
+                Logger.getLogger(Pemesanan.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IllegalArgumentException e){
+                Logger.getLogger(Pemesanan.class.getName()).log(Level.SEVERE, null, e);
+                err1.showNotification();
+            }
+        return isAvailable();
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -237,6 +331,7 @@ public class Pemesanan extends Form{
 
         txtMember.setBackground(new java.awt.Color(55, 55, 55));
         txtMember.setForeground(new java.awt.Color(240, 240, 240));
+        txtMember.setText("0");
         txtMember.setLabelText("Kode Member");
 
         btnSearch.setBackground(new java.awt.Color(50, 200, 126));
@@ -598,7 +693,12 @@ public class Pemesanan extends Form{
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
+        // Create object Service
         ServiceBooking sb = new ServiceBooking();
+        // Notifications
+        Main m = new Main();
+        Notification err= new Notification(m, Notification.Type.ERROR, Notification.Location.TOP_CENTER, "Kode Member Salah !!");
+        Notification succ= new Notification(m, Notification.Type.SUCCESS, Notification.Location.TOP_CENTER, "Kode Member Berhasil Ditemukan !");
         int kodeMember = Integer.parseInt(txtMember.getText());
         try {
             //Give Notifications Here
@@ -609,9 +709,11 @@ public class Pemesanan extends Form{
                 txtEmail.setText(sb.dataCustomer.getEmail());
                 sb.getPaketMember(cbPaket);
                 cbPaket.setSelectedIndex(-1);
+                succ.showNotification();
                 setMember(true);
             }else{
                 setMember(false);
+                err.showNotification();
                 txtNama.setText("");
                 txtnoHp.setText("");
                 txtEmail.setText("");
@@ -626,95 +728,31 @@ public class Pemesanan extends Form{
     }//GEN-LAST:event_btnSearchActionPerformed
 
     private void btnCheckActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCheckActionPerformed
-        try {                                         
-            ServiceBooking sb = new ServiceBooking();
-            //Start Detail Pesanan
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-            DateFormat tf=new SimpleDateFormat("H:mm");
-            Date date = sdf.parse(txtDate.getText());
-            String field = cbLapangan.getSelectedItem().toString();
-            String paket = (String) cbPaket.getSelectedItem();
-            Time durasi = sb.getDurasi(paket);
-            String requestTime = cbTimeReq.getSelectedItem().toString();
-            Date reqTime = tf.parse(requestTime);
-            Date dateRequest = DateUtils.setHours(date,reqTime.getHours());
-            int hour,minute;
-            //End Detail Pesanan
-            if(sb.checkPaket(paket)==1){
-                    int i;
-                    for (i=0;i<=3;i++){
-                        hour= reqTime.getHours()+durasi.getHours();
-                        minute = reqTime.getMinutes()+durasi.getMinutes();
-                        Date expired,request;
-                        if(hour==24){
-                            hour = 23;
-                            request = DateUtils.addWeeks(dateRequest,i);
-                            expired = DateUtils.addWeeks(dateRequest,i);
-                            expired = DateUtils.setHours(expired,23);
-                            expired = DateUtils.setMinutes(expired,minute);
-                        }else{
-                            request = DateUtils.addWeeks(dateRequest, i);
-                            expired = DateUtils.addWeeks(dateRequest,i);
-                            expired = DateUtils.setHours(expired,hour);
-                            expired = DateUtils.setMinutes(expired,minute);
-                        }
-                            ModelCustomer cust = new ModelCustomer(0,"","","","");
-                            ModelTransaksi trx = new ModelTransaksi(0,0,paket,0,0,0,null,"");
-                            ModelBooking check = new ModelBooking(0,cust,paket,field,request,expired,"",trx);
-                            // Give Notifications Here
-                            if(sb.checkRequest(check)==true){
-                                System.out.println("Result Checking : "+sb.checkRequest(check));
-                                lblPaket.setText(paket);
-                                int harga = sb.getPrice(field, paket);
-                                int DP = 0;
-                                int sisa = harga-DP;
-                                lblHarga.setText("Rp "+String.valueOf(harga)+" ,-");
-                                lblDP.setText("Rp "+String.valueOf(DP)+" ,-");
-                                lblSisa.setText("Rp "+String.valueOf(sisa)+" ,-");
-                            }else{
-                                System.out.println("Result Checking : "+sb.checkRequest(check));
-                            }
-                        }
-                }else{
-                    hour = reqTime.getHours()+durasi.getHours();
-                    minute = reqTime.getMinutes()+durasi.getMinutes();
-                    Date expired;
-                    if(hour == 24){
-                        expired = DateUtils.setHours(dateRequest,23);
-                        expired = DateUtils.setMinutes(dateRequest,minute);
-                    }else{
-                        expired = DateUtils.setHours(dateRequest,hour);
-                        expired = DateUtils.setMinutes(expired,minute);
-                    }       
-                    ModelCustomer cust = new ModelCustomer(0,"","","","");
-                    ModelTransaksi trx = new ModelTransaksi(0,0,paket,0,con.getDP(),0,null,"");
-                    ModelBooking check = new ModelBooking(0,cust,paket,field,dateRequest,expired,"",trx);
-                     // Give Notifications Here
-                     if(sb.checkRequest(check)==true){
-                        System.out.println("Result Checking : "+sb.checkRequest(check));
-                        lblPaket.setText(paket);
-                        int harga = sb.getPrice(field, paket);
-                        int DP = con.getDP();
-                        int sisa = harga-DP;
-                        lblHarga.setText("Rp "+String.valueOf(harga)+" ,-");
-                        lblDP.setText("Rp "+String.valueOf(DP)+" ,-");
-                        lblSisa.setText("Rp "+String.valueOf(sisa)+" ,-");
-                     }else{
-                        System.out.println("Result Checking : "+sb.checkRequest(check));
-                     }
-                }  
-            } catch (SQLException ex) {
-                Logger.getLogger(Pemesanan.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (ParseException ex) {            
-                Logger.getLogger(Pemesanan.class.getName()).log(Level.SEVERE, null, ex);
-        }            
+       //Notifications
+        Main m = new Main();
+        Notification err= new Notification(m, Notification.Type.ERROR, Notification.Location.TOP_CENTER, "Jadwal Tidak Tersedia !");
+        Notification succ= new Notification(m, Notification.Type.SUCCESS, Notification.Location.TOP_CENTER, "Jadwal Tersedia !"); 
+        if(checkTime()==true){
+            succ.showNotification();
+        }else{
+            err.showNotification();
+        }
     }//GEN-LAST:event_btnCheckActionPerformed
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
+            Main m = new Main();
+            Notification err= new Notification(m, Notification.Type.ERROR, Notification.Location.TOP_CENTER, "Pesanan Gagal di Tambahkan !");
+            Notification succ= new Notification(m, Notification.Type.SUCCESS, Notification.Location.TOP_CENTER, "Pesanan Berhasil di Tambahkan !"); 
+            Notification err1= new Notification(m, Notification.Type.ERROR, Notification.Location.TOP_CENTER, "Jadwal Tidak Tersedia !");
+            Notification warr= new Notification(m, Notification.Type.WARNING, Notification.Location.TOP_CENTER, "Silahkan Check Pesanan Terlebih Dahulu !");
         try {                                         
             ServiceBooking sb = new ServiceBooking();
             //Start Data Penyewa
-            customerID=Integer.parseInt(txtMember.getText());
+            if(txtMember.getText().equals("")){
+                customerID=0;
+            }else{
+                customerID=Integer.parseInt(txtMember.getText());
+            }
             String nama = txtNama.getText();
             String noTelp = txtnoHp.getText();
             String email = txtEmail.getText();
@@ -735,12 +773,13 @@ public class Pemesanan extends Form{
             Date reqTime = tf.parse(requestTime);
             Date dateRequest = DateUtils.setHours(date,reqTime.getHours());
             int hour,minute;
-            //End Detail Pesanan
-            //Start Pricing
-            long subTotal = Long.parseLong(lblHarga.getText().replaceAll("[^0-9]", ""));
-            long grandTotal = Long.parseLong(lblSisa.getText().replaceAll("[^0-9]", ""));
-            //End Pricing
+            if(checkTime()==true){
             if(sb.checkPaket(paket)==1){
+            //pricing
+            int harga = sb.getPrice(field, paket);
+            int DP = 0;
+            int sisa = harga-DP;
+            //end pricing
                     int i;
                     for (i=0;i<=3;i++){
                         hour= reqTime.getHours()+durasi.getHours();
@@ -759,19 +798,25 @@ public class Pemesanan extends Form{
                             expired = DateUtils.setMinutes(expired,minute);
                         }
                             ModelCustomer cust = new ModelCustomer(customerID,nama,noTelp,email,type);
-                            ModelTransaksi trx = new ModelTransaksi(0,0,paket,subTotal,0,grandTotal,null,"");
+                            ModelTransaksi trx = new ModelTransaksi(0,0,paket,harga,0,sisa,null,"");
                             ModelBooking add = new ModelBooking(0,cust,paket,field,request,expired,"",trx);
                             // Give Notifications Here
                             if(sb.insertData(add)==true){
                                 pesananID = add.getId();
-                                ModelTransaksi addtrx = new ModelTransaksi(0,pesananID,paket,subTotal,0,grandTotal,null,"Selesai");
+                                ModelTransaksi addtrx = new ModelTransaksi(0,pesananID,paket,harga,0,sisa,null,"Selesai");
                                 sb.addTransaksi(addtrx);
+                                succ.showNotification();
                                 initTable();
                             }else{
-                                
+                                err.showNotification();
                             }
                         }
                 }else{
+                    //pricing
+                    int harga = sb.getPrice(field, paket);
+                    int DP = con.getDP();
+                    int sisa = harga-DP;
+                    //end pricing
                     hour = reqTime.getHours()+durasi.getHours();
                     minute = reqTime.getMinutes()+durasi.getMinutes();
                     Date expired;
@@ -783,23 +828,30 @@ public class Pemesanan extends Form{
                         expired = DateUtils.setMinutes(expired,minute);
                     }       
                     ModelCustomer cust = new ModelCustomer(customerID,nama,noTelp,email,type);
-                    ModelTransaksi trx = new ModelTransaksi(0,0,paket,subTotal,con.getDP(),grandTotal,null,"");
+                    ModelTransaksi trx = new ModelTransaksi(0,0,paket,harga,con.getDP(),sisa,null,"");
                     ModelBooking add = new ModelBooking(0,cust,paket,field,dateRequest,expired,"",trx);       
                     // Give Notifications Here
                      if(sb.insertData(add)==true){
                         pesananID = add.getId();
-                        ModelTransaksi addtrx = new ModelTransaksi(0,pesananID,paket,subTotal,con.getDP(),grandTotal,null,"Pending");
+                        ModelTransaksi addtrx = new ModelTransaksi(0,pesananID,paket,harga,con.getDP(),sisa,null,"Pending");
                         sb.addTransaksi(addtrx);
+                        succ.showNotification();
                         initTable();
                      }else{
-                         
+                        err.showNotification();
                      }   
                 }  
+            }else{
+               err1.showNotification();
+            }
             } catch (SQLException ex) {
                 Logger.getLogger(Pemesanan.class.getName()).log(Level.SEVERE, null, ex);
             } catch (ParseException ex) {            
                 Logger.getLogger(Pemesanan.class.getName()).log(Level.SEVERE, null, ex);
-        }           
+            } catch (NumberFormatException e){
+                Logger.getLogger(Pemesanan.class.getName()).log(Level.SEVERE, null, e);
+                warr.showNotification();
+            }          
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void table1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_table1MouseReleased
@@ -838,7 +890,7 @@ public class Pemesanan extends Form{
             txtEmail.setEditable(false);
             txtnoHp.setEditable(false);
             if(sb.checkPaket(paket)==1){
-                txtMember.setText(String.valueOf(name.getCustomerID()));
+                txtMember.setText(String.valueOf(customerID));
                 cbPaket.removeAllItems();
                 sb.getPaketMember(cbPaket);
                 cbPaket.setSelectedIndex(-1);
@@ -857,6 +909,10 @@ public class Pemesanan extends Form{
                 cbLapangan.setEnabled(true);
                 cbTimeReq.setEnabled(true);
                 btnUpdate.setEnabled(true);
+            }
+            if(name.getKet().equals("Member")){
+                txtMember.setText(String.valueOf(name.getCustomerID()));
+                sb.getPaketMember(cbPaket);
             }
             txtMember.setEditable(false);
             txtDate.setText(date);
@@ -913,6 +969,11 @@ public class Pemesanan extends Form{
     }//GEN-LAST:event_btnPrintActionPerformed
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
+        Main m = new Main();
+            Notification err= new Notification(m, Notification.Type.ERROR, Notification.Location.TOP_CENTER, "Pesanan Gagal di Update !");
+            Notification succ= new Notification(m, Notification.Type.SUCCESS, Notification.Location.TOP_CENTER, "Pesanan Berhasil di Update!"); 
+            Notification err1= new Notification(m, Notification.Type.ERROR, Notification.Location.TOP_CENTER, "Jadwal Tidak Tersedia !");
+            Notification warr= new Notification(m, Notification.Type.WARNING, Notification.Location.TOP_CENTER, "Silahkan Check Pesanan Terlebih Dahulu !");
         try {                                         
             ServiceBooking sb = new ServiceBooking();
             //Start Data Penyewa
@@ -932,51 +993,37 @@ public class Pemesanan extends Form{
             int hour,minute;
             //End Detail Pesanan
             //Start Pricing
-            long subTotal = Long.parseLong(lblHarga.getText().replaceAll("[^0-9]", ""));
-            long grandTotal = Long.parseLong(lblSisa.getText().replaceAll("[^0-9]", ""));
+            int harga = sb.getPrice(field, paket);
+            int DP = con.getDP();
+            int sisa = harga-DP;
             //End Pricing
-            ModelCustomer customer = new ModelCustomer(customerID,nama,noTelp,email,"");
-            if(sb.checkPaket(paket)==1){
-                    int i;
-                    for (i=0;i<=3;i++){
-                        hour= reqTime.getHours()+durasi.getHours();
-                        minute = reqTime.getMinutes()+durasi.getMinutes();
-                        Date expired,request;
-                        if(hour==24){
-                            hour = 23;
-                            request = DateUtils.addWeeks(dateRequest,i);
-                            expired = DateUtils.addWeeks(dateRequest,i);
-                            expired = DateUtils.setHours(expired,23);
-                            expired = DateUtils.setMinutes(expired,minute);
-                        }else{
-                            request = DateUtils.addWeeks(dateRequest, i);
-                            expired = DateUtils.addWeeks(dateRequest,i);
-                            expired = DateUtils.setHours(expired,hour);
-                            expired = DateUtils.setMinutes(expired,minute);
-                        }
-                            ModelTransaksi trx = new ModelTransaksi(trxID, pesananID,paket,subTotal,0,grandTotal,null,"Selesai");
-                            ModelBooking add = new ModelBooking(pesananID,customer,paket,field,request,expired,"Member",trx);
-                            sb.updateBooked(add);  
-                            sb.updateOrder(add);
-                        }
+            ModelCustomer customer = new ModelCustomer(customerID,nama,noTelp,email,"");                  
+            hour = reqTime.getHours()+durasi.getHours();     
+            minute = reqTime.getMinutes()+durasi.getMinutes();
+            Date expired;
+            if(checkTime()==true){
+                if(hour == 24){
+                    expired = DateUtils.setHours(dateRequest,23);
+                    expired = DateUtils.setMinutes(dateRequest,minute);
                 }else{
-                    hour = reqTime.getHours()+durasi.getHours();
-                    minute = reqTime.getMinutes()+durasi.getMinutes();
-                    Date expired;
-                    if(hour == 24){
-                        expired = DateUtils.setHours(dateRequest,23);
-                        expired = DateUtils.setMinutes(dateRequest,minute);
-                    }else{
-                        expired = DateUtils.setHours(dateRequest,hour);
-                        expired = DateUtils.setMinutes(expired,minute);
-                    }       
-                    ModelTransaksi trx = new ModelTransaksi(trxID,pesananID,paket,subTotal,con.getDP(),grandTotal,null,"Pending");
-                    ModelBooking data = new ModelBooking(pesananID,customer,paket,field,dateRequest,expired,"",trx);       
-                    // Give Notifications Here
-                    if(sb.updateBooked(data)==true){
-                        System.out.println("updated");
-                    } 
-                }  
+                    expired = DateUtils.setHours(dateRequest,hour);
+                    expired = DateUtils.setMinutes(expired,minute);
+                }       
+                ModelTransaksi trx = new ModelTransaksi(trxID,pesananID,paket,harga,con.getDP(),sisa,null,"Pending");
+                ModelBooking data = new ModelBooking(pesananID,customer,paket,field,dateRequest,expired,"",trx);       
+                // Give Notifications Here
+                if(sb.updateBooked(data)==true){
+                        //Notif Success
+                    succ.showNotification();
+                    initTable();
+                    System.out.println("updated");
+                }else{
+                        //Notif Error
+                    err1.showNotification();
+                }       
+            }else{
+                warr.showNotification();
+            }
             } catch (SQLException ex) {
                 Logger.getLogger(Pemesanan.class.getName()).log(Level.SEVERE, null, ex);
             } catch (ParseException ex) {            

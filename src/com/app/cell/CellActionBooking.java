@@ -1,6 +1,7 @@
 package com.app.cell;
 
 import com.app.form.Pemesanan;
+import com.app.main.Main;
 import com.app.model.ModelBooking;
 import com.app.model.ModelCell;
 import com.app.services.ServiceBooking;
@@ -14,6 +15,7 @@ import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import javax.swing.ImageIcon;
 import java.awt.Color;
+import javax.swing.JOptionPane;
 
 public class CellActionBooking extends TableCustomCell {
     public CellActionBooking()  {
@@ -23,17 +25,23 @@ public class CellActionBooking extends TableCustomCell {
         cmdDelete.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                int bookedID = ((ModelBooking) data).getId();
-                System.out.println("booked ID" +bookedID);
-                if (bookedID != 0) {
-                    try {
-                        new ServiceBooking().deleteBooked(bookedID);
+                Main m = new Main();
+                int response = JOptionPane.showConfirmDialog(m, "Apakah Anda Yakin?", "Konfirmasi Hapus Data", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+                if(response==JOptionPane.YES_OPTION){
+                    int bookedID = ((ModelBooking) data).getId();
+                    System.out.println("booked ID" +bookedID);
+                    if (bookedID != 0) {
+                        try {
+                            new ServiceBooking().deleteBooked(bookedID);
+                            table.deleteRowAt(getRow(), true);
+                        } catch (SQLException e) {
+                            System.err.println(e);
+                        }
+                    } else {
                         table.deleteRowAt(getRow(), true);
-                    } catch (SQLException e) {
-                        System.err.println(e);
                     }
-                } else {
-                    table.deleteRowAt(getRow(), true);
+                }else if(response==JOptionPane.NO_OPTION){
+                        System.err.println("Failed");
                 }
             }
         });

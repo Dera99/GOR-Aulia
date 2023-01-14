@@ -58,7 +58,7 @@ public class CellActionJadwal extends TableCustomCell {
                 Notification succ= new Notification(m, Notification.Type.SUCCESS, Notification.Location.TOP_CENTER, "Pesanan Berhasil di Mulai !!");
                 Notification err= new Notification(m, Notification.Type.ERROR, Notification.Location.TOP_CENTER, "Pesanan Gagal di Mulai !!");
                 //response
-                int response = JOptionPane.showConfirmDialog(m, "Apakah Anda Yakin?", "Konfirmasi Pembayaran", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+                int response = JOptionPane.showConfirmDialog(m, "Apakah Anda Yakin?", "Konfirmasi Mulai Penyewaan", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
                 if(response==JOptionPane.YES_OPTION){
                 if (pesananID != 0) {
                     try {
@@ -111,7 +111,7 @@ public class CellActionJadwal extends TableCustomCell {
                 Notification succ= new Notification(m, Notification.Type.SUCCESS, Notification.Location.TOP_CENTER, "Pesanan Selesai !!");
                 Notification err= new Notification(m, Notification.Type.ERROR, Notification.Location.TOP_CENTER, "Pesanan Gagal di Update!!");
                 //response
-                int response = JOptionPane.showConfirmDialog(m, "Apakah Anda Yakin?", "Konfirmasi Pembayaran", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+                int response = JOptionPane.showConfirmDialog(m, "Apakah Anda Yakin?", "Konfirmasi Selesai Penyewaan", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
                 if(response==JOptionPane.YES_OPTION){
                 if (pesananID != 0) {
                     try {

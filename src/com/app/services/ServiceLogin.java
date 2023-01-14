@@ -30,12 +30,13 @@ public class ServiceLogin {
         Notification err2= new Notification(frame, Notification.Type.ERROR, Notification.Location.TOP_CENTER, "Username Tidak Ada");
         Notification noti= new Notification(b, Notification.Type.SUCCESS, Notification.Location.TOP_CENTER, "Login Berhasil !");
        try {
-        sql="SELECT * FROM accounts WHERE Username = '"+Username+"' AND Password = '"+Password+"'";    
+        sql="SELECT * FROM accounts JOIN staff ON accounts.StaffID = staff.StaffID WHERE Username = '"+Username+"' AND Password = '"+Password+"'";    
         pst = CC.prepareStatement(sql);
         rs = pst.executeQuery(); 
         if(rs.next()){
                 String user = rs.getString("Username");
                 String pass = rs.getString("Password");
+                String name = rs.getString("Nama");
                 int UserId = rs.getInt("UserId");
                 int RoleId = rs.getInt("RoleId");
                 Icon profile=null;
@@ -44,25 +45,13 @@ public class ServiceLogin {
                 }
                 if (Password.equals(pass) && Username.equals(user)){
                     UserSession.setUserId(UserId);
-                    UserSession.setUserLogin(user);
+                    UserSession.setUserLogin(name);
                     UserSession.setRoleId(RoleId);
                     UserSession.setIcon(profile);
                     Main a = new Main();
                     a.setVisible(true);
                     frame.dispose();
                     noti.showNotification();
-//                    if(UserId == 1){
-//                        noti.showNotification();
-//                        Main a = new Main();
-//                        a.setVisible(true);
-//                        frame.dispose();
-//                    }
-//                    else{
-//                        noti.showNotification();
-//                        Main mu=new Main();
-//                        mu.setVisible(true);
-//                        frame.dispose();
-//                    }
                 }else{
                 err.showNotification();
                 }

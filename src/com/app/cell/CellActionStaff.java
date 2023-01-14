@@ -1,5 +1,6 @@
 package com.app.cell;
 
+import com.app.main.Main;
 import com.app.model.ModelAccounts;
 import com.app.model.ModelLapangan;
 import com.app.model.ModelStaff;
@@ -14,6 +15,7 @@ import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import javax.swing.ImageIcon;
 import java.awt.Color;
+import javax.swing.JOptionPane;
 
 public class CellActionStaff extends TableCustomCell {
     public CellActionStaff() {
@@ -35,16 +37,22 @@ public class CellActionStaff extends TableCustomCell {
         cmdDelete.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                int staffID = ((ModelAccounts) data).getStaff().getStaffID();
-                if (staffID != 0) {
-                    try {
-                        new ServiceStaff().deleteStaff(staffID);
+                Main m = new Main();
+                int response = JOptionPane.showConfirmDialog(m, "Apakah Anda Yakin?", "Konfirmasi Hapus Data", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+                if(response==JOptionPane.YES_OPTION){
+                    int staffID = ((ModelAccounts) data).getStaff().getStaffID();
+                    if (staffID != 0) {
+                        try {
+                            new ServiceStaff().deleteStaff(staffID);
+                            table.deleteRowAt(getRow(), true);
+                        } catch (SQLException e) {
+                            System.err.println(e);
+                        }
+                    } else {
                         table.deleteRowAt(getRow(), true);
-                    } catch (SQLException e) {
-                        System.err.println(e);
                     }
-                } else {
-                    table.deleteRowAt(getRow(), true);
+                }else if(response==JOptionPane.NO_OPTION){
+                        System.err.println("Failed");
                 }
             }
         });

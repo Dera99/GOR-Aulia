@@ -1,5 +1,6 @@
 package com.app.cell;
 
+import com.app.main.Main;
 import com.app.model.ModelPaket;
 import com.app.services.ServicePaket;
 import com.app.swing.table.TableCustom;
@@ -11,6 +12,7 @@ import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import javax.swing.ImageIcon;
 import java.awt.Color;
+import javax.swing.JOptionPane;
 
 public class CellActionPaket extends TableCustomCell {
     public CellActionPaket() {
@@ -32,16 +34,22 @@ public class CellActionPaket extends TableCustomCell {
         cmdDelete.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                int paketID = ((ModelPaket) data).getPaketID();
-                if (paketID != 0) {
-                    try {
-                        new ServicePaket().deletePaket(paketID);
+                 Main m = new Main();
+                int response = JOptionPane.showConfirmDialog(m, "Apakah Anda Yakin?", "Konfirmasi Hapus Data", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+                if(response==JOptionPane.YES_OPTION){
+                    int paketID = ((ModelPaket) data).getPaketID();
+                    if (paketID != 0) {
+                        try {
+                            new ServicePaket().deletePaket(paketID);
+                            table.deleteRowAt(getRow(), true);
+                        } catch (SQLException e) {
+                            System.err.println(e);
+                        }
+                    } else {
                         table.deleteRowAt(getRow(), true);
-                    } catch (SQLException e) {
-                        System.err.println(e);
                     }
-                } else {
-                    table.deleteRowAt(getRow(), true);
+                }else if(response==JOptionPane.NO_OPTION){
+                        System.err.println("Failed");
                 }
             }
         });
