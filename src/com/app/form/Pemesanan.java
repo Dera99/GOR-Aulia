@@ -7,6 +7,7 @@ import com.app.model.ModelBooking;
 import com.app.model.ModelCustomer;
 import com.app.model.ModelTransaksi;
 import com.app.services.ServiceBooking;
+import com.app.services.ServiceReport;
 import com.app.swing.table.TableRowData;
 import java.awt.Color;
 import java.awt.event.KeyAdapter;
@@ -50,6 +51,8 @@ public class Pemesanan extends Form{
     private boolean available=false;
     private int pesananID;
     private int customerID;
+    String typeCustomer;
+    String typePesanan;
     private int trxID;
     
     public Pemesanan() {
@@ -867,12 +870,13 @@ public class Pemesanan extends Form{
             String date = (String) table1.getValueAt(row, 4);
             String data = (String) table1.getValueAt(row, 5);
             customerID = name.getCustomerID();
+            typeCustomer = name.getKet();
             trxID = ((ModelBooking)rowData).getTransaksi().getTrxID();
             System.out.println("trxID = "+trxID);
-            String b  = table1.getValueAt(row,0).toString();
-            String pesanan = b.replace("R","");
-            if(!b.contains("R")){
-                pesanan=b.replace("M","");
+            typePesanan  = table1.getValueAt(row,0).toString();
+            String pesanan = typePesanan.replace("R","");
+            if(!typePesanan.contains("R")){
+                pesanan=typePesanan.replace("M","");
             }
             System.out.println("pesanan "+pesanan);
             pesananID=Integer.parseInt(pesanan);
@@ -965,7 +969,18 @@ public class Pemesanan extends Form{
     }//GEN-LAST:event_btnClearActionPerformed
 
     private void btnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrintActionPerformed
-       
+        try {
+            ServiceReport sr = new ServiceReport();
+            String type;
+            if(typeCustomer.equals("Reguler")){
+                type="R";
+            }else{
+                type="M";
+            }
+            sr.getKodePesanan(pesananID,typePesanan,type);
+        } catch (SQLException ex) {
+            Logger.getLogger(Pemesanan.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnPrintActionPerformed
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed

@@ -8,6 +8,8 @@ import com.app.cell.CellTextTelp;
 import com.app.component.Form;
 import com.app.model.ModelCustomer;
 import com.app.services.ServiceCustomer;
+import com.app.services.ServiceReport;
+import com.app.swing.table.TableRowData;
 import java.awt.Color;
 import java.sql.SQLException;
 import java.util.Date;
@@ -28,6 +30,7 @@ public class Penyewa extends Form {
         table2.setAnimateRowHeight(130);
         init();
     }
+    int customerID;
     private void init(){
       table1.addTableCell(new CellCustomerNama(),2);
       table1.addTableCell(new CellTextTelp(),3);
@@ -186,6 +189,11 @@ public class Penyewa extends Form {
         btnPrint.setText("Cetak");
         btnPrint.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
         btnPrint.setPreferredSize(new java.awt.Dimension(43, 27));
+        btnPrint.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPrintActionPerformed(evt);
+            }
+        });
         ;
         GoogleMaterialIcon icn = new GoogleMaterialIcon();
         icn.setIcon(GoogleMaterialDesignIcon.PRINT);
@@ -273,6 +281,12 @@ public class Penyewa extends Form {
     private void table2MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_table2MouseReleased
         // TODO add your handling code here:
         btnPrint.setVisible(true);
+        int row = table2.getSelectedRow();
+        TableRowData rowData = table2.getModelData(row);
+        String id = (String) table2.getValueAt(row,1);
+        String result = id.replace("M", "");
+        customerID = Integer.parseInt(result);
+        System.out.println("ID : "+customerID);
     }//GEN-LAST:event_table2MouseReleased
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
@@ -300,6 +314,17 @@ public class Penyewa extends Form {
         table1.setRowSorter(sorter);
         table1.autoRowHeight();
     }//GEN-LAST:event_serch1KeyReleased
+
+    private void btnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrintActionPerformed
+        try {
+            // TODO add your handling code here:
+            ServiceReport sr = new ServiceReport();
+            sr.getMemberCard(customerID);
+        } catch (SQLException ex) {
+            Logger.getLogger(Penyewa.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }//GEN-LAST:event_btnPrintActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

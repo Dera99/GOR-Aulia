@@ -324,6 +324,9 @@
               <Dimension value="[43, 27]"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnPrintActionPerformed"/>
+          </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="btnPrint.setVisible(false);"/>
             <AuxValue name="JavaCodeGenerator_ListenersCodePost" type="java.lang.String" value=";       &#xa;        GoogleMaterialIcon icn = new GoogleMaterialIcon();&#xa;        icn.setIcon(GoogleMaterialDesignIcon.PRINT);&#xa;        icn.setColor1(Color.white);&#xa;        icn.setColor2(Color.white);&#xa;        btnPrint.setIcon(icn.toIcon());"/>
