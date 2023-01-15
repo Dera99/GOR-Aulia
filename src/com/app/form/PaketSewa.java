@@ -29,6 +29,10 @@ public class PaketSewa extends Form {
         if(roleID==0){
             btnAdd.setVisible(false);
             btnAdd1.setVisible(false);
+            table1.stopCellEditing();
+            table1.removeColumn(table1.getColumn("Action"));
+            table2.stopCellEditing();
+            table2.removeColumn(table2.getColumn("Action"));
         }else{
             btnAdd.setVisible(true);
             btnAdd1.setVisible(true);
@@ -41,7 +45,10 @@ public class PaketSewa extends Form {
         table1.addTableCell(new CellPaketHarga(),2);
         table1.addTableCell(new CellPaketDurasi(),3);
         table1.addTableCell(new CellPaketType(),4);
+        int roleID = UserSession.getRoleId();
+        if(roleID==1){
         table1.addTableCell(new CellActionPaket(),5);
+        }
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -57,7 +64,9 @@ public class PaketSewa extends Form {
             }   
         }).start();
         table2.addTableCell(new CellJenisSewa(),1);
+        if(roleID==1){
         table2.addTableCell(new CellActionLapangan(),2);
+        }
         new Thread(new Runnable() {
             @Override
             public void run() {

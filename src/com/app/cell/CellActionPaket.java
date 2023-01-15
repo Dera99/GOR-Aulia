@@ -64,22 +64,6 @@ public class CellActionPaket extends TableCustomCell {
             cmdEdit.setIcon(new ImageIcon(getClass().getResource("/com/app/icon/edit.png")));
         }
     }
-    private void checkAdmin(TableCustom table,TableRowData data){
-        int roleID = UserSession.getRoleId();
-        if(roleID==0){
-            cmdEdit.setEnabled(false);
-            cmdEdit.setVisible(false);
-            cmdDelete.setEnabled(false);
-            cmdDelete.setVisible(false);
-            table.stopCellEditing();
-            table.removeColumn(table.getColumn("Action"));
-        }else{
-            cmdEdit.setEnabled(true);
-            cmdEdit.setVisible(true);
-            cmdDelete.setEnabled(true);
-            cmdDelete.setVisible(true);
-        }
-    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -128,7 +112,6 @@ public class CellActionPaket extends TableCustomCell {
     public Component createComponentCellRender(TableCustom table, TableRowData data, int row, int column) {
         CellActionPaket cell = new CellActionPaket();
         cell.checkIcon(data);
-        cell.checkAdmin(table,data);
         cell.addEvent(table, data, row);
         return cell;
     }
@@ -142,7 +125,6 @@ public class CellActionPaket extends TableCustomCell {
     public TableCustomCell createComponentCellEditor(TableCustom table, TableRowData data, Object o, int row, int column) {
         CellActionPaket cell = new CellActionPaket();
         cell.checkIcon(data);
-        cell.checkAdmin(table,data);
         cell.addEvent(table, data, row);
         return cell;
     }

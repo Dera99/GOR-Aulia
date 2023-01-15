@@ -12,6 +12,7 @@ import com.app.form.Settings;
 import com.app.form.Staff;
 import com.app.form.Transaksi;
 import com.app.services.UserSession;
+import java.awt.Component;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -26,9 +27,6 @@ Connection CC = new DatabaseConnection().connect();
    private void init(){
         header.initMoving(this);
         header.initEvent(this, panelBackground);
-//        ServiceSettings ss = new ServiceSettings();
-//        int UserID = UserSession.GetUserId();
-//        menu.Image.setImage(ss.getProfile(UserID));
             MenuEvent event = new MenuEvent() {
             @Override
             public void menuSelected(int index) {
@@ -71,7 +69,12 @@ Connection CC = new DatabaseConnection().connect();
         menu.setSelected(0);
         mainBody.displayForm(new FormHome(),"Dashboard");  
     }
-
+    private void showForm(Component com) {
+        mainBody.removeAll();
+        mainBody.add(com);
+        mainBody.revalidate();
+        mainBody.repaint();
+    }
 
 
     @SuppressWarnings("unchecked")

@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="430" pageHeight="220" orientation="Landscape" columnWidth="430" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="f6f86c5d-c585-4197-b9d2-c1dd421c0bfb">
 	<property name="ireport.zoom" value="1.464100000000004"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="96"/>
+	<property name="ireport.y" value="0"/>
 	<style name="Title" forecolor="#FFFFFF" fontName="Times New Roman" fontSize="50" isBold="false" pdfFontName="Times-Bold"/>
 	<style name="SubTitle" forecolor="#CCCCCC" fontName="Times New Roman" fontSize="18" isBold="false" pdfFontName="Times-Roman"/>
 	<style name="Column header" forecolor="#666666" fontName="Times New Roman" fontSize="14" isBold="true" pdfFontName="Times-Roman"/>
@@ -51,7 +51,7 @@
 					<reportElement style="Title" x="0" y="0" width="310" height="66" forecolor="#F3F3F3" backcolor="#3C3C3C" uuid="59e482bf-213b-4013-91dc-0af3d21bf5cd"/>
 					<box topPadding="4" leftPadding="4" bottomPadding="4" rightPadding="4"/>
 					<textElement verticalAlignment="Bottom">
-						<font isBold="false"/>
+						<font fontName="Gill Sans MT" isBold="false"/>
 					</textElement>
 					<text><![CDATA[Member Card]]></text>
 				</staticText>
@@ -160,19 +160,12 @@
 			<frame>
 				<reportElement mode="Opaque" x="0" y="0" width="430" height="25" forecolor="#D0B48E" backcolor="#141414" uuid="883df78c-ffd9-4f70-a5fd-a34738f6e02b"/>
 				<textField pattern="EEEEE dd MMMMM yyyy">
-					<reportElement x="310" y="5" width="105" height="20" forecolor="#FFFFFF" uuid="81503ae0-5f2e-47c6-883e-a740071ff1f9"/>
+					<reportElement x="299" y="5" width="120" height="20" forecolor="#FFFFFF" uuid="81503ae0-5f2e-47c6-883e-a740071ff1f9"/>
 					<textElement textAlignment="Right">
 						<font size="10"/>
 					</textElement>
-					<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+					<textFieldExpression><![CDATA[new SimpleDateFormat("EEEE, dd MMMM yyyy", new java.util.Locale("id")).format(new java.util.Date())]]></textFieldExpression>
 				</textField>
-				<staticText>
-					<reportElement x="268" y="5" width="42" height="20" forecolor="#FFFFFF" uuid="6df69b16-d2ca-413f-a800-f46381892f06"/>
-					<textElement>
-						<font size="10"/>
-					</textElement>
-					<text><![CDATA[Printed : ]]></text>
-				</staticText>
 			</frame>
 		</band>
 	</pageFooter>

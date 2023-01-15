@@ -1,8 +1,12 @@
 
 package com.app.component;
 
+import com.app.services.ServiceReport;
 import com.app.swing.SwitchButton;
 import java.awt.Color;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javaswingdev.GoogleMaterialDesignIcon;
 import javaswingdev.GoogleMaterialIcon;
 import net.miginfocom.swing.MigLayout;
@@ -13,6 +17,7 @@ public class ReportCustomer extends javax.swing.JPanel {
     private MigLayout layout;
     public ReportCustomer() {
         initComponents();
+        cbTipe.setSelectedIndex(0);
         layout = new MigLayout("fill, wrap 1,  inset 3","[fill]","[0][0!]");
         setLayout(layout);
         switchButton1.getAnimator().addTarget(new TimingTargetAdapter(){
@@ -51,7 +56,7 @@ public class ReportCustomer extends javax.swing.JPanel {
         jPanel2 = new javax.swing.JPanel();
         switchButton1 = new com.app.swing.SwitchButton();
         panel = new javax.swing.JPanel();
-        combobox1 = new com.app.swing.Combobox();
+        cbTipe = new com.app.swing.Combobox();
         txtDari = new com.app.swing.TextField();
         txtSampai = new com.app.swing.TextField();
         btnPrint = new com.app.swing.Button();
@@ -122,10 +127,10 @@ public class ReportCustomer extends javax.swing.JPanel {
 
         panel.setOpaque(false);
 
-        combobox1.setBackground(new java.awt.Color(60, 60, 60));
-        combobox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Reguler", "Member" }));
-        combobox1.setSelectedIndex(-1);
-        combobox1.setLabeText("Tipe Customer");
+        cbTipe.setBackground(new java.awt.Color(60, 60, 60));
+        cbTipe.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Reguler", "Member" }));
+        cbTipe.setSelectedIndex(-1);
+        cbTipe.setLabeText("Tipe Customer");
 
         txtDari.setBackground(new java.awt.Color(60, 60, 60));
         txtDari.setForeground(new java.awt.Color(230, 230, 230));
@@ -134,11 +139,6 @@ public class ReportCustomer extends javax.swing.JPanel {
         txtSampai.setBackground(new java.awt.Color(60, 60, 60));
         txtSampai.setForeground(new java.awt.Color(230, 230, 230));
         txtSampai.setLabelText("Sampai :");
-        txtSampai.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtSampaiActionPerformed(evt);
-            }
-        });
 
         btnPrint.setBackground(new java.awt.Color(51, 149, 225));
         btnPrint.setForeground(new java.awt.Color(240, 240, 240));
@@ -164,7 +164,7 @@ public class ReportCustomer extends javax.swing.JPanel {
             .addGroup(panelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(combobox1, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbTipe, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(panelLayout.createSequentialGroup()
                         .addComponent(txtDari, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(29, 29, 29)
@@ -177,7 +177,7 @@ public class ReportCustomer extends javax.swing.JPanel {
             panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(combobox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cbTipe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtDari, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -204,17 +204,25 @@ public class ReportCustomer extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrintActionPerformed
-
+        try {
+        ServiceReport sr = new ServiceReport();
+        String tipe = cbTipe.getSelectedItem().toString();
+        String start = txtDari.getText();
+        String end = txtSampai.getText();
+            if(tipe.equals("Reguler")){
+                sr.getReguler(start, end);
+            }else if(tipe.equals("Member")){
+                sr.getMember(start, end);
+            }
+        } catch (SQLException ex) {
+                Logger.getLogger(ReportCustomer.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnPrintActionPerformed
-
-    private void txtSampaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSampaiActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtSampaiActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.app.swing.Button btnPrint;
-    private com.app.swing.Combobox combobox1;
+    private com.app.swing.Combobox cbTipe;
     private com.app.swing.datechooser.DateChooser dateChooser1;
     private com.app.swing.datechooser.DateChooser dateChooser2;
     private javax.swing.JLabel jLabel2;
