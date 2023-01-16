@@ -1,8 +1,12 @@
 
 package com.app.component;
 
+import com.app.services.ServiceReport;
 import com.app.swing.SwitchButton;
 import java.awt.Color;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javaswingdev.GoogleMaterialDesignIcon;
 import javaswingdev.GoogleMaterialIcon;
 import net.miginfocom.swing.MigLayout;
@@ -128,11 +132,6 @@ public class ReportTransaksi extends javax.swing.JPanel {
         txtSampai.setBackground(new java.awt.Color(60, 60, 60));
         txtSampai.setForeground(new java.awt.Color(230, 230, 230));
         txtSampai.setLabelText("Sampai :");
-        txtSampai.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtSampaiActionPerformed(evt);
-            }
-        });
 
         btnPrint.setBackground(new java.awt.Color(51, 149, 225));
         btnPrint.setForeground(new java.awt.Color(240, 240, 240));
@@ -196,12 +195,15 @@ public class ReportTransaksi extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrintActionPerformed
-
+         try {
+            ServiceReport sr = new ServiceReport();
+            String start = txtDari.getText();
+            String end = txtSampai.getText();
+            sr.getTransaksi(start,end);
+        } catch (SQLException ex) {
+                Logger.getLogger(ReportCustomer.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnPrintActionPerformed
-
-    private void txtSampaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSampaiActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtSampaiActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

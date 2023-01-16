@@ -214,9 +214,6 @@
             </Property>
             <Property name="labelText" type="java.lang.String" value="Sampai :"/>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtSampaiActionPerformed"/>
-          </Events>
         </Component>
         <Component class="com.app.swing.Button" name="btnPrint">
           <Properties>

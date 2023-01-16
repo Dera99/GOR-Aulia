@@ -121,4 +121,20 @@ public class ServiceReport {
             JOptionPane.showMessageDialog(null, e);
         }
     }
+    public void getTransaksi(String start,String end) throws SQLException {
+         try{
+            HashMap param = new HashMap();
+            param.put("start",start);
+            param.put("end",end);
+            InputStream file = new FileInputStream(new File("src/com/app/reports/ReportTransaksi.jrxml"));
+            JasperDesign jd = JRXmlLoader.load(file);
+            JasperReport jr = JasperCompileManager.compileReport(jd);
+            JasperPrint jp = JasperFillManager.fillReport(jr,param,CC);
+            JasperViewer jv = new JasperViewer(jp, false);
+            jv.setVisible(true);
+        }catch(Exception e){
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }
 }
