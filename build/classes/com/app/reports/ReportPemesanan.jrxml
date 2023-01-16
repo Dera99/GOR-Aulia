@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="700" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="4932ae82-518d-4181-b27b-c9ef0c533dd9">
-	<property name="ireport.zoom" value="1.0000000000000195"/>
-	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.zoom" value="6.115909044841581"/>
+	<property name="ireport.x" value="3134"/>
+	<property name="ireport.y" value="834"/>
 	<style name="Title" forecolor="#FFFFFF" fontName="Times New Roman" fontSize="50" isBold="false" pdfFontName="Times-Bold"/>
 	<style name="SubTitle" forecolor="#CCCCCC" fontName="Times New Roman" fontSize="18" isBold="false" pdfFontName="Times-Roman"/>
 	<style name="Column header" forecolor="#666666" fontName="Times New Roman" fontSize="14" isBold="true" pdfFontName="Times-Roman"/>
@@ -197,7 +197,7 @@
 				<text><![CDATA[Nama Paket]]></text>
 			</staticText>
 			<rectangle>
-				<reportElement x="456" y="56" width="101" height="21" backcolor="#1E1E1E" uuid="e92e3d0d-cf35-4526-acff-cd780940227b"/>
+				<reportElement x="456" y="56" width="101" height="20" backcolor="#1E1E1E" uuid="1768cf10-0db6-44a8-b76c-47d155c46d05"/>
 			</rectangle>
 			<staticText>
 				<reportElement style="Column header" x="456" y="56" width="101" height="21" forecolor="#E6E6E6" uuid="6f7f8f70-3394-4659-a1e6-f89475c132ef"/>
@@ -241,8 +241,7 @@
 				<textElement textAlignment="Center">
 					<font size="12"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{NamaSewa}
-]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{NamaSewa}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="332" y="0" width="124" height="20" uuid="445ee668-f87e-4048-b653-be0dd446681c"/>

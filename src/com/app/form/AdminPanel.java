@@ -16,13 +16,15 @@ public class AdminPanel extends Form{
     private void initComponents() {
 
         roundPanel1 = new com.app.swing.RoundPanel();
-        changeDP1 = new com.app.component.ChangeDP();
+        settingDP1 = new com.app.component.SettingDP();
         roundPanel2 = new com.app.swing.RoundPanel();
         reportCustomer2 = new com.app.component.ReportCustomer();
         roundPanel3 = new com.app.swing.RoundPanel();
         reportPemesanan1 = new com.app.component.ReportPemesanan();
         roundPanel4 = new com.app.swing.RoundPanel();
         reportTransaksi1 = new com.app.component.ReportTransaksi();
+        roundPanel5 = new com.app.swing.RoundPanel();
+        settingToleransi1 = new com.app.component.SettingToleransi();
 
         roundPanel1.setBackground(new java.awt.Color(60, 60, 60));
         roundPanel1.setForeground(new java.awt.Color(60, 60, 60));
@@ -31,13 +33,13 @@ public class AdminPanel extends Form{
         roundPanel1.setLayout(roundPanel1Layout);
         roundPanel1Layout.setHorizontalGroup(
             roundPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(changeDP1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(settingDP1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         roundPanel1Layout.setVerticalGroup(
             roundPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, roundPanel1Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(changeDP1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(roundPanel1Layout.createSequentialGroup()
+                .addComponent(settingDP1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         roundPanel2.setBackground(new java.awt.Color(60, 60, 60));
@@ -86,6 +88,19 @@ public class AdminPanel extends Form{
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
+        roundPanel5.setBackground(new java.awt.Color(60, 60, 60));
+
+        javax.swing.GroupLayout roundPanel5Layout = new javax.swing.GroupLayout(roundPanel5);
+        roundPanel5.setLayout(roundPanel5Layout);
+        roundPanel5Layout.setHorizontalGroup(
+            roundPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(settingToleransi1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        roundPanel5Layout.setVerticalGroup(
+            roundPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(settingToleransi1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -94,6 +109,7 @@ public class AdminPanel extends Form{
             .addComponent(roundPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(roundPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(roundPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(roundPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -101,18 +117,19 @@ public class AdminPanel extends Form{
                 .addGap(0, 0, 0)
                 .addComponent(roundPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(roundPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(roundPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(roundPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(roundPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 200, Short.MAX_VALUE))
+                .addGap(0, 128, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private com.app.component.ChangeDP changeDP1;
     private com.app.component.ReportCustomer reportCustomer2;
     private com.app.component.ReportPemesanan reportPemesanan1;
     private com.app.component.ReportTransaksi reportTransaksi1;
@@ -120,5 +137,8 @@ public class AdminPanel extends Form{
     private com.app.swing.RoundPanel roundPanel2;
     private com.app.swing.RoundPanel roundPanel3;
     private com.app.swing.RoundPanel roundPanel4;
+    private com.app.swing.RoundPanel roundPanel5;
+    private com.app.component.SettingDP settingDP1;
+    private com.app.component.SettingToleransi settingToleransi1;
     // End of variables declaration//GEN-END:variables
 }

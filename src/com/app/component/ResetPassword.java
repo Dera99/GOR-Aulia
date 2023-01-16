@@ -1,11 +1,15 @@
 
 package com.app.component;
 
-import com.app.configurations.config;
 import com.app.main.Main;
+import com.app.model.ModelAccounts;
+import com.app.services.ServiceSettings;
+import com.app.services.UserSession;
 import com.app.swing.SwitchButton;
 import java.awt.Color;
-import java.awt.Frame;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javaswingdev.GoogleMaterialDesignIcon;
 import javaswingdev.GoogleMaterialIcon;
 import net.miginfocom.swing.MigLayout;
@@ -13,26 +17,22 @@ import notification.Notification;
 import org.jdesktop.animation.timing.TimingTargetAdapter;
 
 
-public class ChangeDP extends javax.swing.JPanel {
+public class ResetPassword extends javax.swing.JPanel {
     private MigLayout layout;
-
-    config con = new config();
-    int DP = 0;
-    public ChangeDP() {
+    public ResetPassword() {
         initComponents();
-        String value = String.valueOf(con.getDP());
-        txtDP.setText(value);
-        layout = new MigLayout("fill, wrap 1,  inset 0","[fill]","[0][0!]");
+        layout = new MigLayout("fill, wrap 1,  inset 3","[fill]","[0][0!]");
         setLayout(layout);
-        txtDP.setBackground(new Color(0,0,0,0)); 
+        txtLama.setBackground(new Color(0,0,0,0));
+        txtBaru.setBackground(new Color(0,0,0,0)); 
         switchButton1.getAnimator().addTarget(new TimingTargetAdapter(){
            @Override
            public void timingEvent(float fraction){
                double size;
                if(switchButton1.isSelected()){
-                   size = (1f - fraction)*80;
+                   size = (1f - fraction)*110;
                }else{
-                   size = fraction * 80;
+                   size = fraction * 110;
                }
                layout.setRowConstraints("[]0[" +size+ "!]");
                revalidate();
@@ -59,8 +59,9 @@ public class ChangeDP extends javax.swing.JPanel {
         jPanel2 = new javax.swing.JPanel();
         switchButton1 = new com.app.swing.SwitchButton();
         panel = new javax.swing.JPanel();
-        txtDP = new com.app.swing.TextField();
         btnSave = new com.app.swing.Button();
+        txtLama = new com.app.swing.PasswordField();
+        txtBaru = new com.app.swing.PasswordField();
 
         setOpaque(false);
 
@@ -68,11 +69,11 @@ public class ChangeDP extends javax.swing.JPanel {
 
         lbBack.setFont(new java.awt.Font("SansSerif", 1, 16)); // NOI18N
         lbBack.setForeground(new java.awt.Color(230, 230, 230));
-        lbBack.setText("Atur DP");
+        lbBack.setText("Reset Password");
 
         jLabel2.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(128, 128, 128));
-        jLabel2.setText("Atur Harga DP paket Reguler");
+        jLabel2.setText("Input password lama dan password baru");
 
         jPanel2.setOpaque(false);
 
@@ -98,30 +99,30 @@ public class ChangeDP extends javax.swing.JPanel {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
-                    .addComponent(lbBack))
-                .addGap(359, 359, 359)
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(1, 1, 1)
+                        .addComponent(lbBack))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel2)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 301, Short.MAX_VALUE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(5, 5, 5)
+                .addComponent(lbBack)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel2))
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(lbBack)
-                        .addGap(5, 5, 5)
-                        .addComponent(jLabel2))
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         panel.setOpaque(false);
-
-        txtDP.setForeground(new java.awt.Color(230, 230, 230));
-        txtDP.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
-        txtDP.setLabelText("Harga DP");
 
         btnSave.setBackground(new java.awt.Color(51, 149, 225));
         btnSave.setForeground(new java.awt.Color(240, 240, 240));
@@ -138,13 +139,21 @@ public class ChangeDP extends javax.swing.JPanel {
             }
         });
 
+        txtLama.setForeground(new java.awt.Color(230, 230, 230));
+        txtLama.setLabelText("Password Lama");
+
+        txtBaru.setForeground(new java.awt.Color(230, 230, 230));
+        txtBaru.setLabelText("Password Baru");
+
         javax.swing.GroupLayout panelLayout = new javax.swing.GroupLayout(panel);
         panel.setLayout(panelLayout);
         panelLayout.setHorizontalGroup(
             panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(txtDP, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtLama, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtBaru, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(21, 21, 21)
                 .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -153,10 +162,12 @@ public class ChangeDP extends javax.swing.JPanel {
             panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addComponent(txtLama, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(11, 11, 11)
+                .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtDP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(txtBaru, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(12, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -171,26 +182,30 @@ public class ChangeDP extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addComponent(panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
-        // TODO add your handling code here:
-    Main m = new Main();
-    Notification succ= new Notification(m, Notification.Type.SUCCESS, Notification.Location.TOP_CENTER, "Harga DP Berhasil Disimpan !!");
-    Notification err= new Notification(m, Notification.Type.ERROR, Notification.Location.TOP_CENTER, "Gagal Menyimpan Harga DP !!");
-    try{
-        
-        if(Integer.valueOf(txtDP.getText())!=null){
-           DP = Integer.parseInt(txtDP.getText());
-        }
-        String harga = String.valueOf(txtDP.getText());
-        con.SaveProp(lbBack.getText(),harga);
-        succ.showNotification();
-        }catch(NumberFormatException e){
-          err.showNotification();
+       Main m = new Main();
+       Notification err= new Notification(m, Notification.Type.ERROR, Notification.Location.TOP_CENTER, "Password Lama Tidak Sesuai !!");
+       Notification succ= new Notification(m, Notification.Type.SUCCESS, Notification.Location.TOP_CENTER, "Password Berhasil di Update !!");
+        try {
+            // TODO add your handling code here:
+            ServiceSettings ss = new ServiceSettings();
+            int userID = UserSession.GetUserId();
+            int roleID = UserSession.getRoleId();
+            String userLogin = UserSession.getUserLogin();
+            ModelAccounts data = new ModelAccounts(userID,userLogin,txtLama.getText(),roleID);
+            if(ss.checkPassword(data)==true){
+                ModelAccounts data2 = new ModelAccounts(userID,userLogin,txtBaru.getText(),roleID);
+                ss.updatePassword(data2);
+                succ.showNotification();
+            }else{
+                err.showNotification();
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ResetPassword.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnSaveActionPerformed
 
@@ -203,6 +218,7 @@ public class ChangeDP extends javax.swing.JPanel {
     private javax.swing.JLabel lbBack;
     private javax.swing.JPanel panel;
     private com.app.swing.SwitchButton switchButton1;
-    private com.app.swing.TextField txtDP;
+    private com.app.swing.PasswordField txtBaru;
+    private com.app.swing.PasswordField txtLama;
     // End of variables declaration//GEN-END:variables
 }

@@ -12,9 +12,9 @@ public class Settings extends Form{
     private void initComponents() {
 
         roundPanel1 = new com.app.swing.RoundPanel();
-        changePassword2 = new com.app.component.ChangePassword();
+        changePassword2 = new com.app.component.ResetPassword();
         roundPanel3 = new com.app.swing.RoundPanel();
-        changeProfile1 = new com.app.component.ChangeProfile();
+        changeProfile1 = new com.app.component.SettingProfile();
 
         roundPanel1.setBackground(new java.awt.Color(60, 60, 60));
 
@@ -69,8 +69,8 @@ public class Settings extends Form{
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private com.app.component.ChangePassword changePassword2;
-    private com.app.component.ChangeProfile changeProfile1;
+    private com.app.component.ResetPassword changePassword2;
+    private com.app.component.SettingProfile changeProfile1;
     private com.app.swing.RoundPanel roundPanel1;
     private com.app.swing.RoundPanel roundPanel3;
     // End of variables declaration//GEN-END:variables

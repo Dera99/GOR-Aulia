@@ -1,44 +1,38 @@
 
 package com.app.component;
 
+import com.app.configurations.config;
 import com.app.main.Main;
-import com.app.model.ModelAccounts;
-import com.app.services.ServiceSettings;
-import com.app.services.UserSession;
 import com.app.swing.SwitchButton;
 import java.awt.Color;
-import java.io.File;
-import java.io.IOException;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import static java.awt.event.KeyEvent.VK_BACK_SPACE;
 import javaswingdev.GoogleMaterialDesignIcon;
 import javaswingdev.GoogleMaterialIcon;
-import javax.swing.ImageIcon;
-import javax.swing.JFileChooser;
-import javax.swing.SwingUtilities;
-import javax.swing.filechooser.FileFilter;
 import net.miginfocom.swing.MigLayout;
 import notification.Notification;
 import org.jdesktop.animation.timing.TimingTargetAdapter;
 
 
-public class ChangeProfile extends javax.swing.JPanel {
+public class SettingToleransi extends javax.swing.JPanel {
     private MigLayout layout;
-    private String pathImage;
-    public ChangeProfile() {
+    public SettingToleransi() {
         initComponents();
-        image.setImage(UserSession.getIcon());
+        config con = new config();
+        String value = String.valueOf(con.getMinute());
+        txtMenit.setText(value);
         layout = new MigLayout("fill, wrap 1,  inset 3","[fill]","[0][0!]");
         setLayout(layout);
+        txtMenit.setBackground(new Color(0,0,0,0));
         switchButton1.getAnimator().addTarget(new TimingTargetAdapter(){
            @Override
            public void timingEvent(float fraction){
                double size;
                if(switchButton1.isSelected()){
-                   size = (1f - fraction)*110;
+                   size = (1f - fraction)*80;
                }else{
-                   size = fraction * 110;
+                   size = fraction * 80;
                }
                layout.setRowConstraints("[]0[" +size+ "!]");
                revalidate();
@@ -59,8 +53,6 @@ public class ChangeProfile extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        popup = new javax.swing.JPopupMenu();
-        deleteImage = new javax.swing.JMenuItem();
         jPanel1 = new javax.swing.JPanel();
         lbBack = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -68,16 +60,7 @@ public class ChangeProfile extends javax.swing.JPanel {
         switchButton1 = new com.app.swing.SwitchButton();
         panel = new javax.swing.JPanel();
         btnSave = new com.app.swing.Button();
-        image = new com.app.swing.ImageAvatar();
-        btnClear = new com.app.swing.Button();
-
-        deleteImage.setText("Delete Image");
-        deleteImage.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                deleteImageActionPerformed(evt);
-            }
-        });
-        popup.add(deleteImage);
+        txtMenit = new com.app.swing.TextField();
 
         setOpaque(false);
 
@@ -85,11 +68,11 @@ public class ChangeProfile extends javax.swing.JPanel {
 
         lbBack.setFont(new java.awt.Font("SansSerif", 1, 16)); // NOI18N
         lbBack.setForeground(new java.awt.Color(230, 230, 230));
-        lbBack.setText("Profile");
+        lbBack.setText("Toleransi Keterlambatan");
 
         jLabel2.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(128, 128, 128));
-        jLabel2.setText("Upload gambar profile dashboard");
+        jLabel2.setText("Atur toleransi keterlambatan penyewa");
 
         jPanel2.setOpaque(false);
 
@@ -122,7 +105,7 @@ public class ChangeProfile extends javax.swing.JPanel {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jLabel2)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 340, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 327, Short.MAX_VALUE)
                 .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
@@ -155,30 +138,8 @@ public class ChangeProfile extends javax.swing.JPanel {
             }
         });
 
-        image.setGradientColor1(new java.awt.Color(51, 149, 225));
-        image.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                imageMouseClicked(evt);
-            }
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                imageMousePressed(evt);
-            }
-        });
-
-        btnClear.setBackground(new java.awt.Color(253, 83, 63));
-        btnClear.setForeground(new java.awt.Color(240, 240, 240));
-        btnClear.setText("Clear");
-        btnClear.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
-        btnClear.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnClearActionPerformed(evt);
-            }
-        });
-        GoogleMaterialIcon icon4 = new GoogleMaterialIcon();
-        icon4.setIcon(GoogleMaterialDesignIcon.DELETE);
-        icon4.setColor1(Color.white);
-        icon4.setColor2(Color.white);
-        btnClear.setIcon(icon4.toIcon());
+        txtMenit.setForeground(new java.awt.Color(230, 230, 230));
+        txtMenit.setLabelText("Menit");
 
         javax.swing.GroupLayout panelLayout = new javax.swing.GroupLayout(panel);
         panel.setLayout(panelLayout);
@@ -186,23 +147,19 @@ public class ChangeProfile extends javax.swing.JPanel {
             panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(image, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtMenit, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnClear, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(193, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelLayout.setVerticalGroup(
             panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(image, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnClear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(10, Short.MAX_VALUE))
+                .addGap(11, 11, 11)
+                .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtMenit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(69, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -221,78 +178,29 @@ public class ChangeProfile extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void imageMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_imageMouseClicked
-        // TODO add your handling code here:
-         if (SwingUtilities.isLeftMouseButton(evt) && evt.getClickCount() == 2) {
-            JFileChooser ch = new JFileChooser();
-            ch.setFileFilter(new FileFilter() {
-                @Override
-                public boolean accept(File file) {
-                    String name = file.getName().toLowerCase();
-                    return file.isDirectory() || name.endsWith(".png") || name.endsWith(".jpg");
-                }
-
-                @Override
-                public String getDescription() {
-                    return "Image File";
-                }
-            });
-            int opt = ch.showOpenDialog(this);
-            if (opt == JFileChooser.APPROVE_OPTION) {
-                pathImage = ch.getSelectedFile().getAbsolutePath();
-                image.setImage(new ImageIcon(pathImage));
-            }
-        }
-    }//GEN-LAST:event_imageMouseClicked
-
-    private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
-         //TODO add your handling code here:
-        pathImage = "";
-        image.setImage(null);
-    }//GEN-LAST:event_btnClearActionPerformed
-
-    private void imageMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_imageMousePressed
-        // TODO add your handling code here:
-        if (SwingUtilities.isRightMouseButton(evt)) {
-            popup.show(image, evt.getX(), evt.getY());
-        }
-    }//GEN-LAST:event_imageMousePressed
-
-    private void deleteImageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteImageActionPerformed
-        pathImage = "";
-        image.setImage(null);
-    }//GEN-LAST:event_deleteImageActionPerformed
-
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
-       ServiceSettings ss = new ServiceSettings();
-        ModelAccounts data = new ModelAccounts();
-        Main m = new Main();
-        Notification succ= new Notification(m, Notification.Type.SUCCESS, Notification.Location.TOP_CENTER, "Berhasil Disimpan, Silahkan Login Kembali !!");
-        try {
-            int userID = UserSession.GetUserId();
-            System.out.println("user id "+userID);
-            System.out.println("path image "+pathImage);
-            succ.showNotification();
-            ss.updateProfile(pathImage, userID);        
-        } catch (SQLException ex) {
-            //Logger.getLogger(ChangeProfile.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            //System.err.println("E" );
+      Main m = new Main();
+    Notification succ= new Notification(m, Notification.Type.SUCCESS, Notification.Location.TOP_CENTER, "Toleransi Keterlambatan Berhasil Disimpan !!");
+    Notification err= new Notification(m, Notification.Type.ERROR, Notification.Location.TOP_CENTER, "Gagal Menyimpan Toleransi Keterlambatan !!");
+    config con = new config();
+    try{
+        String menit = String.valueOf(txtMenit.getText());
+        con.SaveProp(lbBack.getText(),menit);
+        succ.showNotification();
+        }catch(NumberFormatException e){
+          err.showNotification();
         }
     }//GEN-LAST:event_btnSaveActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private com.app.swing.Button btnClear;
     private com.app.swing.Button btnSave;
-    private javax.swing.JMenuItem deleteImage;
-    private com.app.swing.ImageAvatar image;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel lbBack;
     private javax.swing.JPanel panel;
-    private javax.swing.JPopupMenu popup;
     private com.app.swing.SwitchButton switchButton1;
+    private com.app.swing.TextField txtMenit;
     // End of variables declaration//GEN-END:variables
 }

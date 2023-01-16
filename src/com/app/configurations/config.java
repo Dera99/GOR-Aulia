@@ -47,4 +47,17 @@ public class config {
         }
         return result;
     } 
+    public int getMinute(){
+        String value = "Toleransi Keterlambatan";
+        int result=0;
+    try
+        {
+           prop.load(new FileInputStream("src/config.app"));
+           value=prop.getProperty(value);
+           result = Integer.parseInt(value);
+        }catch(IOException e){
+        
+        }
+        return result;
+    } 
 }

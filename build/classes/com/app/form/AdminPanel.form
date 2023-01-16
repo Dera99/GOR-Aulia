@@ -20,6 +20,7 @@
           <Component id="roundPanel1" alignment="0" max="32767" attributes="0"/>
           <Component id="roundPanel3" alignment="0" max="32767" attributes="0"/>
           <Component id="roundPanel4" alignment="0" max="32767" attributes="0"/>
+          <Component id="roundPanel5" alignment="0" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
@@ -28,12 +29,14 @@
               <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
               <Component id="roundPanel1" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
+              <Component id="roundPanel5" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
               <Component id="roundPanel2" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="roundPanel3" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="roundPanel4" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="0" pref="200" max="32767" attributes="0"/>
+              <EmptySpace min="0" pref="128" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -52,20 +55,20 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Component id="changeDP1" alignment="0" max="32767" attributes="0"/>
+              <Component id="settingDP1" alignment="0" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="1" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
+                  <Component id="settingDP1" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                  <Component id="changeDP1" min="-2" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="com.app.component.ChangeDP" name="changeDP1">
+        <Component class="com.app.component.SettingDP" name="settingDP1">
         </Component>
       </SubComponents>
     </Container>
@@ -148,6 +151,30 @@
       </Layout>
       <SubComponents>
         <Component class="com.app.component.ReportTransaksi" name="reportTransaksi1">
+        </Component>
+      </SubComponents>
+    </Container>
+    <Container class="com.app.swing.RoundPanel" name="roundPanel5">
+      <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="3c" green="3c" red="3c" type="rgb"/>
+        </Property>
+      </Properties>
+
+      <Layout>
+        <DimensionLayout dim="0">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Component id="settingToleransi1" alignment="0" max="32767" attributes="0"/>
+          </Group>
+        </DimensionLayout>
+        <DimensionLayout dim="1">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Component id="settingToleransi1" min="-2" max="-2" attributes="0"/>
+          </Group>
+        </DimensionLayout>
+      </Layout>
+      <SubComponents>
+        <Component class="com.app.component.SettingToleransi" name="settingToleransi1">
         </Component>
       </SubComponents>
     </Container>

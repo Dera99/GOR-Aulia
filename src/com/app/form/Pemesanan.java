@@ -333,7 +333,6 @@ public class Pemesanan extends Form{
 
         txtMember.setBackground(new java.awt.Color(55, 55, 55));
         txtMember.setForeground(new java.awt.Color(240, 240, 240));
-        txtMember.setText("0");
         txtMember.setLabelText("Kode Member");
 
         btnSearch.setBackground(new java.awt.Color(50, 200, 126));

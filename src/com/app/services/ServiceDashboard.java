@@ -2,6 +2,7 @@ package com.app.services;
 
 import com.app.chart.ModelChart;
 import com.app.configurations.DatabaseConnection;
+import com.app.configurations.config;
 import com.app.model.ModelDashboard;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -23,6 +24,9 @@ public class ServiceDashboard {
     String sql; 
     public List<ModelDashboard> getBooking(String stat) throws SQLException {
         List<ModelDashboard> list = new ArrayList<>();
+        config con = new config();
+        System.out.println("Toleransi : "+con.getMinute());
+        checkExpired(con.getMinute());
         if(stat.equals("play")){
         sql = "select * from pesanan JOIN transaksi ON pesanan.IdPesanan = transaksi.IdPesanan JOIN customer ON customer.IdCustomer = pesanan.IdCustomer JOIN Lapangan ON Lapangan.IdLapangan = pesanan.IdLapangan JOIN sewa ON sewa.IdSewa = pesanan.IdSewa WHERE DATE(Request_Date) = CURDATE() AND (Status='Ongoing' OR Status ='Menunggu Antrian')";
         }else{
@@ -107,6 +111,15 @@ public class ServiceDashboard {
         sql="update Pesanan set Status = ? where IdPesanan="+data.getIdPesanan()+" limit 1";
         pst = CC.prepareStatement(sql);
             pst.setString(1, data.getStatus());
+        pst.execute();
+        pst.close();
+    }
+    public void checkExpired(int minute) throws SQLException{
+        sql="UPDATE pesanan p JOIN transaksi t\n" +
+        "ON p.IdPesanan = t.IdPesanan\n" +
+        "SET p.Status = 'Selesai', t.StatusTransaksi = 'Cancelled'\n" +
+        "WHERE TIMESTAMPDIFF(MINUTE, p.Request_Date, NOW()) > "+minute+"";
+        pst = CC.prepareStatement(sql);
         pst.execute();
         pst.close();
     }

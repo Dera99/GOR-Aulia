@@ -65,7 +65,7 @@ public class FormHome extends Form {
             @Override
             public void run() {
                 try {
-                    for (ModelDashboard booking: new ServiceDashboard().getBooking("selesai")) {
+                    for (ModelDashboard booking: new ServiceDashboard().getBooking("Selesai")) {
                         table2.addRow(booking, false);
                     }
                 } catch (SQLException e) {

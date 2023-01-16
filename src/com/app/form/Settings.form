@@ -61,7 +61,7 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="com.app.component.ChangePassword" name="changePassword2">
+        <Component class="com.app.component.ResetPassword" name="changePassword2">
         </Component>
       </SubComponents>
     </Container>
@@ -88,7 +88,7 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="com.app.component.ChangeProfile" name="changeProfile1">
+        <Component class="com.app.component.SettingProfile" name="changeProfile1">
         </Component>
       </SubComponents>
     </Container>
