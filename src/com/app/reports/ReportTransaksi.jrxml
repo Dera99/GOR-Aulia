@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="700" pageHeight="1000" columnWidth="660" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="4932ae82-518d-4181-b27b-c9ef0c533dd9">
-	<property name="ireport.zoom" value="0.9090909090909397"/>
-	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.zoom" value="1.3310000000000453"/>
+	<property name="ireport.x" value="192"/>
+	<property name="ireport.y" value="203"/>
 	<style name="Title" forecolor="#FFFFFF" fontName="Times New Roman" fontSize="50" isBold="false" pdfFontName="Times-Bold"/>
 	<style name="SubTitle" forecolor="#CCCCCC" fontName="Times New Roman" fontSize="18" isBold="false" pdfFontName="Times-Roman"/>
 	<style name="Column header" forecolor="#666666" fontName="Times New Roman" fontSize="14" isBold="true" pdfFontName="Times-Roman"/>
@@ -23,7 +23,7 @@
 		<defaultValueExpression><![CDATA[1]]></defaultValueExpression>
 	</parameter>
 	<queryString>
-		<![CDATA[SELECT t.*, p.*, s.*, l.*, c.* FROM transaksi t JOIN pesanan p ON t.IdPesanan= p.IdPesanan JOIN sewa s ON t.IdSewa = s.IdSewa JOIN Lapangan l ON p.IdLapangan=l.IdLapangan JOIN customer c ON p.IdCustomer = c.IdCustomer WHERE t.Tanggal BETWEEN $P{start} AND  $P{end} ORDER BY t.Tanggal ASC ]]>
+		<![CDATA[SELECT t.*, p.*, s.*, l.*, c.* FROM transaksi t JOIN pesanan p ON t.IdPesanan= p.IdPesanan JOIN sewa s ON t.IdSewa = s.IdSewa JOIN Lapangan l ON p.IdLapangan=l.IdLapangan JOIN customer c ON p.IdCustomer = c.IdCustomer WHERE t.Tanggal BETWEEN $P{start} AND  $P{end} ORDER BY t.Tanggal ASC]]>
 	</queryString>
 	<field name="IdTrx" class="java.lang.Integer">
 		<fieldDescription><![CDATA[]]></fieldDescription>
@@ -107,7 +107,7 @@
 		<variableExpression><![CDATA[$F{DP}]]></variableExpression>
 	</variable>
 	<variable name="totalPesanan" class="java.lang.Long" calculation="Sum">
-		<variableExpression><![CDATA[$F{GrandTotal}+$F{DP}]]></variableExpression>
+		<variableExpression><![CDATA[( $F{StatusTransaksi}.equals("Selesai") ? ($F{GrandTotal}+$F{DP}) : ($F{DP}) )]]></variableExpression>
 	</variable>
 	<background>
 		<band splitType="Stretch"/>
@@ -230,7 +230,7 @@
 				<textElement textAlignment="Center">
 					<font fontName="Gill Sans MT" size="12" isBold="false"/>
 				</textElement>
-				<text><![CDATA[Total Pesanan]]></text>
+				<text><![CDATA[DP Masuk]]></text>
 			</staticText>
 			<rectangle>
 				<reportElement x="421" y="57" width="84" height="19" backcolor="#1E1E1E" uuid="daa36756-0230-4dbf-a8ce-c80bcf432e16"/>
@@ -240,7 +240,7 @@
 				<textElement textAlignment="Center">
 					<font fontName="Gill Sans MT" size="12" isBold="false"/>
 				</textElement>
-				<text><![CDATA[DP]]></text>
+				<text><![CDATA[Total Bayar]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
@@ -324,7 +324,7 @@
 				<textElement textAlignment="Center">
 					<font size="12"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{GrandTotal}+$F{DP}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{DP}]]></textFieldExpression>
 			</textField>
 			<rectangle>
 				<reportElement x="421" y="0" width="84" height="22" uuid="4685858e-6a7c-4f64-9585-39eba292917c"/>
@@ -334,7 +334,7 @@
 				<textElement textAlignment="Center">
 					<font size="12"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{DP}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{GrandTotal}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
@@ -387,18 +387,18 @@
 	<summary>
 		<band height="57" splitType="Stretch">
 			<staticText>
-				<reportElement style="Column header" x="326" y="12" width="93" height="19" forecolor="#000000" uuid="5319aa40-aae4-4345-bf13-92b7cb27fdd9"/>
+				<reportElement style="Column header" x="326" y="10" width="93" height="19" forecolor="#000000" uuid="5319aa40-aae4-4345-bf13-92b7cb27fdd9"/>
 				<textElement textAlignment="Left">
 					<font fontName="Gill Sans MT" size="12" isBold="false"/>
 				</textElement>
-				<text><![CDATA[Total DP]]></text>
+				<text><![CDATA[Total Income DP]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="Column header" x="326" y="31" width="93" height="19" forecolor="#000000" uuid="bbec8734-a0b5-4575-88a4-fb321ad56885"/>
+				<reportElement style="Column header" x="326" y="29" width="93" height="19" forecolor="#000000" uuid="bbec8734-a0b5-4575-88a4-fb321ad56885"/>
 				<textElement textAlignment="Left">
 					<font fontName="Gill Sans MT" size="12" isBold="false"/>
 				</textElement>
-				<text><![CDATA[Total Income]]></text>
+				<text><![CDATA[Grand Total]]></text>
 			</staticText>
 			<textField pattern=": Rp #,##0">
 				<reportElement x="440" y="10" width="115" height="21" uuid="4f926b16-4c30-4547-b295-f92010b87495"/>
@@ -408,7 +408,7 @@
 				<textFieldExpression><![CDATA[$V{totalDP}]]></textFieldExpression>
 			</textField>
 			<textField pattern=": Rp #,##0">
-				<reportElement x="440" y="29" width="115" height="21" uuid="0e3e20e5-0408-4802-99e7-bdd4baad0954"/>
+				<reportElement x="440" y="29" width="115" height="19" uuid="0e3e20e5-0408-4802-99e7-bdd4baad0954"/>
 				<textElement textAlignment="Left">
 					<font size="12"/>
 				</textElement>

@@ -78,7 +78,7 @@ public class ServiceDashboard {
         return String.valueOf(total);
     }
     public String getIncome() throws SQLException{
-        sql="SELECT SUM(CASE WHEN StatusTransaksi = 'Pending' THEN DP ELSE DP + GrandTotal END) as Total FROM transaksi WHERE DATE(Tanggal) = CURDATE()";
+        sql="SELECT SUM(CASE WHEN StatusTransaksi = 'Selesai' THEN DP + GrandTotal ELSE DP END) as Total FROM transaksi WHERE DATE(Tanggal) = CURDATE()";
         pst = CC.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
         rs = pst.executeQuery();
         DecimalFormat kursIndonesia = new DecimalFormat("#,##0");
@@ -115,10 +115,15 @@ public class ServiceDashboard {
         pst.close();
     }
     public void checkExpired(int minute) throws SQLException{
-        sql="UPDATE pesanan p JOIN transaksi t\n" +
-        "ON p.IdPesanan = t.IdPesanan\n" +
-        "SET p.Status = 'Selesai', t.StatusTransaksi = 'Cancelled'\n" +
-        "WHERE TIMESTAMPDIFF(MINUTE, p.Request_Date, NOW()) > "+minute+"";
+        sql="UPDATE pesanan p\n" +
+            "JOIN transaksi t\n" +
+            "ON p.IdPesanan = t.IdPesanan\n" +
+            "JOIN sewa s ON t.IdSewa = s.IdSewa\n" +
+            "SET p.Status = 'Selesai', t.StatusTransaksi = CASE s.isMember \n" +
+            "WHEN 0 THEN 'Cancelled'\n" +
+            "WHEN 1 THEN 'Selesai'\n" +
+            "END\n" +
+            "WHERE TIMESTAMPDIFF(MINUTE, p.Request_Date, NOW()) > "+minute+" ";
         pst = CC.prepareStatement(sql);
         pst.execute();
         pst.close();
