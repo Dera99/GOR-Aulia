@@ -159,7 +159,7 @@
 				<text><![CDATA[Paket Sewa]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="152" y="45" width="89" height="20" uuid="16309abe-cf22-4272-9c87-d86eab5543e6"/>
+				<reportElement x="152" y="45" width="108" height="20" uuid="16309abe-cf22-4272-9c87-d86eab5543e6"/>
 				<textElement>
 					<font fontName="Gill Sans MT" size="14"/>
 				</textElement>
@@ -173,7 +173,7 @@
 				<text><![CDATA[Tanggal Pemesanan]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="152" y="25" width="138" height="20" uuid="4d151e04-c3c9-4187-92f6-fd06fb975d69"/>
+				<reportElement x="152" y="25" width="177" height="20" uuid="4d151e04-c3c9-4187-92f6-fd06fb975d69"/>
 				<textElement>
 					<font fontName="Gill Sans MT" size="14"/>
 				</textElement>
@@ -194,7 +194,7 @@
 				<text><![CDATA[Lapangan]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="152" y="63" width="138" height="20" uuid="94851e59-ad9f-4053-86b8-256043fef97a"/>
+				<reportElement x="152" y="63" width="254" height="20" uuid="94851e59-ad9f-4053-86b8-256043fef97a"/>
 				<textElement>
 					<font fontName="Gill Sans MT" size="14"/>
 				</textElement>
@@ -256,7 +256,7 @@
 				<text><![CDATA[No Telp]]></text>
 			</staticText>
 			<textField isStretchWithOverflow="true">
-				<reportElement style="Detail" positionType="Float" x="152" y="61" width="138" height="18" uuid="3a67e0fc-e213-45da-8712-2c693bb85368"/>
+				<reportElement style="Detail" positionType="Float" x="152" y="61" width="229" height="18" uuid="3a67e0fc-e213-45da-8712-2c693bb85368"/>
 				<textElement>
 					<font fontName="Gill Sans MT" size="14"/>
 				</textElement>
@@ -270,7 +270,7 @@
 				<text><![CDATA[Email]]></text>
 			</staticText>
 			<textField isStretchWithOverflow="true">
-				<reportElement style="Detail" positionType="Float" x="152" y="79" width="138" height="18" uuid="fdb9951a-bcbf-4d7b-bdc8-820e487135f9"/>
+				<reportElement style="Detail" positionType="Float" x="152" y="79" width="320" height="18" uuid="fdb9951a-bcbf-4d7b-bdc8-820e487135f9"/>
 				<textElement>
 					<font fontName="Gill Sans MT" size="14"/>
 				</textElement>

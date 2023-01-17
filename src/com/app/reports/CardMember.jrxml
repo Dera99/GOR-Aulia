@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="430" pageHeight="220" orientation="Landscape" columnWidth="430" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="f6f86c5d-c585-4197-b9d2-c1dd421c0bfb">
 	<property name="ireport.zoom" value="1.464100000000004"/>
-	<property name="ireport.x" value="0"/>
+	<property name="ireport.x" value="189"/>
 	<property name="ireport.y" value="0"/>
 	<style name="Title" forecolor="#FFFFFF" fontName="Times New Roman" fontSize="50" isBold="false" pdfFontName="Times-Bold"/>
 	<style name="SubTitle" forecolor="#CCCCCC" fontName="Times New Roman" fontSize="18" isBold="false" pdfFontName="Times-Roman"/>
@@ -116,7 +116,7 @@
 				<text><![CDATA[Email]]></text>
 			</staticText>
 			<textField isStretchWithOverflow="true">
-				<reportElement style="Detail" positionType="Float" x="113" y="53" width="113" height="18" uuid="c8c11f13-ba40-4298-a5f9-c160399d14f0"/>
+				<reportElement style="Detail" positionType="Float" x="113" y="53" width="317" height="18" uuid="c8c11f13-ba40-4298-a5f9-c160399d14f0"/>
 				<textElement>
 					<font size="14"/>
 				</textElement>

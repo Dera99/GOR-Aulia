@@ -1,1 +1,0 @@
-com.app.config.SystemProperties
