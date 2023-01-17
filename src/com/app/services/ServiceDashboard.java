@@ -30,7 +30,7 @@ public class ServiceDashboard {
     public List<ModelDashboard> getBooking(String stat) throws SQLException {
         List<ModelDashboard> list = new ArrayList<>();
         if(stat.equals("play")){
-            sql = "select * from pesanan JOIN transaksi ON pesanan.IdPesanan = transaksi.IdPesanan JOIN customer ON customer.IdCustomer = pesanan.IdCustomer JOIN Lapangan ON Lapangan.IdLapangan = pesanan.IdLapangan JOIN sewa ON sewa.IdSewa = pesanan.IdSewa WHERE DATE(Request_Date) = CURDATE() AND (Status='Ongoing' OR Status ='Menunggu Antrian') AND Expired <= NOW()";
+            sql = "select * from pesanan JOIN transaksi ON pesanan.IdPesanan = transaksi.IdPesanan JOIN customer ON customer.IdCustomer = pesanan.IdCustomer JOIN Lapangan ON Lapangan.IdLapangan = pesanan.IdLapangan JOIN sewa ON sewa.IdSewa = pesanan.IdSewa WHERE DATE(Request_Date) = CURDATE() AND (Status='Ongoing' OR Status ='Menunggu Antrian') AND TIMESTAMPDIFF(MINUTE, NOW(), Expired) >= 0";
             }else{
             sql = "select * from pesanan JOIN customer ON customer.IdCustomer = pesanan.IdCustomer JOIN Lapangan ON Lapangan.IdLapangan = pesanan.IdLapangan JOIN sewa ON sewa.IdSewa = pesanan.IdSewa WHERE Request_Date > CURDATE() AND Status='"+stat+"'";
         }
