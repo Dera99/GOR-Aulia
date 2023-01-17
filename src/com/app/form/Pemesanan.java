@@ -123,7 +123,7 @@ public class Pemesanan extends Form{
                             request = DateUtils.addWeeks(dateRequest,i);
                             expired = DateUtils.addWeeks(dateRequest,i);
                             expired = DateUtils.setHours(expired,23);
-                            expired = DateUtils.setMinutes(expired,minute);
+                            expired = DateUtils.setMinutes(expired,59);
                         }else{
                             request = DateUtils.addWeeks(dateRequest, i);
                             expired = DateUtils.addWeeks(dateRequest,i);
@@ -155,7 +155,7 @@ public class Pemesanan extends Form{
                     Date expired;
                     if(hour == 24){
                         expired = DateUtils.setHours(dateRequest,23);
-                        expired = DateUtils.setMinutes(dateRequest,minute);
+                        expired = DateUtils.setMinutes(dateRequest,59);
                     }else{
                         expired = DateUtils.setHours(dateRequest,hour);
                         expired = DateUtils.setMinutes(expired,minute);
@@ -801,7 +801,7 @@ public class Pemesanan extends Form{
                             request = DateUtils.addWeeks(dateRequest,i);
                             expired = DateUtils.addWeeks(dateRequest,i);
                             expired = DateUtils.setHours(expired,23);
-                            expired = DateUtils.setMinutes(expired,minute);
+                            expired = DateUtils.setMinutes(expired,59);
                         }else{
                             request = DateUtils.addWeeks(dateRequest, i);
                             expired = DateUtils.addWeeks(dateRequest,i);
@@ -837,7 +837,7 @@ public class Pemesanan extends Form{
                     Date expired;
                     if(hour == 24){
                         expired = DateUtils.setHours(dateRequest,23);
-                        expired = DateUtils.setMinutes(dateRequest,minute);
+                        expired = DateUtils.setMinutes(expired,59);
                     }else{
                         expired = DateUtils.setHours(dateRequest,hour);
                         expired = DateUtils.setMinutes(expired,minute);
@@ -1026,7 +1026,7 @@ public class Pemesanan extends Form{
             if(checkTime()==true){
                 if(hour == 24){
                     expired = DateUtils.setHours(dateRequest,23);
-                    expired = DateUtils.setMinutes(dateRequest,minute);
+                    expired = DateUtils.setMinutes(expired,59);
                 }else{
                     expired = DateUtils.setHours(dateRequest,hour);
                     expired = DateUtils.setMinutes(expired,minute);
