@@ -50,7 +50,7 @@ public class Login extends javax.swing.JFrame {
 
         btnLogin.setBackground(new java.awt.Color(51, 149, 225));
         btnLogin.setForeground(new java.awt.Color(255, 255, 255));
-        btnLogin.setText("Sign In");
+        btnLogin.setText("Login");
         btnLogin.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
         btnLogin.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         btnLogin.addActionListener(new java.awt.event.ActionListener() {

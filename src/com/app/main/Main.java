@@ -40,7 +40,7 @@ Connection CC = new DatabaseConnection().connect();
                 }else if (index==3){
                     mainBody.displayForm(new PaketSewa(),"Paket Sewa");
                 }else if (index==4){
-                    mainBody.displayForm(new Penyewa(),"Penyewa");
+                    mainBody.displayForm(new Penyewa(),"Customer");
                 }else if (index==5){
                     mainBody.displayForm(new AdminPanel(),"Panel Admin");
                 }else if (index==6){

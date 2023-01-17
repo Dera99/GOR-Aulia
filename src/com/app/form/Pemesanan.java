@@ -365,7 +365,7 @@ public class Pemesanan extends Form{
 
         txtnoHp.setBackground(new java.awt.Color(55, 55, 55));
         txtnoHp.setForeground(new java.awt.Color(240, 240, 240));
-        txtnoHp.setLabelText("No Handphone");
+        txtnoHp.setLabelText("No Telp");
 
         jLabel3.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(240, 240, 240));
