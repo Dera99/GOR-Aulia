@@ -1,6 +1,7 @@
 
 package com.app.component;
 
+import com.app.configurations.SystemProperties;
 import com.app.configurations.config;
 import com.app.main.Main;
 import com.app.swing.SwitchButton;
@@ -17,11 +18,10 @@ import org.jdesktop.animation.timing.TimingTargetAdapter;
 
 public class SettingToleransi extends javax.swing.JPanel {
     private MigLayout layout;
+    String minute;
     public SettingToleransi() {
         initComponents();
-        config con = new config();
-        String value = String.valueOf(con.getMinute());
-        txtMenit.setText(value);
+        init();
         layout = new MigLayout("fill, wrap 1,  inset 3","[fill]","[0][0!]");
         setLayout(layout);
         txtMenit.setBackground(new Color(0,0,0,0));
@@ -48,7 +48,15 @@ public class SettingToleransi extends javax.swing.JPanel {
         return switchButton1;
     }
     
-  
+     private void init(){
+        SystemProperties pro = new SystemProperties();
+        pro.loadFromFile();
+         System.out.println("menit "+pro.getMinute());
+        minute=String.valueOf(pro.getMinute());
+        if (pro.getMinute() != 0) {
+            txtMenit.setText(minute);
+        }
+    }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -182,10 +190,11 @@ public class SettingToleransi extends javax.swing.JPanel {
       Main m = new Main();
     Notification succ= new Notification(m, Notification.Type.SUCCESS, Notification.Location.TOP_CENTER, "Toleransi Keterlambatan Berhasil Disimpan !!");
     Notification err= new Notification(m, Notification.Type.ERROR, Notification.Location.TOP_CENTER, "Gagal Menyimpan Toleransi Keterlambatan !!");
-    config con = new config();
+    SystemProperties pro = new SystemProperties();
+    pro.loadFromFile();
     try{
-        String menit = String.valueOf(txtMenit.getText());
-        con.SaveProp(lbBack.getText(),menit);
+        String value = String.valueOf(txtMenit.getText());
+        pro.save("toleransi",value);
         succ.showNotification();
         }catch(NumberFormatException e){
           err.showNotification();

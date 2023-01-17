@@ -7,12 +7,16 @@ import java.awt.Color;
 import java.sql.SQLException;
 import java.util.List;
 import com.app.component.Form;
+import com.app.configurations.SystemProperties;
+import com.app.main.Main;
 import com.app.model.ModelCard;
 import com.app.model.ModelDashboard;
+import java.util.Date;
 import javaswingdev.GoogleMaterialDesignIcon;
 import javax.swing.RowFilter;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
+import notification.Notification;
 
 public class FormHome extends Form {
 
@@ -46,14 +50,21 @@ public class FormHome extends Form {
         
 
     }
-
     private void initDataTable() {
+        SystemProperties pro = new SystemProperties();
+        pro.loadFromFile();
+        int toleransi=pro.getMinute();
+        ServiceDashboard sd = new ServiceDashboard();
         table1.addTableCell(new CellActionJadwal(), 7);
         new Thread(new Runnable() {
             @Override
             public void run() {
                 try {
                     for (ModelDashboard booking: new ServiceDashboard().getBooking("play")) {
+                        long diff = (new Date().getTime() - booking.getRequest().getTime()) / (60 * 1000);
+                        if(diff>toleransi){
+                            sd.lateCheck(toleransi);
+                        }
                         table1.addRow(booking, false);
                     }
                 } catch (SQLException e) {

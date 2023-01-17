@@ -1,4 +1,6 @@
-#Wed Sep 28 16:14:51 WIB 2022
-background_image=bg_4.jpg
-dark_mode=true
+#Tue Jan 17 15:54:03 ICT 2023
 theme_color=-13158601
+background_image=bg_4.jpg
+toleransi=55
+atur_DP=200
+dark_mode=true

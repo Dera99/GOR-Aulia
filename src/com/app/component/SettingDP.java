@@ -1,13 +1,11 @@
 
 package com.app.component;
 
+import com.app.configurations.SystemProperties;
 import com.app.configurations.config;
 import com.app.main.Main;
 import com.app.swing.SwitchButton;
 import java.awt.Color;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import static java.awt.event.KeyEvent.VK_BACK_SPACE;
 import javaswingdev.GoogleMaterialDesignIcon;
 import javaswingdev.GoogleMaterialIcon;
 import net.miginfocom.swing.MigLayout;
@@ -17,11 +15,10 @@ import org.jdesktop.animation.timing.TimingTargetAdapter;
 
 public class SettingDP extends javax.swing.JPanel {
     private MigLayout layout;
+    String dp;
     public SettingDP() {
         initComponents();
-        config con = new config();
-        String value = String.valueOf(con.getDP());
-        txtDP.setText(value);
+        init();
         layout = new MigLayout("fill, wrap 1,  inset 3","[fill]","[0][0!]");
         setLayout(layout);
         txtDP.setBackground(new Color(0,0,0,0));
@@ -47,8 +44,15 @@ public class SettingDP extends javax.swing.JPanel {
     public SwitchButton getSwitch(){
         return switchButton1;
     }
+    private void init(){
+        SystemProperties pro = new SystemProperties();
+        pro.loadFromFile();
+        dp=String.valueOf(pro.getDP());
+        if (pro.getDP() != 0) {
+            txtDP.setText(dp);
+        }
+    }
     
-  
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -182,10 +186,11 @@ public class SettingDP extends javax.swing.JPanel {
       Main m = new Main();
     Notification succ= new Notification(m, Notification.Type.SUCCESS, Notification.Location.TOP_CENTER, "Harga DP Berhasil Disimpan !!");
     Notification err= new Notification(m, Notification.Type.ERROR, Notification.Location.TOP_CENTER, "Gagal Menyimpan Harga DP !!");
-    config con = new config();
+    SystemProperties con = new SystemProperties();
+    con.loadFromFile();
     try{
         String DP = String.valueOf(txtDP.getText());
-        con.SaveProp(lbBack.getText(),DP);
+        con.save("atur_DP",DP);
         succ.showNotification();
         }catch(NumberFormatException e){
           err.showNotification();

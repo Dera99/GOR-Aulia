@@ -2,7 +2,9 @@ package com.app.services;
 
 import com.app.chart.ModelChart;
 import com.app.configurations.DatabaseConnection;
+import com.app.configurations.SystemProperties;
 import com.app.configurations.config;
+import com.app.main.Main;
 import com.app.model.ModelDashboard;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -14,7 +16,10 @@ import java.sql.Timestamp;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
+import notification.Notification;
 
 public class ServiceDashboard {
     ResultSet rs = null;
@@ -24,13 +29,10 @@ public class ServiceDashboard {
     String sql; 
     public List<ModelDashboard> getBooking(String stat) throws SQLException {
         List<ModelDashboard> list = new ArrayList<>();
-        config con = new config();
-        System.out.println("Toleransi : "+con.getMinute());
-        checkExpired(con.getMinute());
         if(stat.equals("play")){
-        sql = "select * from pesanan JOIN transaksi ON pesanan.IdPesanan = transaksi.IdPesanan JOIN customer ON customer.IdCustomer = pesanan.IdCustomer JOIN Lapangan ON Lapangan.IdLapangan = pesanan.IdLapangan JOIN sewa ON sewa.IdSewa = pesanan.IdSewa WHERE DATE(Request_Date) = CURDATE() AND (Status='Ongoing' OR Status ='Menunggu Antrian')";
-        }else{
-        sql = "select * from pesanan JOIN customer ON customer.IdCustomer = pesanan.IdCustomer JOIN Lapangan ON Lapangan.IdLapangan = pesanan.IdLapangan JOIN sewa ON sewa.IdSewa = pesanan.IdSewa WHERE Request_Date > CURDATE() AND Status='"+stat+"'";
+            sql = "select * from pesanan JOIN transaksi ON pesanan.IdPesanan = transaksi.IdPesanan JOIN customer ON customer.IdCustomer = pesanan.IdCustomer JOIN Lapangan ON Lapangan.IdLapangan = pesanan.IdLapangan JOIN sewa ON sewa.IdSewa = pesanan.IdSewa WHERE DATE(Request_Date) = CURDATE() AND (Status='Ongoing' OR Status ='Menunggu Antrian') AND Expired <= NOW()";
+            }else{
+            sql = "select * from pesanan JOIN customer ON customer.IdCustomer = pesanan.IdCustomer JOIN Lapangan ON Lapangan.IdLapangan = pesanan.IdLapangan JOIN sewa ON sewa.IdSewa = pesanan.IdSewa WHERE Request_Date > CURDATE() AND Status='"+stat+"'";
         }
         pst = CC.prepareStatement(sql);
         rs = pst.executeQuery();
@@ -44,8 +46,10 @@ public class ServiceDashboard {
             Time durasi = rs.getTime("Durasi");
             String paket = rs.getString("NamaSewa");
             String status = rs.getString("pesanan.Status");
-            list.add(new ModelDashboard(bookingID,nama,noTelp,Lapangan,request,expired,paket,status));
+            ModelDashboard data = new ModelDashboard(bookingID,nama,noTelp,Lapangan,request,expired,paket,status);
+            list.add(data);
         }
+        System.out.println(list);
         rs.close();
         pst.close();
         return list;
@@ -114,7 +118,7 @@ public class ServiceDashboard {
         pst.execute();
         pst.close();
     }
-    public void checkExpired(int minute) throws SQLException{
+    public void lateCheck(int minute) throws SQLException{
         sql="UPDATE pesanan p\n" +
             "JOIN transaksi t\n" +
             "ON p.IdPesanan = t.IdPesanan\n" +
@@ -128,5 +132,5 @@ public class ServiceDashboard {
         pst.execute();
         pst.close();
     }
-    
+   
 }

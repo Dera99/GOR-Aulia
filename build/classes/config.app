@@ -1,7 +1,6 @@
-#Mon Jan 16 15:47:19 ICT 2023
-Toleransi\ Keterlambatan=10
+#Tue Jan 17 14:49:59 ICT 2023
 Username\ \:=root
-Atur\ DP=100
-Database\ \:=gor
+Toleransi\ Keterlambatan=2
 Password\ \:=
+Database\ \:=gor
 IP\ Server\ \ \:=localhost

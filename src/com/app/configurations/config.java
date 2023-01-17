@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.util.Properties;
 
 public class config {
-    public static Properties prop = new Properties();
+    public Properties prop = new Properties();
     public void SaveProp(String title, String value){
         try
         {
@@ -34,30 +34,5 @@ public class config {
         }
         return value;
     }
-    public int getDP(){
-        String value = "Atur DP";
-        int result=0;
-    try
-        {
-           prop.load(new FileInputStream("src/config.app"));
-           value=prop.getProperty(value);
-           result = Integer.parseInt(value);
-        }catch(IOException e){
-        
-        }
-        return result;
-    } 
-    public int getMinute(){
-        String value = "Toleransi Keterlambatan";
-        int result=0;
-    try
-        {
-           prop.load(new FileInputStream("src/config.app"));
-           value=prop.getProperty(value);
-           result = Integer.parseInt(value);
-        }catch(IOException e){
-        
-        }
-        return result;
-    } 
+    
 }

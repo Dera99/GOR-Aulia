@@ -1,6 +1,7 @@
 package com.app.form;
 import com.app.cell.CellActionBooking;
 import com.app.component.Form;
+import com.app.configurations.SystemProperties;
 import com.app.configurations.config;
 import com.app.main.Main;
 import com.app.model.ModelBooking;
@@ -53,9 +54,10 @@ public class Pemesanan extends Form{
     private int customerID;
     String typePesanan;
     private int trxID;
-    
+    int dp;
     public Pemesanan() {
         initComponents();
+        init();
         table1.addTableStyle(jScrollPane1);
         table1.setAnimateRowHeight(47);
         initTable();
@@ -65,7 +67,14 @@ public class Pemesanan extends Form{
         cbPaket.setSelectedIndex(-1);
         sb.getField(cbLapangan);
     } 
-    config con = new config();
+    private void init(){
+        SystemProperties pro = new SystemProperties();
+        pro.loadFromFile();
+         System.out.println("menit "+pro.getDP());
+        if (pro.getDP() != 0) {
+            dp=pro.getDP();
+        }
+    }
     private void initTable(){        
         table1.addTableCell(new CellActionBooking(), 7);
         new Thread(new Runnable() {
@@ -151,14 +160,14 @@ public class Pemesanan extends Form{
                         expired = DateUtils.setMinutes(expired,minute);
                     }       
                     ModelCustomer cust = new ModelCustomer(0,"","","","");
-                    ModelTransaksi trx = new ModelTransaksi(0,0,paket,0,con.getDP(),0,null,"");
+                    ModelTransaksi trx = new ModelTransaksi(0,0,paket,0,dp,0,null,"");
                     ModelBooking check = new ModelBooking(0,cust,paket,field,dateRequest,expired,"",trx);
                      // Give Notifications Here
                      if(sb.checkRequest(check)==true){
                         System.out.println("Result Checking : "+sb.checkRequest(check));
                         lblPaket.setText(paket);
                         int harga = sb.getPrice(field, paket);
-                        int DP = con.getDP();
+                        int DP = dp;
                         int sisa = harga-DP;
                         lblHarga.setText("Rp "+String.valueOf(harga)+" ,-");
                         lblDP.setText("Rp "+String.valueOf(DP)+" ,-");
@@ -815,7 +824,7 @@ public class Pemesanan extends Form{
                 }else{
                     //pricing
                     int harga = sb.getPrice(field, paket);
-                    int DP = con.getDP();
+                    int DP = dp;
                     int sisa = harga-DP;
                     //end pricing
                     hour = reqTime.getHours()+durasi.getHours();
@@ -829,12 +838,12 @@ public class Pemesanan extends Form{
                         expired = DateUtils.setMinutes(expired,minute);
                     }       
                     ModelCustomer cust = new ModelCustomer(customerID,nama,noTelp,email,type);
-                    ModelTransaksi trx = new ModelTransaksi(0,0,paket,harga,con.getDP(),sisa,null,"");
+                    ModelTransaksi trx = new ModelTransaksi(0,0,paket,harga,dp,sisa,null,"");
                     ModelBooking add = new ModelBooking(0,cust,paket,field,dateRequest,expired,"",trx);       
                     // Give Notifications Here
                      if(sb.insertData(add)==true){
                         pesananID = add.getId();
-                        ModelTransaksi addtrx = new ModelTransaksi(0,pesananID,paket,harga,con.getDP(),sisa,null,"Pending");
+                        ModelTransaksi addtrx = new ModelTransaksi(0,pesananID,paket,harga,dp,sisa,null,"Pending");
                         sb.addTransaksi(addtrx);
                         succ.showNotification();
                         initTable();
@@ -922,7 +931,7 @@ public class Pemesanan extends Form{
             cbPaket.setSelectedItem(paket);
             lblPaket.setText(paket);
             int harga = sb.getPrice(field, paket);
-            int DP = con.getDP();
+            int DP = dp;
             if(sb.checkPaket(paket)==1){
                 DP = 0;
             }
@@ -1000,7 +1009,7 @@ public class Pemesanan extends Form{
             //End Detail Pesanan
             //Start Pricing
             int harga = sb.getPrice(field, paket);
-            int DP = con.getDP();
+            int DP = dp;
             int sisa = harga-DP;
             //End Pricing
             ModelCustomer customer = new ModelCustomer(customerID,nama,noTelp,email,"");                  
@@ -1015,7 +1024,7 @@ public class Pemesanan extends Form{
                     expired = DateUtils.setHours(dateRequest,hour);
                     expired = DateUtils.setMinutes(expired,minute);
                 }       
-                ModelTransaksi trx = new ModelTransaksi(trxID,pesananID,paket,harga,con.getDP(),sisa,null,"Pending");
+                ModelTransaksi trx = new ModelTransaksi(trxID,pesananID,paket,harga,dp,sisa,null,"Pending");
                 ModelBooking data = new ModelBooking(pesananID,customer,paket,field,dateRequest,expired,"",trx);       
                 // Give Notifications Here
                 if(sb.updateBooked(data)==true){
