@@ -26,6 +26,13 @@ import org.joda.time.DateTime;
 import org.joda.time.Interval;
 
 public class ServiceBooking {
+
+    public boolean isResultAdd() {
+        return resultAdd;
+    }
+    public void setResultAdd(boolean resultAdd) {
+        this.resultAdd = resultAdd;
+    }
     public boolean isMember() {
         return member;
     }
@@ -54,6 +61,7 @@ public class ServiceBooking {
     public ModelCustomer dataCustomer;
     public ModelBooking dataBooking;
     private boolean resultCheck;
+    private boolean resultAdd;
     private List<String> ls = new ArrayList<String>(); 
     Main m = new Main();
     public List<ModelBooking> getBooking() throws SQLException, ParseException {
@@ -177,7 +185,7 @@ public class ServiceBooking {
         return result;
     }
     public boolean insertData(ModelBooking data) throws SQLException{
-        boolean result=true;
+        setResultAdd(true);
         SimpleDateFormat ex = new SimpleDateFormat("yyyy-MM-dd H:mm:ss");
         if(checkMember(data.getCustomer().getCustomerID())==false){
         try{
@@ -197,11 +205,11 @@ public class ServiceBooking {
                 pst.close();
             }catch (SQLException e){
                 System.err.println(e);
-                result=false;
+                setResultAdd(false);
             }
         }catch (SQLException ex1){
                 Logger.getLogger(ServiceBooking.class.getName()).log(Level.SEVERE, null,ex1);
-                result=false;
+                setResultAdd(false);
         }
         }else{
         try{    
@@ -219,10 +227,10 @@ public class ServiceBooking {
         pst.close();
         }catch (SQLException a){
             Logger.getLogger(ServiceBooking.class.getName()).log(Level.SEVERE, null, a);
-            result=false;
+            setResultAdd(false);
         }   
     }
-        return result;
+        return isResultAdd();
     }
     public void insertCustomer(ModelBooking data){
         try {

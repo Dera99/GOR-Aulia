@@ -55,6 +55,7 @@ public class Pemesanan extends Form{
     String typePesanan;
     private int trxID;
     int dp;
+    boolean resultAdd = false;
     public Pemesanan() {
         initComponents();
         init();
@@ -811,16 +812,20 @@ public class Pemesanan extends Form{
                             ModelTransaksi trx = new ModelTransaksi(0,0,paket,harga,0,sisa,null,"");
                             ModelBooking add = new ModelBooking(0,cust,paket,field,request,expired,"",trx);
                             // Give Notifications Here
-                            if(sb.insertData(add)==true){
-                                pesananID = add.getId();
-                                ModelTransaksi addtrx = new ModelTransaksi(0,pesananID,paket,harga,0,sisa,null,"Selesai");
-                                sb.addTransaksi(addtrx);
-                                succ.showNotification();
-                                initTable();
-                            }else{
-                                err.showNotification();
-                            }
+                            sb.insertData(add);
+                            resultAdd=true;
+                            pesananID = add.getId();
+                            ModelTransaksi addtrx = new ModelTransaksi(0,pesananID,paket,harga,0,sisa,null,"Selesai");
+                            sb.addTransaksi(addtrx);
                         }
+                            //Notifications
+                            if(sb.isResultAdd()==true){
+                              succ.showNotification();
+                              initTable();
+                            }else{
+                              err.showNotification();
+                              initTable();
+                            }
                 }else{
                     //pricing
                     int harga = sb.getPrice(field, paket);
@@ -840,16 +845,18 @@ public class Pemesanan extends Form{
                     ModelCustomer cust = new ModelCustomer(customerID,nama,noTelp,email,type);
                     ModelTransaksi trx = new ModelTransaksi(0,0,paket,harga,dp,sisa,null,"");
                     ModelBooking add = new ModelBooking(0,cust,paket,field,dateRequest,expired,"",trx);       
-                    // Give Notifications Here
-                     if(sb.insertData(add)==true){
+                        sb.insertData(add);
                         pesananID = add.getId();
                         ModelTransaksi addtrx = new ModelTransaksi(0,pesananID,paket,harga,dp,sisa,null,"Pending");
                         sb.addTransaksi(addtrx);
+                     // Give Notifications Here
+                    if(sb.isResultAdd()==true){
                         succ.showNotification();
                         initTable();
-                     }else{
+                    }else{
                         err.showNotification();
-                     }   
+                        initTable();
+                    }
                 }  
             }else{
                err1.showNotification();
@@ -1029,9 +1036,9 @@ public class Pemesanan extends Form{
                 // Give Notifications Here
                 if(sb.updateBooked(data)==true){
                         //Notif Success
-                    succ.showNotification();
                     initTable();
                     System.out.println("updated");
+                    succ.showNotification();
                 }else{
                         //Notif Error
                     err1.showNotification();
