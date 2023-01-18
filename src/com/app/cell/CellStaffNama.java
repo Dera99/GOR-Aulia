@@ -59,7 +59,8 @@ public class CellStaffNama extends TableCustomCell {
                      acc.setPassword(username);
                      new ServiceStaff().insertStaff(data);
                      table.updateModelData(row, data);
-                     succ.showNotification();
+                     Notification success= new Notification(new Main(), Notification.Type.SUCCESS, Notification.Location.TOP_CENTER, "Data Customer Berhasil Di Tambahkan !!");
+                     success.showNotification();
                     } catch (SQLException e) {
                         e.printStackTrace();
                         err.showNotification();
@@ -103,6 +104,11 @@ public class CellStaffNama extends TableCustomCell {
         icon3.setColor1(Color.white);
         icon3.setColor2(Color.white);
         btnUpdate.setIcon(icon3.toIcon());
+        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateActionPerformed(evt);
+            }
+        });
 
         jLabel2.setForeground(new java.awt.Color(230, 230, 230));
         jLabel2.setText("Alamat       ");
@@ -158,6 +164,10 @@ public class CellStaffNama extends TableCustomCell {
                 .addGap(12, 12, 12))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnUpdateActionPerformed
 
     int staffID=0,userID=0,roleID=0;
     String email,jabatan;

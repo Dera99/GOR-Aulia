@@ -21,16 +21,18 @@ import java.util.List;
 import java.util.stream.Collectors;
 import notification.Notification;
 
-public class ServiceDashboard {
+public class ServiceDashboard { 
     ResultSet rs = null;
     Connection CC = new DatabaseConnection().connect();;
     PreparedStatement pst = null;
     Statement stt;
     String sql; 
+    private static boolean notif=false;
     public List<ModelDashboard> getBooking(String stat) throws SQLException {
         List<ModelDashboard> list = new ArrayList<>();
+        checkExpired();
         if(stat.equals("play")){
-            sql = "select * from pesanan JOIN transaksi ON pesanan.IdPesanan = transaksi.IdPesanan JOIN customer ON customer.IdCustomer = pesanan.IdCustomer JOIN Lapangan ON Lapangan.IdLapangan = pesanan.IdLapangan JOIN sewa ON sewa.IdSewa = pesanan.IdSewa WHERE DATE(Request_Date) = CURDATE() AND (Status='Ongoing' OR Status ='Menunggu Antrian') AND TIMESTAMPDIFF(MINUTE, NOW(), Expired) >= 0";
+            sql = "select * from pesanan JOIN transaksi ON pesanan.IdPesanan = transaksi.IdPesanan JOIN customer ON customer.IdCustomer = pesanan.IdCustomer JOIN Lapangan ON Lapangan.IdLapangan = pesanan.IdLapangan JOIN sewa ON sewa.IdSewa = pesanan.IdSewa WHERE DATE(Request_Date) = CURDATE() AND (Status='Ongoing' OR Status ='Menunggu Antrian')";
             }else{
             sql = "select * from pesanan JOIN customer ON customer.IdCustomer = pesanan.IdCustomer JOIN Lapangan ON Lapangan.IdLapangan = pesanan.IdLapangan JOIN sewa ON sewa.IdSewa = pesanan.IdSewa WHERE Request_Date > CURDATE() AND Status='"+stat+"'";
         }
@@ -49,7 +51,6 @@ public class ServiceDashboard {
             ModelDashboard data = new ModelDashboard(bookingID,nama,noTelp,Lapangan,request,expired,paket,status);
             list.add(data);
         }
-        System.out.println(list);
         rs.close();
         pst.close();
         return list;
@@ -127,10 +128,15 @@ public class ServiceDashboard {
             "WHEN 0 THEN 'Cancelled'\n" +
             "WHEN 1 THEN 'Selesai'\n" +
             "END\n" +
-            "WHERE TIMESTAMPDIFF(MINUTE, p.Request_Date, NOW()) > "+minute+" ";
+            "WHERE TIMESTAMPDIFF(MINUTE, p.Request_Date, NOW()) > "+minute+" AND p.Status = 'Menunggu Antrian'";
         pst = CC.prepareStatement(sql);
         pst.execute();
         pst.close();
     }
-   
+    public void checkExpired() throws SQLException{
+        sql="UPDATE pesanan p JOIN transaksi t ON p.IdPesanan = t.IdPesanan JOIN sewa s ON t.IdSewa = s.IdSewa SET p.Status = 'Selesai' WHERE p.Expired < NOW() AND p.Status = 'Ongoing'";
+        pst = CC.prepareStatement(sql);
+        pst.execute();
+        pst.close();
+    }
 }

@@ -79,6 +79,9 @@
           <Font name="SansSerif" size="12" style="1"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnUpdateActionPerformed"/>
+      </Events>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="GoogleMaterialIcon icon3 = new GoogleMaterialIcon();&#xa;        icon3.setIcon(GoogleMaterialDesignIcon.UPDATE);&#xa;        icon3.setColor1(Color.white);&#xa;        icon3.setColor2(Color.white);&#xa;        btnUpdate.setIcon(icon3.toIcon());"/>
       </AuxValues>

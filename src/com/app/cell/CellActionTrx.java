@@ -76,6 +76,11 @@ public class CellActionTrx extends TableCustomCell {
         cmdPayment = new com.app.swing.Button();
 
         cmdPayment.setBackground(new Color(0,0,0,0));
+        cmdPayment.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdPaymentActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -100,6 +105,10 @@ public class CellActionTrx extends TableCustomCell {
         googleIcon.setSize(22);
         cmdPayment.setIcon(googleIcon.toIcon());
     }// </editor-fold>//GEN-END:initComponents
+
+    private void cmdPaymentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdPaymentActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmdPaymentActionPerformed
 
     @Override
     public void setData(Object o) {

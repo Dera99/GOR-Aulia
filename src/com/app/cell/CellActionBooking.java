@@ -25,8 +25,7 @@ public class CellActionBooking extends TableCustomCell {
         cmdDelete.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                Main m = new Main();
-                int response = JOptionPane.showConfirmDialog(m, "Apakah Anda Yakin?", "Konfirmasi Hapus Data", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+                int response = JOptionPane.showConfirmDialog(Main.getJFram(), "Apakah Anda Yakin?", "Konfirmasi Hapus Data", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
                 if(response==JOptionPane.YES_OPTION){
                     int bookedID = ((ModelBooking) data).getId();
                     System.out.println("booked ID" +bookedID);
@@ -56,6 +55,11 @@ public class CellActionBooking extends TableCustomCell {
 
         cmdDelete.setBackground(new Color(0,0,0,0));
         cmdDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/app/icon/delete.png"))); // NOI18N
+        cmdDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdDeleteActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -74,6 +78,10 @@ public class CellActionBooking extends TableCustomCell {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void cmdDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdDeleteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmdDeleteActionPerformed
 
     @Override
     public void setData(Object o) {

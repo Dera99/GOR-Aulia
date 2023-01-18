@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="430" pageHeight="220" orientation="Landscape" columnWidth="430" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="f6f86c5d-c585-4197-b9d2-c1dd421c0bfb">
-	<property name="ireport.zoom" value="1.464100000000004"/>
-	<property name="ireport.x" value="189"/>
+	<property name="ireport.zoom" value="1.3310000000000037"/>
+	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<style name="Title" forecolor="#FFFFFF" fontName="Times New Roman" fontSize="50" isBold="false" pdfFontName="Times-Bold"/>
 	<style name="SubTitle" forecolor="#CCCCCC" fontName="Times New Roman" fontSize="18" isBold="false" pdfFontName="Times-Roman"/>
@@ -48,12 +48,19 @@
 			<frame>
 				<reportElement mode="Opaque" x="0" y="0" width="430" height="66" backcolor="#141414" uuid="af9f2d45-6cb6-4188-bc46-883f33611716"/>
 				<staticText>
-					<reportElement style="Title" x="0" y="0" width="310" height="66" forecolor="#F3F3F3" backcolor="#3C3C3C" uuid="59e482bf-213b-4013-91dc-0af3d21bf5cd"/>
+					<reportElement style="Title" x="0" y="0" width="351" height="38" forecolor="#F3F3F3" backcolor="#3C3C3C" uuid="59e482bf-213b-4013-91dc-0af3d21bf5cd"/>
 					<box topPadding="4" leftPadding="4" bottomPadding="4" rightPadding="4"/>
-					<textElement verticalAlignment="Bottom">
-						<font fontName="Gill Sans MT" isBold="false"/>
+					<textElement textAlignment="Center" verticalAlignment="Bottom">
+						<font fontName="Gill Sans MT" size="25" isBold="false"/>
 					</textElement>
 					<text><![CDATA[Member Card]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="0" y="38" width="351" height="28" forecolor="#E6E6E6" uuid="b778237e-70ae-46a0-9376-d08e11330842"/>
+					<textElement textAlignment="Center">
+						<font size="9"/>
+					</textElement>
+					<text><![CDATA[Perumahan Jakasampurna No.20 RT.005/RW.002 Jakasampurna Kecamatan Bekasi Barat Kota Bekasi Jawa Barat 17145]]></text>
 				</staticText>
 			</frame>
 			<image>

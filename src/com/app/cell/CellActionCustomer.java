@@ -78,6 +78,11 @@ public class CellActionCustomer extends TableCustomCell {
 
         cmdDelete.setBackground(new Color(0,0,0,0));
         cmdDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/app/icon/delete.png"))); // NOI18N
+        cmdDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdDeleteActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -98,6 +103,10 @@ public class CellActionCustomer extends TableCustomCell {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void cmdDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdDeleteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmdDeleteActionPerformed
 
     @Override
     public void setData(Object o) {

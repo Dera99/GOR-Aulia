@@ -11,15 +11,18 @@ import com.app.form.Penyewa;
 import com.app.form.Settings;
 import com.app.form.Staff;
 import com.app.form.Transaksi;
+import com.app.services.ServiceDashboard;
 import com.app.services.UserSession;
 import java.awt.Component;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFrame;
+import notification.Notification;
 
 public class Main extends javax.swing.JFrame {
-Connection CC = new DatabaseConnection().connect();
+//Connection CC = new DatabaseConnection().connect();
     public Main() {
         initComponents();
         init();
@@ -159,15 +162,20 @@ Connection CC = new DatabaseConnection().connect();
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                   Connection CC = new DatabaseConnection().connect();
+                   //Connection CC = new DatabaseConnection().connect();
                 } catch (Exception e) {
                     System.err.println(e);
                 }
-                new Main().setVisible(true);
+                fram=new Main();
+                fram.setVisible(true);
             }
         });
     }
 
+    private static  JFrame fram;
+    public static JFrame getJFram(){
+        return fram;
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.app.component.Header header;
     private com.app.component.MainBody mainBody;
