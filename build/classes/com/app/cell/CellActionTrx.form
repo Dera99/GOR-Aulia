@@ -39,6 +39,9 @@
           <Connection code="new Color(0,0,0,0)" type="code"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cmdPaymentActionPerformed"/>
+      </Events>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="GoogleMaterialIcon googleIcon = new GoogleMaterialIcon();&#xa;googleIcon.setIcon(GoogleMaterialDesignIcon.PAYMENTS);&#xa;googleIcon.setColor1(new Color(50,200,126));&#xa;googleIcon.setColor2(new Color(50,200,126));&#xa;googleIcon.setSize(22);&#xa;cmdPayment.setIcon(googleIcon.toIcon());"/>
       </AuxValues>
