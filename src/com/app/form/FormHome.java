@@ -1,6 +1,6 @@
 package com.app.form;
 
-import com.app.cell.CellActionJadwal;
+import com.app.cell.CellActionDashboard;
 import com.app.chart.ModelChart;
 import com.app.services.ServiceDashboard;
 import java.awt.Color;
@@ -54,7 +54,7 @@ public class FormHome extends Form {
         pro.loadFromFile();
         int toleransi=pro.getMinute();
         ServiceDashboard sd = new ServiceDashboard();
-        table1.addTableCell(new CellActionJadwal(), 7);
+        table1.addTableCell(new CellActionDashboard(), 7);
         new Thread(new Runnable() {
             @Override
             public void run() {

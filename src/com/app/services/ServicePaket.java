@@ -1,5 +1,4 @@
 package com.app.services;
-
 import com.app.configurations.DatabaseConnection;
 import com.app.main.Main;
 import com.app.model.ModelLapangan;
@@ -13,7 +12,6 @@ import java.sql.Time;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
-
 public class ServicePaket {
     ResultSet rs = null;
     Connection CC = new DatabaseConnection().connect();;

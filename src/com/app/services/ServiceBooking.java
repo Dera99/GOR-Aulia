@@ -1,5 +1,4 @@
 package com.app.services;
-
 import com.app.configurations.DatabaseConnection;
 import com.app.main.Main;
 import com.app.model.ModelBooking;
@@ -24,9 +23,7 @@ import javax.swing.DefaultComboBoxModel;
 import notification.Notification;
 import org.joda.time.DateTime;
 import org.joda.time.Interval;
-
 public class ServiceBooking {
-
     public boolean isResultAdd() {
         return resultAdd;
     }

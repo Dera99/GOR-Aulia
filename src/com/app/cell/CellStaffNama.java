@@ -29,10 +29,10 @@ public class CellStaffNama extends TableCustomCell {
             public void actionPerformed(ActionEvent ae) {
                 table.stopCellEditing();
                 Main m = new Main();
-                Notification err= new Notification(m, Notification.Type.ERROR, Notification.Location.TOP_CENTER, "Data Customer Gagal Di Tambahkan !!");
-                Notification succ= new Notification(m, Notification.Type.SUCCESS, Notification.Location.TOP_CENTER, "Data Customer Berhasil Di Tambahkan !!");
-                Notification err1= new Notification(m, Notification.Type.ERROR, Notification.Location.TOP_CENTER, "Data Customer Gagal Di Update !!");
-                Notification succ1= new Notification(m, Notification.Type.SUCCESS, Notification.Location.TOP_CENTER, "Data Customer Berhasil Di Update !!");
+                Notification err= new Notification(m, Notification.Type.ERROR, Notification.Location.TOP_CENTER, "Data Staff Gagal Di Tambahkan !!");
+                Notification succ= new Notification(m, Notification.Type.SUCCESS, Notification.Location.TOP_CENTER, "Data Staff Berhasil Di Tambahkan !!");
+                Notification err1= new Notification(m, Notification.Type.ERROR, Notification.Location.TOP_CENTER, "Data Staff Gagal Di Update !!");
+                Notification succ1= new Notification(m, Notification.Type.SUCCESS, Notification.Location.TOP_CENTER, "Data Staff Berhasil Di Update !!");
             try{  
                 int row = getRow();
                 int col = getColumn();

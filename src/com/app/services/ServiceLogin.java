@@ -24,11 +24,10 @@ public class ServiceLogin {
         rs=pst.executeQuery();
     }
     public ServiceLogin(String Username, String Password,JFrame frame) throws SQLException{
-        Main b = new Main();
         Notification err= new Notification(frame, Notification.Type.ERROR, Notification.Location.TOP_CENTER, "Username atau Password anda salah !");
         Notification err1= new Notification(frame, Notification.Type.ERROR, Notification.Location.TOP_CENTER, "Ada Kesalahan !");
         Notification err2= new Notification(frame, Notification.Type.ERROR, Notification.Location.TOP_CENTER, "Username Tidak Ada");
-        Notification noti= new Notification(b, Notification.Type.SUCCESS, Notification.Location.TOP_CENTER, "Login Berhasil !");
+        Notification noti= new Notification(frame, Notification.Type.SUCCESS, Notification.Location.TOP_CENTER, "Login Berhasil !");
        try {
         sql="SELECT * FROM accounts JOIN staff ON accounts.StaffID = staff.StaffID WHERE Username = '"+Username+"' AND Password = '"+Password+"'";    
         pst = CC.prepareStatement(sql);
@@ -62,6 +61,5 @@ public class ServiceLogin {
             err1.showNotification();
             e.printStackTrace();
         }        
-      
     }
 }

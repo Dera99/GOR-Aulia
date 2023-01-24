@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package com.app.configurations;
 
 import com.app.main.Login;
@@ -12,24 +8,18 @@ import java.util.logging.Logger;
 import javaswingdev.GoogleMaterialDesignIcon;
 import javaswingdev.GoogleMaterialIcon;
 
-/**
- *
- * @author AMIRULLAH
- */
 public class Configuration extends javax.swing.JFrame {
 
-    /**
-     * Creates new form config
-     */
-    config con = new config();
+    SystemProperties pro = new SystemProperties();
     public Configuration() {
         initComponents();
+        pro.loadFromFile();
         header1.initMoving(this);
         header1.initEvent(this, panelBackground1);
-        ip.setText(con.GetProp(lbl_ip.toString()));
-        dbname.setText(con.GetProp(lbl_db.toString()));
-       user.setText(con.GetProp(lbl_user.toString()));
-       pw.setText(con.GetProp(lbl_pass.toString()));  
+        ip.setText(String.valueOf(pro.getIP()));
+        dbname.setText(String.valueOf(pro.getDbname()));
+        user.setText(String.valueOf(pro.getDbuser()));
+        pw.setText(String.valueOf(pro.getPwuser()));  
     }
 
     @SuppressWarnings("unchecked")
@@ -189,18 +179,15 @@ public class Configuration extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void button2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button2ActionPerformed
-        // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_button2ActionPerformed
 
     private void button1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button1ActionPerformed
         try {
-            // TODO add your handling code here:\
-            String a = lbl_ip.getText();
-            con.SaveProp(lbl_ip.getText(),ip.getText());
-            con.SaveProp(lbl_db.getText(),dbname.getText());
-            con.SaveProp(lbl_user.getText(),user.getText());
-            con.SaveProp(lbl_pass.getText(),pw.getText());
+            pro.save("IP",ip.getText());
+            pro.save("DB_Name",dbname.getText());
+            pro.save("DB_User",user.getText());
+            pro.save("DB_Password",pw.getText());
             this.dispose();
             Login obj = new Login();
             obj.setVisible(true);
@@ -208,18 +195,8 @@ public class Configuration extends javax.swing.JFrame {
             Logger.getLogger(Configuration.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_button1ActionPerformed
-
-    
-    /**
-     * @param args the command line arguments
-     */
     
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -227,82 +204,11 @@ public class Configuration extends javax.swing.JFrame {
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Configuration.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Configuration.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Configuration.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(Configuration.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new Configuration().setVisible(true);
             }

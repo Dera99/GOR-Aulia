@@ -2,7 +2,6 @@
 package com.app.component;
 
 import com.app.configurations.SystemProperties;
-import com.app.configurations.config;
 import com.app.main.Main;
 import com.app.swing.SwitchButton;
 import java.awt.Color;

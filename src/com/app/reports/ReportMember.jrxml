@@ -63,7 +63,7 @@
 				<staticText>
 					<reportElement style="Column header" x="10" y="0" width="462" height="42" forecolor="#E6E6E6" uuid="e534d2fe-26ed-44f7-b826-bca541925f17"/>
 					<textElement textAlignment="Center">
-						<font fontName="Gill Sans MT" size="30" isBold="true"/>
+						<font fontName="SansSerif" size="30" isBold="true"/>
 					</textElement>
 					<text><![CDATA[GOR AULIA]]></text>
 				</staticText>
@@ -91,7 +91,7 @@
 			<staticText>
 				<reportElement style="Column header" x="10" y="9" width="543" height="19" forecolor="#E6E6E6" uuid="bf036037-ed05-4894-bffe-77bcf4532224"/>
 				<textElement textAlignment="Center">
-					<font fontName="Gill Sans MT" size="16" isBold="true"/>
+					<font fontName="SansSerif" size="15" isBold="true"/>
 				</textElement>
 				<text><![CDATA[LAPORAN CUSTOMER MEMBER]]></text>
 			</staticText>
@@ -101,7 +101,7 @@
 			<staticText>
 				<reportElement style="Column header" x="24" y="56" width="61" height="20" forecolor="#E6E6E6" uuid="90216458-bbcc-4be0-8a2f-a0e5008bb7d2"/>
 				<textElement textAlignment="Center">
-					<font fontName="Gill Sans MT" size="12" isBold="false"/>
+					<font fontName="SansSerif" size="12" isBold="false"/>
 				</textElement>
 				<text><![CDATA[No]]></text>
 			</staticText>
@@ -111,14 +111,14 @@
 			<staticText>
 				<reportElement style="Column header" x="85" y="56" width="100" height="20" forecolor="#E6E6E6" uuid="67052ed2-e1fa-46df-9e61-5fa419fe7154"/>
 				<textElement textAlignment="Center">
-					<font fontName="Gill Sans MT" size="12" isBold="false"/>
+					<font fontName="SansSerif" size="12" isBold="false"/>
 				</textElement>
 				<text><![CDATA[Customer ID]]></text>
 			</staticText>
 			<staticText>
 				<reportElement style="Column header" x="185" y="56" width="94" height="20" forecolor="#E6E6E6" uuid="d6214421-4cb3-45a8-a5dd-4afed3d3b4eb"/>
 				<textElement textAlignment="Center">
-					<font fontName="Gill Sans MT" size="12" isBold="false"/>
+					<font fontName="SansSerif" size="12" isBold="false"/>
 				</textElement>
 				<text><![CDATA[Nama]]></text>
 			</staticText>
@@ -128,7 +128,7 @@
 			<staticText>
 				<reportElement style="Column header" x="404" y="56" width="125" height="20" forecolor="#E6E6E6" uuid="76d19643-c23c-43fc-84ef-780e8e951bb0"/>
 				<textElement textAlignment="Center">
-					<font fontName="Gill Sans MT" size="12" isBold="false"/>
+					<font fontName="SansSerif" size="12" isBold="false"/>
 				</textElement>
 				<text><![CDATA[Last Order]]></text>
 			</staticText>
@@ -138,7 +138,7 @@
 			<staticText>
 				<reportElement style="Column header" x="279" y="56" width="125" height="20" forecolor="#E6E6E6" uuid="c3e13867-f0cf-4447-8b69-d78749fa6ffe"/>
 				<textElement textAlignment="Center">
-					<font fontName="Gill Sans MT" size="12" isBold="false"/>
+					<font fontName="SansSerif" size="12" isBold="false"/>
 				</textElement>
 				<text><![CDATA[Created At]]></text>
 			</staticText>
@@ -164,35 +164,35 @@
 			<textField>
 				<reportElement x="24" y="2" width="61" height="20" uuid="b52fc157-e295-4f21-939e-960d929710be"/>
 				<textElement textAlignment="Center">
-					<font size="12"/>
+					<font fontName="SansSerif" size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[new Integer($V{Nomor}.intValue()+$P{no}.intValue())]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="85" y="2" width="100" height="20" uuid="9240edfd-8f72-48ee-adce-84af88728e99"/>
 				<textElement textAlignment="Center">
-					<font size="12"/>
+					<font fontName="SansSerif" size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[( $F{Keterangan}.equals("Reguler") ? ("R"+$F{IdCustomer}) : ("M"+$F{IdCustomer}) )]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="185" y="2" width="94" height="20" uuid="ac742f13-3428-44da-bd0f-3343793d6006"/>
 				<textElement textAlignment="Center">
-					<font size="12"/>
+					<font fontName="SansSerif" size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{Nama}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="279" y="2" width="125" height="20" uuid="1231c601-9730-45df-8c47-919509181840"/>
 				<textElement textAlignment="Center">
-					<font size="12"/>
+					<font fontName="SansSerif" size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[java.time.format.DateTimeFormatter.ofPattern("dd-MM-yyyy").format($F{CreatedAt})]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="404" y="0" width="125" height="20" uuid="445ee668-f87e-4048-b653-be0dd446681c"/>
 				<textElement textAlignment="Center">
-					<font size="12"/>
+					<font fontName="SansSerif" size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[java.time.format.DateTimeFormatter.ofPattern("dd-MM-yyyy").format($F{LastOrder})]]></textFieldExpression>
 			</textField>
@@ -231,14 +231,14 @@
 			<textField evaluationTime="Report">
 				<reportElement style="Column header" x="514" y="1" width="40" height="20" forecolor="#FFFFFF" uuid="ba35efb5-95f4-48bc-a7dc-2b0d3ef44e88"/>
 				<textElement verticalAlignment="Middle">
-					<font size="10" isBold="false"/>
+					<font fontName="SansSerif" size="10" isBold="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement style="Column header" x="434" y="1" width="80" height="20" forecolor="#FFFFFF" uuid="8ba2481d-49df-4783-ae69-8b994795206d"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
-					<font size="10" isBold="false"/>
+					<font fontName="SansSerif" size="10" isBold="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
 			</textField>

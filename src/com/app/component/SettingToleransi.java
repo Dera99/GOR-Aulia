@@ -2,13 +2,9 @@
 package com.app.component;
 
 import com.app.configurations.SystemProperties;
-import com.app.configurations.config;
 import com.app.main.Main;
 import com.app.swing.SwitchButton;
 import java.awt.Color;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import static java.awt.event.KeyEvent.VK_BACK_SPACE;
 import javaswingdev.GoogleMaterialDesignIcon;
 import javaswingdev.GoogleMaterialIcon;
 import net.miginfocom.swing.MigLayout;

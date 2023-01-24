@@ -54,7 +54,7 @@ public class ModelPaket extends TableRowData {
 
     @Override
     public Object[] toTableRow() {
-        DateFormat sdf = new SimpleDateFormat("h:mm"); 
+        DateFormat sdf = new SimpleDateFormat("H:mm"); 
         String kode = "R";
         String value = "Reguler";
         if(member==true){

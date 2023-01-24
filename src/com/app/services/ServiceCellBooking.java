@@ -1,9 +1,7 @@
 package com.app.services;
 
-import com.app.configurations.Conn;
 import com.app.configurations.DatabaseConnection;
 import com.app.model.ModelCell;
-import com.app.swing.Combobox;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -16,13 +14,18 @@ import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 
 public class ServiceCellBooking {
+    ResultSet rs = null;
+    Connection CC = new DatabaseConnection().connect();;
+    PreparedStatement pst = null;
+    Statement stt;
+    String sql; 
     public List<String> getPaket(ModelCell paket){
        paket.getComboBox().removeAllItems();
        List<String> ls = new ArrayList<String>(); 
         try{
-            String sql = "SELECT * FROM sewa";
-            PreparedStatement pst = Conn.getInstance().connect().prepareStatement(sql);
-            ResultSet rs = pst.executeQuery();
+            sql = "SELECT * FROM sewa";
+            pst = CC.prepareStatement(sql);
+            rs = pst.executeQuery();
             while(rs.next()){
                 String result = rs.getString("NamaSewa");
                 ls.add(result);
@@ -43,9 +46,9 @@ public class ServiceCellBooking {
        paket.getComboBox().removeAllItems();
        List<String> la = new ArrayList<String>(); 
         try{
-            String sql = "SELECT * FROM Lapangan";
-            PreparedStatement pst = Conn.getInstance().connect().prepareStatement(sql);
-            ResultSet rs = pst.executeQuery();
+             sql = "SELECT * FROM Lapangan";
+             pst = CC.prepareStatement(sql);
+             rs = pst.executeQuery();
             while(rs.next()){
                 String result = rs.getString("NamaLapangan");
                 la.add(result);

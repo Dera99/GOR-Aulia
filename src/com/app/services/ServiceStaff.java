@@ -1,5 +1,4 @@
 package com.app.services;
-
 import com.app.configurations.DatabaseConnection;
 import com.app.model.ModelAccounts;
 import com.app.model.ModelStaff;
@@ -10,7 +9,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-
 public class ServiceStaff {
     ResultSet rs = null;
     Connection CC = new DatabaseConnection().connect();;

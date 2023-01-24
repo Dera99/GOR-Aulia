@@ -1,12 +1,6 @@
-
 package com.app.services;
-
 import javax.swing.Icon;
-
 public class UserSession {
-
-
-
     private static String userLogin;
     private static int UserId;
     private static int RoleId;
@@ -36,6 +30,4 @@ public class UserSession {
     public static Icon getIcon() {
         return icon;
     }
- 
-   
 }

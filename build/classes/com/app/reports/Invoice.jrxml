@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="470" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="4932ae82-518d-4181-b27b-c9ef0c533dd9">
-	<property name="ireport.zoom" value="1.3310000000000222"/>
+	<property name="ireport.zoom" value="1.948717100000034"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="138"/>
+	<property name="ireport.y" value="432"/>
 	<style name="Title" forecolor="#FFFFFF" fontName="Times New Roman" fontSize="50" isBold="false" pdfFontName="Times-Bold"/>
 	<style name="SubTitle" forecolor="#CCCCCC" fontName="Times New Roman" fontSize="18" isBold="false" pdfFontName="Times-Roman"/>
 	<style name="Column header" forecolor="#666666" fontName="Times New Roman" fontSize="14" isBold="true" pdfFontName="Times-Roman"/>
@@ -108,7 +108,7 @@
 				<staticText>
 					<reportElement style="Column header" x="10" y="0" width="462" height="42" forecolor="#E6E6E6" uuid="e534d2fe-26ed-44f7-b826-bca541925f17"/>
 					<textElement textAlignment="Center">
-						<font fontName="Gill Sans MT" size="30" isBold="true"/>
+						<font fontName="SansSerif" size="30" isBold="true"/>
 					</textElement>
 					<text><![CDATA[GOR AULIA]]></text>
 				</staticText>
@@ -136,63 +136,63 @@
 			<staticText>
 				<reportElement style="Column header" x="10" y="9" width="543" height="19" forecolor="#E6E6E6" uuid="bf036037-ed05-4894-bffe-77bcf4532224"/>
 				<textElement textAlignment="Center">
-					<font fontName="Gill Sans MT" size="16" isBold="true"/>
+					<font fontName="SansSerif" size="15" isBold="true"/>
 				</textElement>
 				<text><![CDATA[BUKTI PEMBAYARAN]]></text>
 			</staticText>
 			<staticText>
 				<reportElement style="Column header" x="24" y="39" width="102" height="18" forecolor="#000000" uuid="c3a81879-cb05-4fd8-9e7f-871725652439"/>
 				<textElement>
-					<font fontName="Gill Sans MT" size="14" isBold="false"/>
+					<font fontName="SansSerif" size="14" isBold="false"/>
 				</textElement>
 				<text><![CDATA[Customer ID]]></text>
 			</staticText>
 			<staticText>
 				<reportElement style="Column header" x="24" y="57" width="102" height="18" forecolor="#000000" uuid="a7df5653-dcbf-4fb4-af7d-8ab34ea2e66b"/>
 				<textElement>
-					<font fontName="Gill Sans MT" size="14" isBold="false"/>
+					<font fontName="SansSerif" size="14" isBold="false"/>
 				</textElement>
 				<text><![CDATA[Nama]]></text>
 			</staticText>
 			<textField isStretchWithOverflow="true">
 				<reportElement style="Detail" positionType="Float" x="152" y="57" width="138" height="18" uuid="36a4e16d-8561-468b-b29f-d3cfc0b5d334"/>
 				<textElement>
-					<font fontName="Gill Sans MT" size="14"/>
+					<font fontName="SansSerif" size="14"/>
 				</textElement>
 				<textFieldExpression><![CDATA[": "+$F{Nama}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement style="Column header" x="24" y="75" width="102" height="18" forecolor="#000000" uuid="4b4aa292-1700-4283-9ee2-d40109b19808"/>
 				<textElement>
-					<font fontName="Gill Sans MT" size="14" isBold="false"/>
+					<font fontName="SansSerif" size="14" isBold="false"/>
 				</textElement>
 				<text><![CDATA[No Telp]]></text>
 			</staticText>
 			<textField isStretchWithOverflow="true">
 				<reportElement style="Detail" positionType="Float" x="152" y="75" width="138" height="18" uuid="3a67e0fc-e213-45da-8712-2c693bb85368"/>
 				<textElement>
-					<font fontName="Gill Sans MT" size="14"/>
+					<font fontName="SansSerif" size="14"/>
 				</textElement>
 				<textFieldExpression><![CDATA[": "+$F{NoTelp}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement style="Column header" x="24" y="93" width="102" height="18" forecolor="#000000" uuid="73ad7202-0662-4b2f-931e-5de8875225ac"/>
 				<textElement>
-					<font fontName="Gill Sans MT" size="14" isBold="false"/>
+					<font fontName="SansSerif" size="14" isBold="false"/>
 				</textElement>
 				<text><![CDATA[Email]]></text>
 			</staticText>
 			<textField isStretchWithOverflow="true">
 				<reportElement style="Detail" positionType="Float" x="152" y="93" width="372" height="18" uuid="fdb9951a-bcbf-4d7b-bdc8-820e487135f9"/>
 				<textElement>
-					<font fontName="Gill Sans MT" size="14"/>
+					<font fontName="SansSerif" size="14"/>
 				</textElement>
 				<textFieldExpression><![CDATA[": "+$F{Email}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
 				<reportElement style="Detail" positionType="Float" x="152" y="39" width="89" height="18" uuid="4f6ce81e-0b68-4963-89ba-2fe01bfa8a0d"/>
 				<textElement>
-					<font fontName="Gill Sans MT" size="14"/>
+					<font fontName="SansSerif" size="14"/>
 				</textElement>
 				<textFieldExpression><![CDATA[( $F{Keterangan}.equals("Reguler") ? (": R"+$F{IdCustomer}) : (": M"+$F{IdCustomer}) )]]></textFieldExpression>
 			</textField>
@@ -202,7 +202,7 @@
 			<staticText>
 				<reportElement style="Column header" x="24" y="161" width="102" height="20" forecolor="#E6E6E6" uuid="90216458-bbcc-4be0-8a2f-a0e5008bb7d2"/>
 				<textElement textAlignment="Center">
-					<font fontName="Gill Sans MT" size="12" isBold="false"/>
+					<font fontName="SansSerif" size="12" isBold="false"/>
 				</textElement>
 				<text><![CDATA[Trx ID]]></text>
 			</staticText>
@@ -212,14 +212,14 @@
 			<staticText>
 				<reportElement style="Column header" x="124" y="161" width="100" height="20" forecolor="#E6E6E6" uuid="67052ed2-e1fa-46df-9e61-5fa419fe7154"/>
 				<textElement textAlignment="Center">
-					<font fontName="Gill Sans MT" size="12" isBold="false"/>
+					<font fontName="SansSerif" size="12" isBold="false"/>
 				</textElement>
 				<text><![CDATA[Kode Paket]]></text>
 			</staticText>
 			<staticText>
 				<reportElement style="Column header" x="224" y="161" width="100" height="20" forecolor="#E6E6E6" uuid="d6214421-4cb3-45a8-a5dd-4afed3d3b4eb"/>
 				<textElement textAlignment="Center">
-					<font fontName="Gill Sans MT" size="12" isBold="false"/>
+					<font fontName="SansSerif" size="12" isBold="false"/>
 				</textElement>
 				<text><![CDATA[Nama Paket]]></text>
 			</staticText>
@@ -229,7 +229,7 @@
 			<staticText>
 				<reportElement style="Column header" x="424" y="161" width="100" height="20" forecolor="#E6E6E6" uuid="76d19643-c23c-43fc-84ef-780e8e951bb0"/>
 				<textElement textAlignment="Center">
-					<font fontName="Gill Sans MT" size="12" isBold="false"/>
+					<font fontName="SansSerif" size="12" isBold="false"/>
 				</textElement>
 				<text><![CDATA[Harga]]></text>
 			</staticText>
@@ -239,7 +239,7 @@
 			<staticText>
 				<reportElement style="Column header" x="324" y="161" width="100" height="20" forecolor="#E6E6E6" uuid="a89398f1-56a5-48ea-b365-4b6263c4481d"/>
 				<textElement textAlignment="Center">
-					<font fontName="Gill Sans MT" size="12" isBold="false"/>
+					<font fontName="SansSerif" size="12" isBold="false"/>
 				</textElement>
 				<text><![CDATA[Lapangan]]></text>
 			</staticText>
@@ -249,7 +249,7 @@
 			<staticText>
 				<reportElement style="Column header" x="10" y="123" width="460" height="19" forecolor="#E6E6E6" uuid="b85f465f-3e4c-4668-86f2-3daf30d17047"/>
 				<textElement textAlignment="Left">
-					<font fontName="Gill Sans MT" size="16" isBold="true"/>
+					<font fontName="SansSerif" size="15" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Detail Rincian]]></text>
 			</staticText>
@@ -263,7 +263,7 @@
 			<textField>
 				<reportElement x="124" y="0" width="100" height="22" uuid="30c2d7b4-9dea-4810-95d8-4db8051dd742"/>
 				<textElement textAlignment="Center">
-					<font fontName="Gill Sans MT" size="12"/>
+					<font fontName="SansSerif" size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[( $F{isMember}==0 ? ("R"+$F{IdSewa}) : ("M"+$F{IdSewa}) )]]></textFieldExpression>
 			</textField>
@@ -273,7 +273,7 @@
 			<textField>
 				<reportElement x="224" y="0" width="100" height="22" uuid="afa9dc08-871c-45bf-9d7d-c63e8e25f4b6"/>
 				<textElement textAlignment="Center">
-					<font fontName="Gill Sans MT" size="12"/>
+					<font fontName="SansSerif" size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{NamaSewa}]]></textFieldExpression>
 			</textField>
@@ -283,7 +283,7 @@
 			<textField pattern="Rp #,##0">
 				<reportElement x="424" y="0" width="100" height="22" uuid="5a92d642-20df-4cdd-8944-8c5a0b4de319"/>
 				<textElement textAlignment="Center">
-					<font fontName="Gill Sans MT" size="12"/>
+					<font fontName="SansSerif" size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{Harga}]]></textFieldExpression>
 			</textField>
@@ -293,7 +293,7 @@
 			<textField>
 				<reportElement x="24" y="0" width="100" height="22" uuid="3a182e17-4070-4b22-b7f2-a1a6fd30f01d"/>
 				<textElement textAlignment="Center">
-					<font fontName="Gill Sans MT" size="12"/>
+					<font fontName="SansSerif" size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[( $F{isMember}==0 ? ("R"+$F{IdTrx}) : ("M"+$F{IdTrx}) )]]></textFieldExpression>
 			</textField>
@@ -303,7 +303,7 @@
 			<textField>
 				<reportElement x="324" y="0" width="100" height="22" uuid="759b9c30-f10e-4eaa-a7f3-3dbdb5835544"/>
 				<textElement textAlignment="Center">
-					<font fontName="Gill Sans MT" size="12"/>
+					<font fontName="SansSerif" size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{NamaLapangan}]]></textFieldExpression>
 			</textField>
@@ -331,42 +331,42 @@
 			<staticText>
 				<reportElement style="Column header" x="324" y="20" width="90" height="18" forecolor="#000000" uuid="f4589553-cc1b-4496-9c38-41d56a852123"/>
 				<textElement>
-					<font fontName="Gill Sans MT" size="12" isBold="false"/>
+					<font fontName="SansSerif" size="12" isBold="false"/>
 				</textElement>
 				<text><![CDATA[Subtotal]]></text>
 			</staticText>
 			<staticText>
 				<reportElement style="Column header" x="324" y="40" width="90" height="18" forecolor="#000000" uuid="1ba6c2c0-7f09-4e18-8066-a94eb3f65a76"/>
 				<textElement>
-					<font fontName="Gill Sans MT" size="12" isBold="false"/>
+					<font fontName="SansSerif" size="12" isBold="false"/>
 				</textElement>
 				<text><![CDATA[DP]]></text>
 			</staticText>
 			<textField pattern=": Rp #,##0 -">
 				<reportElement x="434" y="38" width="119" height="20" uuid="7ea33f81-9d50-4f26-8c3d-e97298d3b770"/>
 				<textElement textAlignment="Left">
-					<font fontName="Gill Sans MT" size="12"/>
+					<font fontName="SansSerif" size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{DP}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement style="Column header" x="324" y="56" width="90" height="18" forecolor="#000000" uuid="5c10add2-e805-4da6-9e73-b21c7296c3f9"/>
 				<textElement>
-					<font fontName="Gill Sans MT" size="12" isBold="false"/>
+					<font fontName="SansSerif" size="12" isBold="false"/>
 				</textElement>
 				<text><![CDATA[Jumlah Bayar]]></text>
 			</staticText>
 			<textField pattern=": Rp #,##0">
 				<reportElement x="434" y="54" width="119" height="20" uuid="783a9860-c80b-4fc9-8360-3c6dd78687be"/>
 				<textElement textAlignment="Left">
-					<font fontName="Gill Sans MT" size="12"/>
+					<font fontName="SansSerif" size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{GrandTotal}]]></textFieldExpression>
 			</textField>
 			<textField pattern=": Rp #,##0">
 				<reportElement x="434" y="20" width="119" height="20" uuid="e754416d-fbb2-4f27-b644-e8b678569408"/>
 				<textElement textAlignment="Left">
-					<font fontName="Gill Sans MT" size="12"/>
+					<font fontName="SansSerif" size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{Subtotal}]]></textFieldExpression>
 			</textField>

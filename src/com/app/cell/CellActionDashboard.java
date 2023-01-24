@@ -18,8 +18,8 @@ import javaswingdev.GoogleMaterialIcon;
 import javax.swing.JOptionPane;
 import notification.Notification;
 
-public class CellActionJadwal extends TableCustomCell {
-    public CellActionJadwal()  {
+public class CellActionDashboard extends TableCustomCell {
+    public CellActionDashboard()  {
         initComponents();
     }
     public void addEventSave(TableCustom table) {
@@ -206,7 +206,7 @@ public class CellActionJadwal extends TableCustomCell {
 
     @Override
     public Component createComponentCellRender(TableCustom table, TableRowData data, int row, int column) {
-        CellActionJadwal cell = new CellActionJadwal();
+        CellActionDashboard cell = new CellActionDashboard();
         cell.checkIcon(data);
         cell.addEventSave(table);
         return cell;
@@ -219,7 +219,7 @@ public class CellActionJadwal extends TableCustomCell {
 
     @Override
     public TableCustomCell createComponentCellEditor(TableCustom table, TableRowData data, Object o, int row, int column) {
-        CellActionJadwal cell = new CellActionJadwal();
+        CellActionDashboard cell = new CellActionDashboard();
         cell.checkIcon(data);
         cell.addEventSave(table);
         return cell;

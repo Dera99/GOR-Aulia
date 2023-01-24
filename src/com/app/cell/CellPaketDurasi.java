@@ -96,7 +96,7 @@ public class CellPaketDurasi extends TableCustomCell {
         Object a;
         int hour = (int) jam.getValue();
         int minute = (int) jam1.getValue();
-        DateFormat sdf = new SimpleDateFormat("h:mm");
+        DateFormat sdf = new SimpleDateFormat("H:mm");
         Time value = new Time(hour,minute,0);
         a = sdf.format(value);
         return a;

@@ -1,10 +1,6 @@
 package com.app.services;
-
 import com.app.chart.ModelChart;
 import com.app.configurations.DatabaseConnection;
-import com.app.configurations.SystemProperties;
-import com.app.configurations.config;
-import com.app.main.Main;
 import com.app.model.ModelDashboard;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -16,10 +12,7 @@ import java.sql.Timestamp;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.stream.Collectors;
-import notification.Notification;
 
 public class ServiceDashboard { 
     ResultSet rs = null;

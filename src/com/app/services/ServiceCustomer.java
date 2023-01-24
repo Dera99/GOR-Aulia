@@ -1,6 +1,4 @@
-
 package com.app.services;
-
 import com.app.configurations.DatabaseConnection;
 import com.app.model.ModelCustomer;
 import java.sql.Connection;
@@ -11,7 +9,6 @@ import java.sql.Statement;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
-
 public class ServiceCustomer  {
     ResultSet rs = null;
     Connection CC = new DatabaseConnection().connect();;
