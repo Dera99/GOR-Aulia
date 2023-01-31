@@ -101,7 +101,7 @@ public class ModelTransaksi extends TableRowData{
     @Override
     public Object[] toTableRow() {
         DateFormat sdf = new SimpleDateFormat("dd/MM/yy H:mm");
-        String kode;
+        String kode="R";
         String type="R";
         System.out.println(customerID.getKet());
         if(customerID.getKet().equals("Member")){

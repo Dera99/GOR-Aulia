@@ -47,9 +47,11 @@ public class ServiceTransaksi {
             ModelCustomer dataCustomer = new ModelCustomer(customerID,nama,noTelp,email,type);
             dataCustomer.setTanggal(tanggal);
             ModelTransaksi data = new ModelTransaksi(trxID,pesananID,paket,subTotal,DP,grandTotal,tanggal,status);
-            String typeSewa = "Sewa Reguler";
+            String typeSewa;
             if(isMember==1){
                 typeSewa = "Sewa Member";
+            }else{
+                typeSewa = "Sewa Reguler";
             }
             data.setNameTransaksi(typeSewa);
             data.setCount(count++);
